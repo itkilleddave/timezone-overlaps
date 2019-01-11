@@ -21,10 +21,8 @@ class City extends Component {
 		var rows = [];
 		for (var i = 0; i < 24; i++) {
 			rows.push(
-				<li>
+				<li key={i} >
 					<TimeRow 
-					className="row-time" 
-					key={i} 
 					rowIndex={i}
 					onMouseEnter={this.handleMouseEnterRow}
 					/>
@@ -58,6 +56,7 @@ class TimeRow extends Component {
 
 		return(
 			<div 
+			className="row-time" 
 			onMouseEnter={this.handleMouseEnter}
 			>
 				<span className="label-day">Wed</span>
