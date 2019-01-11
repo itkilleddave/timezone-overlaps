@@ -1,32 +1,57 @@
-.App {
-  text-align: center;
+:root{
+	--col-width: 120px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.app {
+  padding: 20px 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+/* TimezoneApp */
 
-.App-link {
-  color: #61dafb;
-}
+.container {
+	display: grid;
+	/*grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));*/
+	grid-template-columns: repeat(auto-fit, minmax(var(--col-width), 1fr));
+	grid-gap: 40px;
+	background: #fff;
+	grid-auto-columns: minmax(var(--col-width), 1fr);
+	/*width: calc(var(--col-width) * 8);*/
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.row-time {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.label-day {
+	color: #8996a2;
+}
+.label-time {
+
+}
+.item {
+	text-align: center;
+	background: grey;
+	grid-row: 1;
+}
+.city {
+	background: #fff;
+}
+.city h3 {
+	margin-bottom: 20px;
+}
+.city ul {
+
+}
+.city ul li {
+	padding: 10px;
+	list-style: none;
+	border-bottom: solid 1px #eaeff3;
+}
+.city ul li:nth-child(even) {
+	/*background: #f0f4f7;*/
 }

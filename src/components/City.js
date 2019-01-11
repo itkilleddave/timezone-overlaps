@@ -1,12 +1,35 @@
 import React, { Component } from 'react'
 
-class TimezoneApp extends Component {
+class City extends Component {
+
+	constructor(props) {
+
+		super(props);
+		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this);
+
+	}
+
+	handleMouseEnterRow(rowIndex) {
+		this.props.onMouseEnter({
+			column: this.props.columnIndex, 
+			row: rowIndex
+		});
+	}
 
 	render() {
 
 		var rows = [];
 		for (var i = 0; i < 24; i++) {
-			rows.push(<li key={i}>{i}:00</li>);
+			rows.push(
+				<li>
+					<TimeRow 
+					className="row-time" 
+					key={i} 
+					rowIndex={i}
+					onMouseEnter={this.handleMouseEnterRow}
+					/>
+				</li>
+				);
 		}
 
 		return (
@@ -18,4 +41,30 @@ class TimezoneApp extends Component {
 	}
 }
 
-export default TimezoneApp
+class TimeRow extends Component {
+
+	constructor(props) {
+
+		super(props);
+		this.handleMouseEnter = this.handleMouseEnter.bind(this);
+
+	}
+
+	handleMouseEnter() {
+		this.props.onMouseEnter(this.props.rowIndex);
+	}
+
+	render() {
+
+		return(
+			<div 
+			onMouseEnter={this.handleMouseEnter}
+			>
+				<span className="label-day">Wed</span>
+				<span className="label-time">{this.props.rowIndex}:00</span>
+			</div>
+			)
+	}
+}
+
+export default City
