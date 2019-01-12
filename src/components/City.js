@@ -18,6 +18,10 @@ class City extends Component {
 
 	render() {
 
+		//console.log('position', this.props.activeTimeRow); 
+
+		const activeTimeRow = this.props.activeTimeRow
+
 		var rows = [];
 		for (var i = 0; i < 24; i++) {
 			rows.push(
@@ -25,13 +29,14 @@ class City extends Component {
 					<TimeRow 
 					rowIndex={i}
 					onMouseEnter={this.handleMouseEnterRow}
+					active={ (i===activeTimeRow) ? true : false }
 					/>
 				</li>
 				);
 		}
 
 		return (
-			<div className="city">
+			<div className={this.props.active ? 'city active' : 'city'}>
 				<h3>{this.props.name}</h3>
 				<ul>{rows}</ul>
 			</div>
@@ -54,13 +59,15 @@ class TimeRow extends Component {
 
 	render() {
 
+		//console.log('active', this.props.active); 
+
 		return(
 			<div 
-			className="row-time" 
+			className={this.props.active ? 'row-time active' : 'row-time'} 
 			onMouseEnter={this.handleMouseEnter}
 			>
-				<span className="label-day">Wed</span>
-				<span className="label-time">{this.props.rowIndex}:00</span>
+				<div className="label label-day">Wed</div>
+				<div className="label label-time">{this.props.rowIndex}:00</div>
 			</div>
 			)
 	}

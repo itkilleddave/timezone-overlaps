@@ -4,18 +4,26 @@ import City from './City';
 class TimezoneApp extends Component {
 
 	constructor(props) {
-
 		super(props);
+		this.state = {
+			position : [],
+		}
 		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this);
 	}
 
 	handleMouseEnterCityTimeRow(position) {
-		console.log('position', position); 
+
+		this.setState({
+			position : position
+		})
 	}
 
 	render() {
 
+		//console.log('position', this.state.position); 
+
 		const cities = this.props.cities;
+		const position = this.state.position;
 
 		return (
 			<div className="timezone-app">
@@ -29,6 +37,8 @@ class TimezoneApp extends Component {
 							timezone={city.timezone} 
 							columnIndex={index}
 							onMouseEnter={this.handleMouseEnterCityTimeRow}
+							active={ (index===position.column) ? true : false }
+							activeTimeRow={position.row}
 							/>
 						</div>
 					)

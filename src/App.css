@@ -17,20 +17,10 @@
 	display: grid;
 	/*grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));*/
 	grid-template-columns: repeat(auto-fit, minmax(var(--col-width), 1fr));
-	grid-gap: 40px;
+	/*grid-gap: 10px;*/
 	background: #fff;
 	grid-auto-columns: minmax(var(--col-width), 1fr);
 	/*width: calc(var(--col-width) * 8);*/
-
-}
-.row-time {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-}
-.label-day {
-	color: #8996a2;
-}
-.label-time {
 
 }
 .item {
@@ -48,10 +38,39 @@
 
 }
 .city ul li {
-	padding: 10px;
-	list-style: none;
-	border-bottom: solid 1px #eaeff3;
+/*	padding: 10px;
+*/	list-style: none;
+	cursor: hand;
 }
 .city ul li:nth-child(even) {
 	/*background: #f0f4f7;*/
 }
+.city.active .row-time {
+	background: rgba(230,235,240,0.2);
+}
+.row-time {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding: 0 10px;
+}
+.row-time.active {
+	background: rgba(230,235,240,0.4);
+}
+.city.active .row-time.active {
+	background: rgba(230,235,240,0.8);
+}
+.row-time .label {
+	padding: 10px;
+	border-bottom: solid 1px #eaeff3;
+
+}
+.label .label-day {
+	color: #8996a2;
+}
+.label .label-time {
+
+}
+
+
+
+
