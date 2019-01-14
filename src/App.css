@@ -1,5 +1,13 @@
 :root{
 	--col-width: 120px;
+
+	/* colors swatches */
+
+	--light-grey: #f5f7f9;
+
+	/* theme colors */
+
+	--row-time-active: var(--light-grey);
 }
 
 *{
@@ -46,7 +54,7 @@
 	/*background: #f0f4f7;*/
 }
 .city.active .row-time {
-	background: rgba(230,235,240,0.2);
+/*	background: rgba(230,235,240,0.2);*/
 }
 .row-time {
 	display: grid;
@@ -54,11 +62,19 @@
 	padding: 0 10px;
 }
 .row-time.active {
-	background: rgba(230,235,240,0.4);
+	background: var(--row-time-active);
+}
+.row-time.active .label {
+	border-color:  var(--row-time-active);
+}
+.row-time.before-active .label {
+	border-color: white;
 }
 .city.active .row-time.active {
-	background: rgba(230,235,240,0.8);
+	/*background: rgba(230,235,240,0.8);*/
+	cursor: pointer;
 }
+
 .row-time .label {
 	padding: 10px;
 	border-bottom: solid 1px #eaeff3;

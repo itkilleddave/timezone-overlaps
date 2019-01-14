@@ -29,7 +29,9 @@ class City extends Component {
 					<TimeRow 
 					rowIndex={i}
 					onMouseEnter={this.handleMouseEnterRow}
+					beforeActive={ (i===activeTimeRow-1) ? true : false }
 					active={ (i===activeTimeRow) ? true : false }
+					afterActive={ (i===activeTimeRow+1) ? true : false }
 					/>
 				</li>
 				);
@@ -61,9 +63,15 @@ class TimeRow extends Component {
 
 		//console.log('active', this.props.active); 
 
+		let className = 'row-time ';
+
+        className += this.props.beforeActive ? 'before-active ' : ''
+        className += this.props.active ? 'active ' : ''
+        className += this.props.afterActive ? 'after-active ' : ''
+
 		return(
 			<div 
-			className={this.props.active ? 'row-time active' : 'row-time'} 
+			className={className} 
 			onMouseEnter={this.handleMouseEnter}
 			>
 				<div className="label label-day">Wed</div>
