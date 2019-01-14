@@ -39,7 +39,6 @@ class City extends Component {
 
 		return (
 			<div className={this.props.active ? 'city active' : 'city'}>
-				<h3>{this.props.name}</h3>
 				<ul>{rows}</ul>
 			</div>
 		)
@@ -81,4 +80,19 @@ class TimeRow extends Component {
 	}
 }
 
+class CityHead extends Component {
+
+	render() {
+		return (
+			<div className={this.props.active ? 'city active' : 'city'}>
+				<h3>{this.props.name}</h3>
+			</div>
+			)
+	}
+
+}
+
 export default City
+
+export { CityHead }
+

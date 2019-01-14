@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import City from './City';
+import City, { CityHead } from './City';
 
 class TimezoneApp extends Component {
 
@@ -27,7 +27,22 @@ class TimezoneApp extends Component {
 
 		return (
 			<div className="timezone-app">
-				<div className="container">
+				<div className="container container-header">
+					{cities.map((city, index) => (
+						<div className="item" key={city.name}>
+							<CityHead 
+							name={city.name} 
+							country={city.country} 
+							countryCode={city.countryCode}
+							timezone={city.timezone} 
+							columnIndex={index} 
+							active={ (index===position.column) ? true : false }
+							/>
+						</div>
+					)
+					)}
+				</div>
+				<div className="container container-content">
 					{cities.map((city, index) => (
 						<div className="item" key={city.name}>
 							<City 

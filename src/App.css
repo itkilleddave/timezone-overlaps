@@ -1,5 +1,9 @@
 :root{
+
+	/* theme dimensions */
+
 	--col-width: 120px;
+	--head-height: 60px;
 
 	/* colors swatches */
 
@@ -16,7 +20,7 @@
   margin: 0;
 }
 .app {
-  padding: 20px 0;
+  padding: 0;
 }
 
 /* TimezoneApp */
@@ -31,16 +35,32 @@
 	/*width: calc(var(--col-width) * 8);*/
 
 }
+.container.container-header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+/*  display: flex;
+  flex-wrap: wrap;
+  align-items: center;*/
+  width: 100%;
+}
+.container.container-header .item {
+	height: var(--head-height);
+}
+.container.container-header .item h3 {
+	line-height: var(--head-height);
+}
+.container.container-content {
+/*	padding-top: var(--head-height);*/
+}
 .item {
 	text-align: center;
-	background: grey;
 	grid-row: 1;
 }
 .city {
 	background: #fff;
 }
 .city h3 {
-	margin-bottom: 20px;
 }
 .city ul {
 
