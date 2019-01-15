@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import City, { CityHead } from './City';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faBuilding } from '@fortawesome/free-solid-svg-icons'
 
 class TimezoneApp extends Component {
 
@@ -70,7 +72,12 @@ class AddCityButton extends Component {
 
 	render() {
 
-		return <button className="btn btn-circle btn-bottom-right">Add<br />City</button>
+		return (
+		<button className="btn btn-circle btn-bottom-right">
+		{/*<FontAwesomeIcon icon={faPlus} />*/}
+		<FontAwesomeIcon icon={faPlus} />
+		</button>
+		)
 		
 	}
 }
