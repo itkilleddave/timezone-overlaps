@@ -8,7 +8,8 @@
 	/* colors swatches */
 
 	--light-grey: #f5f7f9;
-	--red: #ff5a5a;
+	--red: #ff3e3e;
+	--light-red: #ff5a5a;
 
 	/* theme colors */
 
@@ -21,6 +22,8 @@
   padding: 0;
   margin: 0;
 }
+button:focus {outline:0;}
+
 .app {
   padding: 0;
 }
@@ -108,32 +111,24 @@
 .label .label-time {
 
 }
-
-button:focus {outline:0;}
-
 .btn {
 	font-weight: bold;
 	cursor: pointer;
-}
-/*
-.btn .fa-plus{
-	font-size: 14px;
-	line-height: 20px;
-	display: inline-block;
-	margin-right: 3px;
-}
-.btn .fa-building{
-	font-size: 18px;
-	display: inline-block;
-}*/
-.btn-circle {
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	border-radius: 50%;
 	border: none;
 	background: var(--red);
 	color: white;
+	padding: 10px 14px;
+	font-size: 13px;
+	border-radius: 4px;
+}
+.btn:hover {
+	background: var(--light-red);
+}
+.btn-circle {
+	padding: 0;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
 	font-size: 20px;
 }
 .btn-bottom-left {
@@ -146,7 +141,27 @@ button:focus {outline:0;}
 	right:    20px;
 	bottom:   20px;
 }
-
+.date-picker {
+	display: none;
+}
+.date-picker.active {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(51,51,51,0.7);
+    background: white;
+    z-index: 10;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+}
+.date-picker h3 {
+	font-size: 13vw;
+	font-weight: 700;
+	font-family: 'Khula', sans-serif;
+}
 
 
 
