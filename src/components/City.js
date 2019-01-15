@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Button, { BUTTON_TYPE } from './Button'
 
 class City extends Component {
 
@@ -20,28 +21,61 @@ class City extends Component {
 
 		//console.log('position', this.props.activeTimeRow); 
 
-		const activeTimeRow = this.props.activeTimeRow
+		if (!this.props.name) {
 
-		var rows = [];
-		for (var i = 0; i < 24; i++) {
-			rows.push(
-				<li key={i} >
-					<TimeRow 
-					rowIndex={i}
-					onMouseEnter={this.handleMouseEnterRow}
-					beforeActive={ (i===activeTimeRow-1) ? true : false }
-					active={ (i===activeTimeRow) ? true : false }
-					afterActive={ (i===activeTimeRow+1) ? true : false }
+			// new city - render options
+
+			return(
+				<div className={
+					this.props.active ? 
+					'city city-new active' : 
+					'city city-new'
+				}>
+					<p>Please Select</p>
+
+					<p>PREDICTIVE TEXTFIELD HERE</p>
+					
+					<Button
+						text="Add City"
+						onClick={this.props.onClickAdd}
 					/>
-				</li>
-				);
-		}
+					<Button 
+						text="Cancel"
+						onClick={this.props.onClickCancel}
+					/>
 
-		return (
-			<div className={this.props.active ? 'city active' : 'city'}>
-				<ul>{rows}</ul>
-			</div>
-		)
+				</div>
+			)
+
+		} else {
+
+			// city - render content (time rows)
+
+			const activeTimeRow = this.props.activeTimeRow
+
+			var rows = [];
+			for (var i = 0; i < 24; i++) {
+				rows.push(
+					<li key={i} >
+						<TimeRow 
+						rowIndex={i}
+						onMouseEnter={this.handleMouseEnterRow}
+						beforeActive={ (i===activeTimeRow-1) ? true : false }
+						active={ (i===activeTimeRow) ? true : false }
+						afterActive={ (i===activeTimeRow+1) ? true : false }
+						/>
+					</li>
+					)
+			}
+
+
+			return (
+				<div className={this.props.active ? 'city active' : 'city'}>
+					<ul>{rows}</ul>
+				</div>
+			)
+
+		}
 	}
 }
 

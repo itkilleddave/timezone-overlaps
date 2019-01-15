@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import City, { CityHead } from './City';
-import DatePicker from './DatePicker';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import City, { CityHead } from './City'
+import cities from '../Data'
+import DatePicker from './DatePicker'
+import Button, { BUTTON_SHAPE } from './Button'
 import { faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 class TimezoneApp extends Component {
@@ -9,6 +10,7 @@ class TimezoneApp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			cities : cities,
 			position : [],
 			datePicker : {
 				active : false
@@ -42,13 +44,25 @@ class TimezoneApp extends Component {
 		console.log('handleClickSetDate', this.state.datePicker);
 	}
 	handleClickAddCity() {
-		console.log('handleClickAddCity');
+
+		console.log('handleClickAddCity', cities);
+
+		const cities = [...this.state.cities, {
+			name: "",
+			country: "",
+			countryCode: "",
+			timezone: "",
+		}]
+
+		this.setState({cities: cities});
+
+
 	}
 	render() {
 
 		//console.log('position', this.state.position); 
 
-		const cities = this.props.cities;
+		const cities = this.state.cities;
 		const position = this.state.position;
 
 		return (
@@ -90,61 +104,24 @@ class TimezoneApp extends Component {
 					)
 					)}
 				</div>
-				<ChangeDateButton onClick={this.handleClickChangeDate} />
-				<AddCityButton onClick={this.handleClickAddCity}  />
+				<div className="btn-bottom-left">
+					<Button 
+					icon={faCalendar}
+					shape={BUTTON_SHAPE.CIRCLE}
+					onClick={this.handleClickChangeDate} 
+					/>
+				</div>
+				<div className="btn-bottom-right">
+					<Button 
+					icon={faPlus}
+					shape={BUTTON_SHAPE.CIRCLE}
+					onClick={this.handleClickAddCity}  
+					/>
+				</div>
 			</div>
 		)
 	}
 }
 
-
-class AddCityButton extends Component {
-
-	constructor(props) {
-		super(props)
-		this.handleClick = this.handleClick.bind(this)
-	}
-
-	handleClick() {
-		this.props.onClick()
-	}
-
-	render() {
-
-		return (
-		<button 
-		className="btn btn-circle btn-bottom-right"
-		onClick={this.handleClick}
-		>
-			<FontAwesomeIcon icon={faPlus} />
-		</button>
-		)
-		
-	}
-}
-class ChangeDateButton extends Component {
-
-	constructor(props) {
-		super(props)
-		this.handleClick = this.handleClick.bind(this)
-	}
-
-	handleClick() {
-		this.props.onClick()
-	}
-
-	render() {
-
-		return (
-		<button 
-		className="btn btn-circle btn-bottom-left"
-		onClick={this.handleClick}
-		>
-			<FontAwesomeIcon icon={faCalendar} />
-		</button>
-		)
-		
-	}
-}
 
 export default TimezoneApp
