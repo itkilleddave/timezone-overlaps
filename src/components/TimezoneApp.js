@@ -59,8 +59,19 @@ class TimezoneApp extends Component {
 					)
 					)}
 				</div>
+				<AddCityButton />
 			</div>
 		)
+	}
+}
+
+
+class AddCityButton extends Component {
+
+	render() {
+
+		return <button className="btn btn-circle btn-bottom-right">Add<br />City</button>
+		
 	}
 }
 

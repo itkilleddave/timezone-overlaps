@@ -8,10 +8,12 @@
 	/* colors swatches */
 
 	--light-grey: #f5f7f9;
+	--red: #ff5a5a;
 
 	/* theme colors */
 
 	--row-time-active: var(--light-grey);
+
 }
 
 *{
@@ -105,6 +107,32 @@
 }
 .label .label-time {
 
+}
+
+button:focus {outline:0;}
+
+.btn {
+	font-weight: bold;
+	cursor: pointer;
+}
+.btn-circle {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border-radius: 50%;
+	border: none;
+	background: var(--red);
+	color: white;
+}
+.btn-bottom-left {
+	position: fixed;
+	left:    20px;
+	bottom:   20px;
+}
+.btn-bottom-right {
+	position: fixed;
+	right:    20px;
+	bottom:   20px;
 }
 
 
