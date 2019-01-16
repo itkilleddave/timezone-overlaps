@@ -7,6 +7,7 @@
 
 	/* colors swatches */
 
+	--grey: #e6e9ec;
 	--light-grey: #f5f7f9;
 	--red: #ff3e3e;
 	--light-red: #ff5a5a;
@@ -62,6 +63,9 @@ button:focus {outline:0;}
 	text-align: center;
 	grid-row: 1;
 }
+.item.new {
+	grid-column: span 2;
+}
 .city {
 	background: #fff;
 }
@@ -77,6 +81,14 @@ button:focus {outline:0;}
 }
 .city ul li:nth-child(even) {
 	/*background: #f0f4f7;*/
+}
+.city.city-new  {
+	display: grid;
+	justify-items: center;
+	align-items: center;
+}
+.city.city-new > * {
+	margin-bottom: 20px;
 }
 .city.active .row-time {
 /*	background: rgba(230,235,240,0.2);*/
@@ -101,7 +113,7 @@ button:focus {outline:0;}
 }
 
 .row-time .label {
-	padding: 10px;
+	padding: 20px 10px;
 	border-bottom: solid 1px #eaeff3;
 
 }
@@ -115,14 +127,9 @@ button:focus {outline:0;}
 	font-weight: bold;
 	cursor: pointer;
 	border: none;
-	background: var(--red);
-	color: white;
 	padding: 10px 14px;
 	font-size: 13px;
 	border-radius: 4px;
-}
-.btn:hover {
-	background: var(--light-red);
 }
 .btn-circle {
 	padding: 0;
@@ -130,6 +137,21 @@ button:focus {outline:0;}
 	height: 50px;
 	border-radius: 50%;
 	font-size: 20px;
+}
+.btn-primary {
+	background: var(--red);
+	color: white;
+
+}
+.btn-primary:hover {
+	background: var(--light-red);
+}
+.btn-secondary {
+	background: var(--light-grey);
+	color: black;
+}
+.btn-secondary:hover {
+	background: var(--grey);
 }
 .btn-bottom-left {
 	position: fixed;
