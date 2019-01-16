@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import City, { CityHead } from './City'
-import cities from '../Data'
 import DatePicker from './DatePicker'
 import Button, { BUTTON } from './Button'
 import { faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
@@ -10,7 +9,20 @@ class TimezoneApp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			cities : cities,
+			cities : [
+				  		{
+							name: "",
+							country: "",
+							countryCode: "",
+							timezone: "",
+						},
+						{
+							name: "",
+							country: "",
+							countryCode: "",
+							timezone: "",
+						},
+					],
 			position : [],
 			datePicker : {
 				active : false

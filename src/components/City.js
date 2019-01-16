@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Button from './Button'
+import CityInput from './CityInput'
 
 class City extends Component {
 
@@ -58,9 +59,8 @@ class City extends Component {
 					'city city-new active' : 
 					'city city-new'
 				}>
-					<p>Please Select</p>
-
-					<p>PREDICTIVE TEXTFIELD HERE</p>
+					
+					<CityInput />
 
 					<Button
 						text="Add City"

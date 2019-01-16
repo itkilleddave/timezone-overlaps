@@ -7,6 +7,7 @@
 
 	/* colors swatches */
 
+	--dark-grey: #a4acb3;
 	--grey: #e6e9ec;
 	--light-grey: #f5f7f9;
 	--red: #ff3e3e;
@@ -15,6 +16,8 @@
 	/* theme colors */
 
 	--row-time-active: var(--light-grey);
+	--input-border: var(--grey);
+	--placeholder: var(--dark-grey);
 
 }
 
@@ -23,8 +26,33 @@
   padding: 0;
   margin: 0;
 }
-button:focus {outline:0;}
+*:focus {
+	outline:0; /* remove blue glow from inputs */
+}
+input {
+	padding: 20px 0px;
+	border-radius: 6px;
+	border: solid 1px var(--input-border);
+	font-weight: 700;
+	font-size: 18px;
+	text-align: center;;
+}
+input::placeholder {
+	color: var(--placeholder);
+}
+.react-autosuggest__suggestion {
+	
+	padding: 20px;
+	border: solid 1px var(--input-border);
+	border-top: none;
+	font-weight: 700;
+	font-size: 18px;
+	text-align: center;
+	cursor: pointer;
+}
+.react-autosuggest__suggestion.react-autosuggest__suggestion--first {
 
+}
 .app {
   padding: 0;
 }
