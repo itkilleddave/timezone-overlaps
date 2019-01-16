@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const BUTTON_SHAPE = {
-	DEFAULT : 'default',
-	CIRCLE : 'circle'
+const BUTTON = {
+	THEME : {
+		PRIMARY : 'primary',
+		SECONDARY : 'secondary'
+	},
+	SHAPE : {
+		DEFAULT : 'default',
+		CIRCLE : 'circle'
+	}
 }
 
 class Button extends Component {
@@ -20,12 +26,15 @@ class Button extends Component {
 	render() {
 
 		return (
-			<button 
-			className={"btn btn-"+(this.props.shape ? this.props.shape : BUTTON_SHAPE.DEFAULT)}
+			<button
+			className={"btn"
+			+" btn-"+(this.props.theme ? this.props.theme : BUTTON.THEME.PRIMARY)
+			+" btn-"+(this.props.shape ? this.props.shape : BUTTON.SHAPE.DEFAULT)
+			}
 			onClick={this.handleClick}
 			>
-				<FontAwesomeIcon icon={this.props.icon} />
-				{this.props.text}
+			{this.props.icon ? <FontAwesomeIcon icon={this.props.icon} /> : ''} 
+			{this.props.text}
 			</button>
 		)
 		
@@ -34,7 +43,7 @@ class Button extends Component {
 
 export default Button
 
-export {BUTTON_SHAPE}
+export {BUTTON}
 
 // class ChangeDateButton extends Component {
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import City, { CityHead } from './City'
 import cities from '../Data'
 import DatePicker from './DatePicker'
-import Button, { BUTTON_SHAPE } from './Button'
+import Button, { BUTTON } from './Button'
 import { faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 class TimezoneApp extends Component {
@@ -20,6 +20,7 @@ class TimezoneApp extends Component {
 		this.handleClickChangeDate = this.handleClickChangeDate.bind(this)
 		this.handleClickSetDate = this.handleClickSetDate.bind(this)
 		this.handleClickAddCity = this.handleClickAddCity.bind(this)
+		this.handleClickConfirmAddCity = this.handleClickConfirmAddCity.bind(this)
 	}
 
 	handleMouseEnterCityTimeRow(position) {
@@ -33,7 +34,6 @@ class TimezoneApp extends Component {
 
 		this.setState({datePicker: dp});
 
-		console.log('handleClickChangeDate', this.state.datePicker);
 	}
 	handleClickSetDate() {
 		
@@ -41,11 +41,8 @@ class TimezoneApp extends Component {
 
 		this.setState({datePicker: dp});
 
-		console.log('handleClickSetDate', this.state.datePicker);
 	}
 	handleClickAddCity() {
-
-		console.log('handleClickAddCity', cities);
 
 		const cities = [...this.state.cities, {
 			name: "",
@@ -56,6 +53,15 @@ class TimezoneApp extends Component {
 
 		this.setState({cities: cities});
 
+	}
+	handleClickConfirmAddCity(cityData) {
+		
+		//console.log('cityProps', cityProps);
+
+		const cities = this.state.cities.concat()
+		cities[cityData.index] = cityData.props
+
+		this.setState({cities: cities});
 
 	}
 	render() {
@@ -74,7 +80,9 @@ class TimezoneApp extends Component {
 				</DatePicker>
 				<div className="container container-header">
 					{cities.map((city, index) => (
-						<div className="item" key={city.name}>
+						<div 
+						className={'item '+(!city.name ? 'new' : '')} 
+						key={city.name}>
 							<CityHead 
 							name={city.name} 
 							country={city.country} 
@@ -89,7 +97,9 @@ class TimezoneApp extends Component {
 				</div>
 				<div className="container container-content">
 					{cities.map((city, index) => (
-						<div className="item" key={city.name}>
+						<div 
+						className={'item '+(!city.name ? 'new' : '')} 
+						key={city.name}>
 							<City 
 							name={city.name} 
 							country={city.country} 
@@ -99,6 +109,7 @@ class TimezoneApp extends Component {
 							onMouseEnter={this.handleMouseEnterCityTimeRow}
 							active={ (index===position.column) ? true : false }
 							activeTimeRow={position.row}
+							onClickAdd={this.handleClickConfirmAddCity}
 							/>
 						</div>
 					)
@@ -107,14 +118,14 @@ class TimezoneApp extends Component {
 				<div className="btn-bottom-left">
 					<Button 
 					icon={faCalendar}
-					shape={BUTTON_SHAPE.CIRCLE}
+					shape={BUTTON.SHAPE.CIRCLE}
 					onClick={this.handleClickChangeDate} 
 					/>
 				</div>
 				<div className="btn-bottom-right">
 					<Button 
 					icon={faPlus}
-					shape={BUTTON_SHAPE.CIRCLE}
+					shape={BUTTON.SHAPE.CIRCLE}
 					onClick={this.handleClickAddCity}  
 					/>
 				</div>

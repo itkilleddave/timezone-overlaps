@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Button, { BUTTON_TYPE } from './Button'
+import Button from './Button'
 
 class DatePicker extends Component {
 

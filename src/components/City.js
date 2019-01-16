@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Button, { BUTTON_TYPE } from './Button'
+import Button from './Button'
 
 class City extends Component {
 
@@ -7,7 +7,7 @@ class City extends Component {
 
 		super(props);
 		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this);
-
+		this.handleClickAdd = this.handleClickAdd.bind(this)
 	}
 
 	handleMouseEnterRow(rowIndex) {
@@ -15,6 +15,23 @@ class City extends Component {
 			column: this.props.columnIndex, 
 			row: rowIndex
 		});
+	}
+
+	handleClickAdd() {
+
+		// temp hardcoded data (will ultimately be derived from user input)
+
+		this.props.onClickAdd(
+			{
+			index: this.props.columnIndex,
+			props: {
+					name: "London",
+					country: "United Kingdom",
+					countryCode: "GB",
+					timezone: "Europe/London",
+					}
+			}
+		)
 	}
 
 	render() {
@@ -34,12 +51,13 @@ class City extends Component {
 					<p>Please Select</p>
 
 					<p>PREDICTIVE TEXTFIELD HERE</p>
-					
+
 					<Button
 						text="Add City"
-						onClick={this.props.onClickAdd}
+						onClick={this.handleClickAdd}
 					/>
 					<Button 
+						theme="secondary"
 						text="Cancel"
 						onClick={this.props.onClickCancel}
 					/>
