@@ -21,6 +21,7 @@ class TimezoneApp extends Component {
 		this.handleClickSetDate = this.handleClickSetDate.bind(this)
 		this.handleClickAddCity = this.handleClickAddCity.bind(this)
 		this.handleClickConfirmAddCity = this.handleClickConfirmAddCity.bind(this)
+		this.handleClickRemoveCity = this.handleClickRemoveCity.bind(this)
 	}
 
 	handleMouseEnterCityTimeRow(position) {
@@ -51,22 +52,44 @@ class TimezoneApp extends Component {
 			timezone: "",
 		}]
 
-		this.setState({cities: cities});
+		this.setState({cities: cities})
+
 
 	}
 	handleClickConfirmAddCity(cityData) {
-		
-		//console.log('cityProps', cityProps);
 
 		const cities = this.state.cities.concat()
+
 		cities[cityData.index] = cityData.props
 
-		this.setState({cities: cities});
+		this.setState({cities: cities})
 
+	}
+	handleClickRemoveCity(cityData) {
+
+		const cities = this.state.cities.concat()
+
+		cities.splice(cityData.index, 1)
+
+		this.setState({cities: cities})
+	}
+	componentDidUpdate(prevProps, prevState, snapshot) {
+
+		//console.log('prevState.cities', prevState.cities); 
+
+		if(this.state.cities.length > prevState.cities.length) {
+
+			// city was added
+
+			window.scrollTo({
+			  top: 0,
+			  left: document.body.scrollWidth,
+			  behavior: 'smooth'
+			})
+		}
 	}
 	render() {
 
-		//console.log('position', this.state.position); 
 
 		const cities = this.state.cities;
 		const position = this.state.position;
@@ -82,7 +105,7 @@ class TimezoneApp extends Component {
 					{cities.map((city, index) => (
 						<div 
 						className={'item '+(!city.name ? 'new' : '')} 
-						key={city.name}>
+						key={index}>
 							<CityHead 
 							name={city.name} 
 							country={city.country} 
@@ -99,7 +122,7 @@ class TimezoneApp extends Component {
 					{cities.map((city, index) => (
 						<div 
 						className={'item '+(!city.name ? 'new' : '')} 
-						key={city.name}>
+						key={index}>
 							<City 
 							name={city.name} 
 							country={city.country} 
@@ -110,6 +133,7 @@ class TimezoneApp extends Component {
 							active={ (index===position.column) ? true : false }
 							activeTimeRow={position.row}
 							onClickAdd={this.handleClickConfirmAddCity}
+							onClickRemove={this.handleClickRemoveCity}
 							/>
 						</div>
 					)
@@ -130,7 +154,10 @@ class TimezoneApp extends Component {
 					/>
 				</div>
 			</div>
+
 		)
+
+		
 	}
 }
 

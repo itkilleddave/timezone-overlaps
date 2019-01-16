@@ -8,6 +8,7 @@ class City extends Component {
 		super(props);
 		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this);
 		this.handleClickAdd = this.handleClickAdd.bind(this)
+		this.handleClickRemove = this.handleClickRemove.bind(this)
 	}
 
 	handleMouseEnterRow(rowIndex) {
@@ -30,6 +31,15 @@ class City extends Component {
 					countryCode: "GB",
 					timezone: "Europe/London",
 					}
+			}
+		)
+	}
+
+	handleClickRemove() {
+
+		this.props.onClickRemove(
+			{
+			index: this.props.columnIndex,
 			}
 		)
 	}
@@ -58,8 +68,8 @@ class City extends Component {
 					/>
 					<Button 
 						theme="secondary"
-						text="Cancel"
-						onClick={this.props.onClickCancel}
+						text="Remove"
+						onClick={this.handleClickRemove}
 					/>
 
 				</div>

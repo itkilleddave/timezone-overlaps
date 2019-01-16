@@ -2,7 +2,7 @@
 
 	/* theme dimensions */
 
-	--col-width: 120px;
+	--col-width: 180px;
 	--head-height: 60px;
 
 	/* colors swatches */
@@ -62,9 +62,11 @@ button:focus {outline:0;}
 .item {
 	text-align: center;
 	grid-row: 1;
+  -webkit-transition: width 2s; /* Safari */
+  transition: width 2s;
 }
 .item.new {
-	grid-column: span 2;
+	/*grid-column: span 2;*/
 }
 .city {
 	background: #fff;
@@ -86,6 +88,7 @@ button:focus {outline:0;}
 	display: grid;
 	justify-items: center;
 	align-items: center;
+	/*width: 400px;*/
 }
 .city.city-new > * {
 	margin-bottom: 20px;

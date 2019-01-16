@@ -5,29 +5,41 @@
 
 const cities = [
   {
-    name: "Adelaide",
-    country: "Australia",
-    countryCode: "AU",
-    timezone: "Australia/Adelaide",
+      name: "",
+      country: "",
+      countryCode: "",
+      timezone: "",
   },
   {
-    name: "Melbourne",
-    country: "Australia",
-    countryCode: "AU",
-    timezone: "Australia/Melbourne",
+      name: "",
+      country: "",
+      countryCode: "",
+      timezone: "",
   },
-  {
-    name: "New York",
-    country: "United States",
-    countryCode: "US",
-    timezone: "America/New_York",
-  },
-  {
-    name: "",
-    country: "",
-    countryCode: "",
-    timezone: "",
-  }
+  // {
+  //   name: "Adelaide",
+  //   country: "Australia",
+  //   countryCode: "AU",
+  //   timezone: "Australia/Adelaide",
+  // },
+  // {
+  //   name: "Melbourne",
+  //   country: "Australia",
+  //   countryCode: "AU",
+  //   timezone: "Australia/Melbourne",
+  // },
+  // {
+  //   name: "New York",
+  //   country: "United States",
+  //   countryCode: "US",
+  //   timezone: "America/New_York",
+  // },
+  // {
+  //   name: "",
+  //   country: "",
+  //   countryCode: "",
+  //   timezone: "",
+  // }
   // {
   //   name: "London",
   //   country: "United Kingdom",
