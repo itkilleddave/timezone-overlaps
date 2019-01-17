@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Button from './Button'
 import CityInput from './CityInput'
+import cities from '../Data'
 
 class City extends Component {
 
@@ -45,6 +46,10 @@ class City extends Component {
 		)
 	}
 
+	handleChangeCityInput() {
+		console.log("change");
+	}
+
 	render() {
 
 		//console.log('position', this.props.activeTimeRow); 
@@ -60,7 +65,9 @@ class City extends Component {
 					'city city-new'
 				}>
 					
-					<CityInput />
+					<CityInput 
+					// onChange={this.handleChangeCityInput} 
+					/>
 
 					<Button
 						text="Add City"
