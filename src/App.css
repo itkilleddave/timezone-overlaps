@@ -186,6 +186,15 @@ input::placeholder {
 	border-radius: 50%;
 	font-size: 20px;
 }
+.btn-circle.btn-small {
+	width: 30px;
+	height: 30px;
+	font-size: 12px;
+}
+.btn-rectangle.btn-small {
+	font-size: 10px;
+	padding: 8px 10px;
+}
 .btn-primary {
 	background: var(--red);
 	color: white;

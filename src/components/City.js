@@ -2,15 +2,31 @@ import React, { Component } from 'react'
 import Button from './Button'
 import CityInput from './CityInput'
 import cities from '../Data'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 class City extends Component {
 
 	constructor(props) {
 
 		super(props);
-		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this);
+
+		// state used for the suggestive input (CityInput)
+
+	    this.state = {
+	      value: '',
+	      suggestions: []
+	    };
+
+		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this)
 		this.handleClickAdd = this.handleClickAdd.bind(this)
 		this.handleClickRemove = this.handleClickRemove.bind(this)
+
+		//CitInput Event Handlers
+		this.handleChangeCityInput = this.handleChangeCityInput.bind(this)
+		this.handleSuggestionsFetchRequestedCityInput = this.handleSuggestionsFetchRequestedCityInput.bind(this)
+		this.handleSuggestionsClearRequestedCityInput = this.handleSuggestionsClearRequestedCityInput.bind(this)
+	
+
 	}
 
 	handleMouseEnterRow(rowIndex) {
@@ -50,6 +66,31 @@ class City extends Component {
 		console.log("change");
 	}
 
+	// CityInput Event Handlers
+
+	handleChangeCityInput(newValue) {
+		this.setState({
+		  value: newValue
+		});
+	};
+
+	// Autosuggest will call this function every time you need to update suggestions.
+	// You already implemented this logic above, so just use it.
+	handleSuggestionsFetchRequestedCityInput(value) {
+		this.setState({
+		  suggestions: value
+		});
+	};
+
+	// Autosuggest will call this function every time you need to clear suggestions.
+	handleSuggestionsClearRequestedCityInput() {
+		this.setState({
+		  suggestions: []
+		});
+	};
+
+
+
 	render() {
 
 		//console.log('position', this.props.activeTimeRow); 
@@ -58,6 +99,10 @@ class City extends Component {
 
 			// new city - render options
 
+    		const { value, suggestions } = this.state;
+
+    		//console.log();
+
 			return(
 				<div className={
 					this.props.active ? 
@@ -65,17 +110,27 @@ class City extends Component {
 					'city city-new'
 				}>
 					
-					<CityInput 
+					<CityInput
+						value={value}
+						suggestions={suggestions}
+						onChangeCityInput={this.handleChangeCityInput}
+						onSuggestionsFetchRequestedCityInput={this.handleSuggestionsFetchRequestedCityInput}
+						onSuggestionsClearRequestedCityInput={this.handleSuggestionsClearRequestedCityInput}
 					// onChange={this.handleChangeCityInput} 
 					/>
 
+					{value ?
 					<Button
 						text="Add City"
 						onClick={this.handleClickAdd}
 					/>
+					: false}
+
 					<Button 
 						theme="secondary"
-						text="Remove"
+						icon={faTimes}
+						shape="circle"
+						size="small"
 						onClick={this.handleClickRemove}
 					/>
 

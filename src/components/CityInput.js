@@ -45,35 +45,39 @@ class CityInput extends React.Component {
     // and an onChange handler that updates this value (see below).
     // Suggestions also need to be provided to the Autosuggest,
     // and they are initially empty because the Autosuggest is closed.
-    this.state = {
-      value: '',
-      suggestions: []
-    };
+    // this.state = {
+    //   value: '',
+    //   suggestions: []
+    // };
   }
  
   onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
+    // this.setState({
+    //   value: newValue
+    // });
+    this.props.onChangeCityInput(newValue);
   };
  
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value)
-    });
+    // this.setState({
+    //   suggestions: getSuggestions(value)
+    // });
+    this.props.onSuggestionsFetchRequestedCityInput(getSuggestions(value));
   };
  
   // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
+    // this.setState({
+    //   suggestions: []
+    // });
+    this.props.onSuggestionsClearRequestedCityInput();
   };
  
   render() {
-    const { value, suggestions } = this.state;
+
+    const { value, suggestions } = this.props;
  
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
@@ -91,6 +95,7 @@ class CityInput extends React.Component {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
+        highlightFirstSuggestion={true}
       />
     );
   }

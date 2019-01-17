@@ -4,12 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const BUTTON = {
 	THEME : {
 		PRIMARY : 'primary',
-		SECONDARY : 'secondary'
+		SECONDARY : 'secondary',
 	},
 	SHAPE : {
-		DEFAULT : 'default',
-		CIRCLE : 'circle'
-	}
+		DEFAULT : 'rectangle',
+		CIRCLE : 'circle',
+	},
+	SIZE : {
+		DEFAULT : 'medium',
+		SMALL : 'small',
+	},
 }
 
 class Button extends Component {
@@ -30,6 +34,7 @@ class Button extends Component {
 			className={"btn"
 			+" btn-"+(this.props.theme ? this.props.theme : BUTTON.THEME.PRIMARY)
 			+" btn-"+(this.props.shape ? this.props.shape : BUTTON.SHAPE.DEFAULT)
+			+" btn-"+(this.props.size ? this.props.size : BUTTON.SIZE.DEFAULT)
 			}
 			onClick={this.handleClick}
 			>
