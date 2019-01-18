@@ -37,6 +37,7 @@ class Button extends Component {
 			+" btn-"+(this.props.size ? this.props.size : BUTTON.SIZE.DEFAULT)
 			}
 			onClick={this.handleClick}
+			tabIndex="-1"
 			>
 			{this.props.icon ? <FontAwesomeIcon icon={this.props.icon} /> : ''} 
 			{this.props.text}

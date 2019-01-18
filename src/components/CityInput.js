@@ -36,66 +36,88 @@ const renderSuggestion = suggestion => (
   </div>
 );
  
-class CityInput extends React.Component {
-  constructor() {
-    super();
+class CityInput extends Component {
+
+  // constructor() {
+  //   super();
  
-    // Autosuggest is a controlled component.
-    // This means that you need to provide an input value
-    // and an onChange handler that updates this value (see below).
-    // Suggestions also need to be provided to the Autosuggest,
-    // and they are initially empty because the Autosuggest is closed.
-    // this.state = {
-    //   value: '',
-    //   suggestions: []
-    // };
-  }
+  //   // Autosuggest is a controlled component.
+  //   // This means that you need to provide an input value
+  //   // and an onChange handler that updates this value (see below).
+  //   // Suggestions also need to be provided to the Autosuggest,
+  //   // and they are initially empty because the Autosuggest is closed.
+  //   this.state = {
+  //     value: '',
+  //     suggestions: []
+  //   };
+  // }
  
-  onChange = (event, { newValue }) => {
+  handleChange = (event, { newValue }) => {
     // this.setState({
     //   value: newValue
     // });
-    this.props.onChangeCityInput(newValue);
+    this.props.onChange(newValue);
   };
  
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
-  onSuggestionsFetchRequested = ({ value }) => {
+  handleSuggestionsFetchRequested = ({ value }) => {
     // this.setState({
     //   suggestions: getSuggestions(value)
     // });
-    this.props.onSuggestionsFetchRequestedCityInput(getSuggestions(value));
+    this.props.onSuggestionsFetchRequested(getSuggestions(value));
   };
  
   // Autosuggest will call this function every time you need to clear suggestions.
-  onSuggestionsClearRequested = () => {
+  handleSuggestionsClearRequested = () => {
     // this.setState({
     //   suggestions: []
     // });
-    this.props.onSuggestionsClearRequestedCityInput();
+    this.props.onSuggestionsClearRequested();
   };
+
+  handleKeyPress = (event) => {
+    this.props.onKeyPress(event);
+  };
+
+  handleSuggestionSelected = (event, { 
+    suggestion, 
+    suggestionValue, 
+    suggestionIndex, 
+    sectionIndex, 
+    method }) => {
+
+    this.props.onSuggestionSelected(suggestion)
+  }
+
+
  
   render() {
 
     const { value, suggestions } = this.props;
- 
+    
+    //const randomIndex = Math.floor(Math.random() * cities.length)  
+
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: 'e.g. New York',
       value,
-      onChange: this.onChange
+      onChange: this.handleChange,
+      onKeyPress: this.handleKeyPress,
+      //onKeyUp: () => {console.log("hello")}
     };
  
     // Finally, render it!
     return (
       <Autosuggest
         suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
         highlightFirstSuggestion={true}
+        onSuggestionSelected={this.handleSuggestionSelected}
       />
     );
   }

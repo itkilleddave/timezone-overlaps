@@ -25,7 +25,8 @@ class City extends Component {
 		this.handleChangeCityInput = this.handleChangeCityInput.bind(this)
 		this.handleSuggestionsFetchRequestedCityInput = this.handleSuggestionsFetchRequestedCityInput.bind(this)
 		this.handleSuggestionsClearRequestedCityInput = this.handleSuggestionsClearRequestedCityInput.bind(this)
-	
+		this.handleKeyPressCityInput = this.handleKeyPressCityInput.bind(this)
+		this.handleSuggestionSelectedCityInput = this.handleSuggestionSelectedCityInput.bind(this)
 
 	}
 
@@ -38,17 +39,16 @@ class City extends Component {
 
 	handleClickAdd() {
 
-		// temp hardcoded data (will ultimately be derived from user input)
+		// validation note: the 'add city' button is available only when the value is valid, so no need to check validity here
+
+		const cityName = this.state.value
+
+		const cityDataIndex = this.getCityIndexByName(cityName)
 
 		this.props.onClickAdd(
 			{
 			index: this.props.columnIndex,
-			props: {
-					name: "London",
-					country: "United Kingdom",
-					countryCode: "GB",
-					timezone: "Europe/London",
-					}
+			props: cities[cityDataIndex],
 			}
 		)
 	}
@@ -60,10 +60,6 @@ class City extends Component {
 			index: this.props.columnIndex,
 			}
 		)
-	}
-
-	handleChangeCityInput() {
-		console.log("change");
 	}
 
 	// CityInput Event Handlers
@@ -89,7 +85,59 @@ class City extends Component {
 		});
 	};
 
+	handleKeyPressCityInput(event) {
 
+		const value = this.state.value
+
+		if (event.key === 'Enter')
+		{
+			if (this.isValidCityName(value))
+			{
+			this.handleClickAdd()
+			}
+		}
+
+		console.log(event.key);
+
+		if (event.which === 9)
+		{
+       		event.preventDefault()
+			console.log('dfsd')
+		}
+	}
+	handleSuggestionSelectedCityInput(suggestion) {
+
+		//console.log(suggestion)
+
+		this.setState({
+		  value: suggestion.name
+		});
+
+		this.props.onClickAdd(
+			{
+			index: this.props.columnIndex,
+			props: cities[this.getCityIndexByName(suggestion.name)],
+			}
+		)
+	}
+
+	// data functions
+
+	getCityIndexByName(value) {
+
+		for(var i = 0; i < cities.length; i++) {
+		    if (cities[i].name === value) {
+		        return i
+		        break
+		    }
+		}
+
+		return -1;
+	}
+
+	isValidCityName(name) {
+		return this.getCityIndexByName(name)>=0 ? true : false
+	}
 
 	render() {
 
@@ -103,6 +151,8 @@ class City extends Component {
 
     		//console.log();
 
+    		// check if CityInput value is a valid city name
+
 			return(
 				<div className={
 					this.props.active ? 
@@ -112,19 +162,25 @@ class City extends Component {
 					
 					<CityInput
 						value={value}
+						index={this.props.columnIndex}
 						suggestions={suggestions}
-						onChangeCityInput={this.handleChangeCityInput}
-						onSuggestionsFetchRequestedCityInput={this.handleSuggestionsFetchRequestedCityInput}
-						onSuggestionsClearRequestedCityInput={this.handleSuggestionsClearRequestedCityInput}
-					// onChange={this.handleChangeCityInput} 
+						onChange={this.handleChangeCityInput}
+						onKeyPress={this.handleKeyPressCityInput}
+						onSuggestionsFetchRequested={this.handleSuggestionsFetchRequestedCityInput}
+						onSuggestionsClearRequested={this.handleSuggestionsClearRequestedCityInput}
+						onSuggestionSelected={this.handleSuggestionSelectedCityInput}
 					/>
 
-					{value ?
+{/*
+					// removing button (just adds confusion to the UX)
+
+					{(this.isValidCityName(value)) ?
 					<Button
 						text="Add City"
 						onClick={this.handleClickAdd}
 					/>
 					: false}
+*/}
 
 					<Button 
 						theme="secondary"
