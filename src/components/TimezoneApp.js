@@ -18,10 +18,10 @@ class TimezoneApp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			cities : [],
+			cities : [getEmptyCity()],
 			position : [],
 			datePicker : {
-				active : true
+				active : false
 			}
 		}
 		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
@@ -65,7 +65,11 @@ class TimezoneApp extends Component {
 
 		cities[cityData.index] = cityData.props
 
+		cities.push(getEmptyCity())
+
 		this.setState({cities: cities})
+
+
 
 	}
 	handleClickRemoveCity(cityData) {
@@ -89,7 +93,7 @@ class TimezoneApp extends Component {
 			// city was added
 
 			window.scrollTo({
-			  top: 0,
+			  // top: 0,
 			  left: document.body.scrollWidth,
 			  behavior: 'smooth'
 			})

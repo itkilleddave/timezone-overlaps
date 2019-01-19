@@ -28,7 +28,7 @@ class Button extends Component {
 	}
 
 	render() {
-		console.log(this.props.pulse)
+		
 		return (
 			<button
 			className={"btn"

@@ -97,13 +97,6 @@ class City extends Component {
 			}
 		}
 
-		console.log(event.key);
-
-		if (event.which === 9)
-		{
-       		event.preventDefault()
-			console.log('dfsd')
-		}
 	}
 	handleSuggestionSelectedCityInput(suggestion) {
 
