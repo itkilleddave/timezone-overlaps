@@ -89,8 +89,14 @@ class CityInput extends Component {
 
     this.props.onSuggestionSelected(suggestion)
   }
-
-
+  componentDidMount() {
+    this.input.focus();
+  }
+  storeInputReference = autosuggest => {
+    if (autosuggest !== null) {
+      this.input = autosuggest.input;
+    }
+  };
  
   render() {
 
@@ -118,8 +124,11 @@ class CityInput extends Component {
         inputProps={inputProps}
         highlightFirstSuggestion={true}
         onSuggestionSelected={this.handleSuggestionSelected}
+        ref={this.storeInputReference}
       />
     );
+
+
   }
 }
 
