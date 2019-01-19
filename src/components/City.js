@@ -159,7 +159,7 @@ class City extends Component {
 					'city city-new active' : 
 					'city city-new'
 				}>
-					
+					<h3>Add City</h3>
 					<CityInput
 						value={value}
 						index={this.props.columnIndex}
@@ -265,7 +265,9 @@ class CityHead extends Component {
 	render() {
 		return (
 			<div className={this.props.active ? 'city active' : 'city'}>
-				<h3>{this.props.name}</h3>
+				<h3>
+				{this.props.name}
+				</h3>
 			</div>
 			)
 	}
