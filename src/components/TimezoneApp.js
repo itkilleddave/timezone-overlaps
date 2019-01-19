@@ -116,7 +116,7 @@ class TimezoneApp extends Component {
 				<div className="container container-header">
 					{cities.map((city, index) => (
 						<div 
-						className={'item '+(!city.name ? 'new' : '')} 
+						className={'item '+(!city.name ? 'new' : 'set')} 
 						key={index}>
 							<CityHead 
 							name={city.name} 
@@ -125,6 +125,7 @@ class TimezoneApp extends Component {
 							timezone={city.timezone} 
 							columnIndex={index} 
 							active={ (index===position.column) ? true : false }
+							onClickRemove={this.handleClickRemoveCity}
 							/>
 						</div>
 					)
@@ -133,7 +134,7 @@ class TimezoneApp extends Component {
 				<div className="container container-content">
 					{cities.map((city, index) => (
 						<div 
-						className={'item '+(!city.name ? 'new' : '')} 
+						className={'item '+(!city.name ? 'new' : 'set')} 
 						key={index}>
 							<City 
 							name={city.name} 

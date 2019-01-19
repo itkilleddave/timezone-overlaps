@@ -216,6 +216,7 @@ class City extends Component {
 
 
 			return (
+
 				<div className={this.props.active ? 'city active' : 'city'}>
 					<ul>{rows}</ul>
 				</div>
@@ -262,14 +263,51 @@ class TimeRow extends Component {
 
 class CityHead extends Component {
 
+
+	constructor(props) {
+
+		super(props);
+
+		this.handleClickRemove = this.handleClickRemove.bind(this)
+
+	}
+
+	handleClickRemove() {
+
+		this.props.onClickRemove(
+			{
+			index: this.props.columnIndex,
+			}
+		)
+	}
+
 	render() {
+		if(this.props.name) {
 		return (
 			<div className={this.props.active ? 'city active' : 'city'}>
-				<h3>
-				{this.props.name}
-				</h3>
+				
+				<div className="head">
+					<div></div>
+					<h3>
+					{this.props.name}
+					</h3>
+					<Button 
+						theme="secondary"
+						icon={faTimes}
+						shape="circle"
+						size="small"
+						onClick={this.handleClickRemove}
+					/>
+				</div>
+
 			</div>
 			)
+		} else {
+			return (
+			<div className={this.props.active ? 'city active' : 'city'}>
+			</div>
+			)
+		}
 	}
 
 }
