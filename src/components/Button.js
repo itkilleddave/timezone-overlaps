@@ -28,13 +28,14 @@ class Button extends Component {
 	}
 
 	render() {
-
+		console.log(this.props.pulse)
 		return (
 			<button
 			className={"btn"
 			+" btn-"+(this.props.theme ? this.props.theme : BUTTON.THEME.PRIMARY)
 			+" btn-"+(this.props.shape ? this.props.shape : BUTTON.SHAPE.DEFAULT)
 			+" btn-"+(this.props.size ? this.props.size : BUTTON.SIZE.DEFAULT)
+			+" "+(this.props.pulse ? 'pulse' : '')
 			}
 			onClick={this.handleClick}
 			tabIndex="-1"

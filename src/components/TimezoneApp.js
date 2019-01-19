@@ -4,28 +4,24 @@ import DatePicker from './DatePicker'
 import Button, { BUTTON } from './Button'
 import { faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
+function getEmptyCity() {
+	return {
+				name: "",
+				country: "",
+				countryCode: "",
+				timezone: "",
+			}
+}
+
 class TimezoneApp extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			cities : [
-				  		{
-							name: "",
-							country: "",
-							countryCode: "",
-							timezone: "",
-						},
-						{
-							name: "",
-							country: "",
-							countryCode: "",
-							timezone: "",
-						},
-					],
+			cities : [],
 			position : [],
 			datePicker : {
-				active : false
+				active : true
 			}
 		}
 		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
@@ -57,12 +53,7 @@ class TimezoneApp extends Component {
 	}
 	handleClickAddCity() {
 
-		const cities = [...this.state.cities, {
-			name: "",
-			country: "",
-			countryCode: "",
-			timezone: "",
-		}]
+		const cities = [...this.state.cities, getEmptyCity()]
 
 		this.setState({cities: cities})
 
@@ -83,6 +74,10 @@ class TimezoneApp extends Component {
 
 		cities.splice(cityData.index, 1)
 
+		// if(!cities.length) {
+		// 	cities[0] = getEmptyCity();
+		// }
+
 		this.setState({cities: cities})
 	}
 	componentDidUpdate(prevProps, prevState, snapshot) {
@@ -101,7 +96,6 @@ class TimezoneApp extends Component {
 		}
 	}
 	render() {
-
 
 		const cities = this.state.cities;
 		const position = this.state.position;
@@ -163,7 +157,13 @@ class TimezoneApp extends Component {
 					<Button 
 					icon={faPlus}
 					shape={BUTTON.SHAPE.CIRCLE}
-					onClick={this.handleClickAddCity}  
+					onClick={this.handleClickAddCity}
+					pulse={
+						(!cities.length)
+						||
+						(cities.length===1 && cities[0].name != '')
+						? true : false}
+					//pulse={ cities.length ? true : false} 
 					/>
 				</div>
 			</div>
