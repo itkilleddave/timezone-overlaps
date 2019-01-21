@@ -121,7 +121,6 @@ class City extends Component {
 		for(var i = 0; i < cities.length; i++) {
 		    if (cities[i].name === value) {
 		        return i
-		        break
 		    }
 		}
 
@@ -162,6 +161,7 @@ class City extends Component {
 						onSuggestionsFetchRequested={this.handleSuggestionsFetchRequestedCityInput}
 						onSuggestionsClearRequested={this.handleSuggestionsClearRequestedCityInput}
 						onSuggestionSelected={this.handleSuggestionSelectedCityInput}
+						focus={this.props.focus}
 					/>
 
 {/*

@@ -91,16 +91,20 @@ class TimezoneApp extends Component {
 
 		if(this.state.cities.length > prevState.cities.length) {
 
+			console.log('city added');
+
 			// city was added
 
 			window.scrollTo({
-			  // top: 0,
+			  top: 0,
 			  left: document.body.scrollWidth,
 			  behavior: 'smooth'
 			})
 		}
 	}
 	render() {
+
+		console.log("render");
 
 		const cities = this.state.cities;
 		const position = this.state.position;
@@ -170,7 +174,7 @@ class TimezoneApp extends Component {
 					pulse={
 						(!cities.length)
 						||
-						(cities.length===1 && cities[0].name != '')
+						(cities.length===1 && cities[0].name !== '')
 						? true : false}
 					//pulse={ cities.length ? true : false} 
 					/>

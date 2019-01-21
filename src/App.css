@@ -34,9 +34,6 @@
 *:focus {
 	outline:0; /* remove blue glow from inputs */
 }
-#root {
-	overflow-x: scroll;
-}
 input {
 }
 input::placeholder {
@@ -141,6 +138,7 @@ input::placeholder {
 	grid-row: 1;
   -webkit-transition: width 2s; /* Safari */
   transition: width 2s;
+  background: white;
 }
 .item.new {
 	/*grid-column: span 2;*/
