@@ -65,7 +65,8 @@ class TimezoneApp extends Component {
 
 		cities[cityData.index] = cityData.props
 
-		cities.push(getEmptyCity())
+		// add this line conditionally when 'add-another' funcationality is implemented
+		//cities.push(getEmptyCity())
 
 		this.setState({cities: cities})
 
@@ -158,6 +159,10 @@ class TimezoneApp extends Component {
 					/>
 				</div>
 				<div className="btn-bottom-right">
+					{!cities[cities.length-1].name
+					? 
+					false // only allow 1 new city to be added at a time
+					:
 					<Button 
 					icon={faPlus}
 					shape={BUTTON.SHAPE.CIRCLE}
@@ -169,6 +174,7 @@ class TimezoneApp extends Component {
 						? true : false}
 					//pulse={ cities.length ? true : false} 
 					/>
+					}
 				</div>
 			</div>
 
