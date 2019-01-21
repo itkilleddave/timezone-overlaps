@@ -38,20 +38,19 @@ const renderSuggestion = suggestion => (
  
 class CityInput extends Component {
 
-  constructor() {
-    super();
+  // constructor() {
+  //   super();
  
-    // Autosuggest is a controlled component.
-    // This means that you need to provide an input value
-    // and an onChange handler that updates this value (see below).
-    // Suggestions also need to be provided to the Autosuggest,
-    // and they are initially empty because the Autosuggest is closed.
-    // this.state = {
-    //   value: '',
-    //   suggestions: []
-    // };
-    //this.focusIt = this.focusIt.bind();
-  }
+  //   // Autosuggest is a controlled component.
+  //   // This means that you need to provide an input value
+  //   // and an onChange handler that updates this value (see below).
+  //   // Suggestions also need to be provided to the Autosuggest,
+  //   // and they are initially empty because the Autosuggest is closed.
+  //   this.state = {
+  //     value: '',
+  //     suggestions: []
+  //   };
+  // }
  
   handleChange = (event, { newValue }) => {
     // this.setState({
@@ -91,10 +90,10 @@ class CityInput extends Component {
     this.props.onSuggestionSelected(suggestion)
   }
   componentDidMount() {
-    // if (this.props.focus) {
-    //   this.input.focus();
-    // }
-    //setTimeout(function(){this.focusIt()}, 1000);
+
+    // use a timeout for delay, to allow time for the scrollTo animation.
+    // because the focusing also triggers an auto scroll (with no animation)
+    // which breaks/overrides the scrollTo animation
 
     setTimeout(
         function() {

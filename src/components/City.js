@@ -161,7 +161,6 @@ class City extends Component {
 						onSuggestionsFetchRequested={this.handleSuggestionsFetchRequestedCityInput}
 						onSuggestionsClearRequested={this.handleSuggestionsClearRequestedCityInput}
 						onSuggestionSelected={this.handleSuggestionSelectedCityInput}
-						focus={this.props.focus}
 					/>
 
 {/*

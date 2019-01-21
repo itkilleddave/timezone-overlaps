@@ -87,13 +87,7 @@ class TimezoneApp extends Component {
 	}
 	componentDidUpdate(prevProps, prevState, snapshot) {
 
-		//console.log('prevState.cities', prevState.cities); 
-
 		if(this.state.cities.length > prevState.cities.length) {
-
-			console.log('city added');
-
-			// city was added
 
 			window.scrollTo({
 			  top: 0,
@@ -103,8 +97,6 @@ class TimezoneApp extends Component {
 		}
 	}
 	render() {
-
-		console.log("render");
 
 		const cities = this.state.cities;
 		const position = this.state.position;
