@@ -89,9 +89,24 @@ const cities = [
   },
 ];
 
+getFilteredCities = value => {
+
+	const inputValue = value.trim().toLowerCase();
+	const inputLength = inputValue.length;
+
+	return inputLength === 0 ? [] : cities.filter(lang =>
+	  lang.name.toLowerCase().slice(0, inputLength) === inputValue
+	);
+};
+
 app.get('/api/cities', (req, res) => {
-	console.log('cities', cities);
+	console.log('get - api/cities', cities);
  	res.send(cities);
+});
+
+app.post('/api/filtered-cities', (req, res) => {
+	console.log('post - api/filtered-cities', req.body.value)
+ 	res.send(getFilteredCities(req.body.value));
 });
 
 //////////////////////////////

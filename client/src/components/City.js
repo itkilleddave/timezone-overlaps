@@ -13,9 +13,12 @@ class City extends Component {
 		// state used for the suggestive input (CityInput)
 
 	    this.state = {
-	      value: '',
-	      suggestions: []
+	      	value: '',
+	      	suggestions: [],
+      		isLoading: false,
 	    };
+
+    	//this.lastRequestId = null;
 
 		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this)
 		this.handleClickAdd = this.handleClickAdd.bind(this)
@@ -70,12 +73,43 @@ class City extends Component {
 		});
 	};
 
+	callApiFilteredCities = async (value) => {
+
+		const response = await fetch('/api/filtered-cities', {
+	      method: 'POST',
+	      headers: {
+	        'Content-Type': 'application/json',
+	      },
+	      body: JSON.stringify({ value: value })
+	    });
+
+		const body = await response.json();
+		if (response.status !== 200) throw Error(body.message);
+		return body;
+	};
+
+	loadSuggestionsCityInput(value) {
+	    
+	    this.setState({
+	      isLoading: true
+	    });
+	    
+        this.callApiFilteredCities(value)
+		.then(res => this.setState({
+	      	isLoading: false,
+		  	suggestions: res,
+		}))
+		.catch(err => console.log(err));
+
+	}
+
+
+
 	// Autosuggest will call this function every time you need to update suggestions.
 	// You already implemented this logic above, so just use it.
 	handleSuggestionsFetchRequestedCityInput(value) {
-		this.setState({
-		  suggestions: value
-		});
+		//console.log(value);
+		this.loadSuggestionsCityInput(value);
 	};
 
 	// Autosuggest will call this function every time you need to clear suggestions.
