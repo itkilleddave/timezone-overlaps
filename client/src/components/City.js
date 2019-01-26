@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Button from './Button'
 import CityInput from './CityInput'
-import cities from '../Data'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 class City extends Component {
@@ -21,7 +20,7 @@ class City extends Component {
     	//this.lastRequestId = null;
 
 		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this)
-		this.handleClickAdd = this.handleClickAdd.bind(this)
+		//this.handleClickAdd = this.handleClickAdd.bind(this)
 		this.handleClickRemove = this.handleClickRemove.bind(this)
 
 		//CitInput Event Handlers
@@ -40,21 +39,23 @@ class City extends Component {
 		});
 	}
 
-	handleClickAdd() {
+	// handleClickAdd() {
 
-		// validation note: the 'add city' button is available only when the value is valid, so no need to check validity here
+	// 	// validation note: the 'add city' button is available only when the value is valid, so no need to check validity here
 
-		const cityName = this.state.value
+	// 	console.log('add', this.state.value)
 
-		const cityDataIndex = this.getCityIndexByName(cityName)
+	// 	const cityName = this.state.value
 
-		this.props.onClickAdd(
-			{
-			index: this.props.columnIndex,
-			props: cities[cityDataIndex],
-			}
-		)
-	}
+	// 	const cityDataIndex = this.getCityIndexByName(cityName)
+
+	// 	this.props.onClickAdd(
+	// 		{
+	// 		index: this.props.columnIndex,
+	// 		props: cities[cityDataIndex],
+	// 		}
+	// 	)
+	// }
 
 	handleClickRemove() {
 
@@ -121,15 +122,15 @@ class City extends Component {
 
 	handleKeyPressCityInput(event) {
 
-		const value = this.state.value
+		// const value = this.state.value
 
-		if (event.key === 'Enter')
-		{
-			if (this.isValidCityName(value))
-			{
-			this.handleClickAdd()
-			}
-		}
+		// if (event.key === 'Enter')
+		// {
+		// 	if (this.isValidCityName(value))
+		// 	{
+		// 	this.handleClickAdd()
+		// 	}
+		// }
 
 	}
 	handleSuggestionSelectedCityInput(suggestion) {
@@ -143,27 +144,28 @@ class City extends Component {
 		this.props.onClickAdd(
 			{
 			index: this.props.columnIndex,
-			props: cities[this.getCityIndexByName(suggestion.name)],
+			props: suggestion
+			//props: cities[this.getCityIndexByName(suggestion.name)],
 			}
 		)
 	}
 
 	// data functions
 
-	getCityIndexByName(value) {
+	// getCityIndexByName(value) {
 
-		for(var i = 0; i < cities.length; i++) {
-		    if (cities[i].name === value) {
-		        return i
-		    }
-		}
+	// 	for(var i = 0; i < cities.length; i++) {
+	// 	    if (cities[i].name === value) {
+	// 	        return i
+	// 	    }
+	// 	}
 
-		return -1;
-	}
+	// 	return -1;
+	// }
 
-	isValidCityName(name) {
-		return this.getCityIndexByName(name)>=0 ? true : false
-	}
+	// isValidCityName(name) {
+	// 	return this.getCityIndexByName(name)>=0 ? true : false
+	// }
 
 	render() {
 
