@@ -20,10 +20,9 @@ class City extends Component {
     	//this.lastRequestId = null;
 
 		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this)
-		//this.handleClickAdd = this.handleClickAdd.bind(this)
 		this.handleClickRemove = this.handleClickRemove.bind(this)
 
-		//CitInput Event Handlers
+		//CityInput Event Handlers
 		this.handleChangeCityInput = this.handleChangeCityInput.bind(this)
 		this.handleSuggestionsFetchRequestedCityInput = this.handleSuggestionsFetchRequestedCityInput.bind(this)
 		this.handleSuggestionsClearRequestedCityInput = this.handleSuggestionsClearRequestedCityInput.bind(this)
@@ -38,24 +37,6 @@ class City extends Component {
 			row: rowIndex
 		});
 	}
-
-	// handleClickAdd() {
-
-	// 	// validation note: the 'add city' button is available only when the value is valid, so no need to check validity here
-
-	// 	console.log('add', this.state.value)
-
-	// 	const cityName = this.state.value
-
-	// 	const cityDataIndex = this.getCityIndexByName(cityName)
-
-	// 	this.props.onClickAdd(
-	// 		{
-	// 		index: this.props.columnIndex,
-	// 		props: cities[cityDataIndex],
-	// 		}
-	// 	)
-	// }
 
 	handleClickRemove() {
 
