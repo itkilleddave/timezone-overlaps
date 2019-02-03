@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Button from './Button'
 import CityInput from './CityInput'
-import cities from '../Data'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 class City extends Component {
@@ -13,12 +12,15 @@ class City extends Component {
 		// state used for the suggestive input (CityInput)
 
 	    this.state = {
-	      value: '',
-	      suggestions: []
+	      	value: '',
+	      	suggestions: [],
+      		isLoading: false,
 	    };
 
+    	//this.lastRequestId = null;
+
 		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this)
-		this.handleClickAdd = this.handleClickAdd.bind(this)
+		//this.handleClickAdd = this.handleClickAdd.bind(this)
 		this.handleClickRemove = this.handleClickRemove.bind(this)
 
 		//CitInput Event Handlers
@@ -37,21 +39,23 @@ class City extends Component {
 		});
 	}
 
-	handleClickAdd() {
+	// handleClickAdd() {
 
-		// validation note: the 'add city' button is available only when the value is valid, so no need to check validity here
+	// 	// validation note: the 'add city' button is available only when the value is valid, so no need to check validity here
 
-		const cityName = this.state.value
+	// 	console.log('add', this.state.value)
 
-		const cityDataIndex = this.getCityIndexByName(cityName)
+	// 	const cityName = this.state.value
 
-		this.props.onClickAdd(
-			{
-			index: this.props.columnIndex,
-			props: cities[cityDataIndex],
-			}
-		)
-	}
+	// 	const cityDataIndex = this.getCityIndexByName(cityName)
+
+	// 	this.props.onClickAdd(
+	// 		{
+	// 		index: this.props.columnIndex,
+	// 		props: cities[cityDataIndex],
+	// 		}
+	// 	)
+	// }
 
 	handleClickRemove() {
 
@@ -70,12 +74,43 @@ class City extends Component {
 		});
 	};
 
+	callApiFilteredCities = async (value) => {
+
+		const response = await fetch('/api/filtered-cities', {
+	      method: 'POST',
+	      headers: {
+	        'Content-Type': 'application/json',
+	      },
+	      body: JSON.stringify({ value: value })
+	    });
+
+		const body = await response.json();
+		if (response.status !== 200) throw Error(body.message);
+		return body;
+	};
+
+	loadSuggestionsCityInput(value) {
+	    
+	    this.setState({
+	      isLoading: true
+	    });
+	    
+        this.callApiFilteredCities(value)
+		.then(res => this.setState({
+	      	isLoading: false,
+		  	suggestions: res,
+		}))
+		.catch(err => console.log(err));
+
+	}
+
+
+
 	// Autosuggest will call this function every time you need to update suggestions.
 	// You already implemented this logic above, so just use it.
 	handleSuggestionsFetchRequestedCityInput(value) {
-		this.setState({
-		  suggestions: value
-		});
+		//console.log(value);
+		this.loadSuggestionsCityInput(value);
 	};
 
 	// Autosuggest will call this function every time you need to clear suggestions.
@@ -87,15 +122,15 @@ class City extends Component {
 
 	handleKeyPressCityInput(event) {
 
-		const value = this.state.value
+		// const value = this.state.value
 
-		if (event.key === 'Enter')
-		{
-			if (this.isValidCityName(value))
-			{
-			this.handleClickAdd()
-			}
-		}
+		// if (event.key === 'Enter')
+		// {
+		// 	if (this.isValidCityName(value))
+		// 	{
+		// 	this.handleClickAdd()
+		// 	}
+		// }
 
 	}
 	handleSuggestionSelectedCityInput(suggestion) {
@@ -109,27 +144,28 @@ class City extends Component {
 		this.props.onClickAdd(
 			{
 			index: this.props.columnIndex,
-			props: cities[this.getCityIndexByName(suggestion.name)],
+			props: suggestion
+			//props: cities[this.getCityIndexByName(suggestion.name)],
 			}
 		)
 	}
 
 	// data functions
 
-	getCityIndexByName(value) {
+	// getCityIndexByName(value) {
 
-		for(var i = 0; i < cities.length; i++) {
-		    if (cities[i].name === value) {
-		        return i
-		    }
-		}
+	// 	for(var i = 0; i < cities.length; i++) {
+	// 	    if (cities[i].name === value) {
+	// 	        return i
+	// 	    }
+	// 	}
 
-		return -1;
-	}
+	// 	return -1;
+	// }
 
-	isValidCityName(name) {
-		return this.getCityIndexByName(name)>=0 ? true : false
-	}
+	// isValidCityName(name) {
+	// 	return this.getCityIndexByName(name)>=0 ? true : false
+	// }
 
 	render() {
 

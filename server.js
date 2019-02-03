@@ -1,7 +1,12 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const port = process.env.PORT || 5000;
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// 'cities' data will eventually come from a database/api. 
-// For nore, use this:
-// https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+//////////////////////////////
+//cities
 
 const cities = [
   // {
@@ -82,6 +87,38 @@ const cities = [
     countryCode: "JP",
     timezone: "Asia/Tokyo",
   },
-]
+];
 
-export default cities
+getFilteredCities = value => {
+
+	const inputValue = value.trim().toLowerCase();
+	const inputLength = inputValue.length;
+
+	return inputLength === 0 ? [] : cities.filter(lang =>
+	  lang.name.toLowerCase().slice(0, inputLength) === inputValue
+	);
+};
+
+app.get('/api/cities', (req, res) => {
+	console.log('get - api/cities', cities);
+ 	res.send(cities);
+});
+
+app.post('/api/filtered-cities', (req, res) => {
+	console.log('post - api/filtered-cities', req.body.value)
+ 	res.send(getFilteredCities(req.body.value));
+});
+
+//////////////////////////////
+
+app.get('/api/hello', (req, res) => {
+  res.send({ express: 'Hello From Express' });
+});
+app.post('/api/world', (req, res) => {
+  console.log(req.body);
+  res.send(
+    `I received your POST request. This is what you sent me: ${req.body.post}`,
+  );
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

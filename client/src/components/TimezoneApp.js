@@ -61,6 +61,8 @@ class TimezoneApp extends Component {
 	}
 	handleClickConfirmAddCity(cityData) {
 
+		//console.log('cityData', cityData);
+
 		const cities = this.state.cities.concat()
 
 		cities[cityData.index] = cityData.props
