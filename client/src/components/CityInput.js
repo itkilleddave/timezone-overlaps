@@ -20,7 +20,14 @@ class CityInput extends Component {
   };
  
   handleSuggestionsFetchRequested = ({ value }) => {
-    this.props.onSuggestionsFetchRequested(value);
+
+    const minCharacters = 2
+
+    if (value.length >= minCharacters) {
+      this.props.onSuggestionsFetchRequested(value);
+    } else {
+      this.props.onSuggestionsClearRequested();
+    }
   };
  
   handleSuggestionsClearRequested = () => {
@@ -70,7 +77,7 @@ class CityInput extends Component {
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
-      placeholder: 'e.g. New York',
+      placeholder: 'e.g. Tokyo',
       value,
       onChange: this.handleChange,
       onKeyPress: this.handleKeyPress,

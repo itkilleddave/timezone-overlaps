@@ -8,95 +8,126 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //////////////////////////////
 //cities
 
-const cities = [
-  // {
-  //     name: "",
-  //     country: "",
-  //     countryCode: "",
-  //     timezone: "",
-  // },
-  // {
-  //     name: "",
-  //     country: "",
-  //     countryCode: "",
-  //     timezone: "",
-  // },
-  {
-    name: "Adelaide",
-    country: "Australia",
-    countryCode: "AU",
-    timezone: "Australia/Adelaide",
-  },
-  {
-    name: "Melbourne",
-    country: "Australia",
-    countryCode: "AU",
-    timezone: "Australia/Melbourne",
-  },
-  {
-    name: "New York",
-    country: "United States",
-    countryCode: "US",
-    timezone: "America/New_York",
-  },
-  {
-    name: "New Jersey",
-    country: "United States",
-    countryCode: "US",
-    timezone: "America/New_York",
-  },
-  {
-    name: "New Orleans",
-    country: "United States",
-    countryCode: "US",
-    timezone: "America/???",
-  },
-  {
-    name: "London",
-    country: "United Kingdom",
-    countryCode: "GB",
-    timezone: "Europe/London",
-  },
-  {
-    name: "Shanghai",
-    country: "China",
-    countryCode: "CN",
-    timezone: "Asia/Shanghai",
-  },
-  {
-    name: "Cairo",
-    country: "Egypt",
-    countryCode: "EG",
-    timezone: "Africa/Cairo",
-  },
-  {
-    name: "Buenos Aires",
-    country: "Argentina",
-    countryCode: "AR",
-    timezone: "America/Argentina/Buenos_Aires",
-  },
-  {
-    name: "Manila",
-    country: "Philippines",
-    countryCode: "PH",
-    timezone: "Asia/Manila",
-  },
-  {
-    name: "Tokyo",
-    country: "Japan",
-    countryCode: "JP",
-    timezone: "Asia/Tokyo",
-  },
-];
+// const cities = [
+//   // {
+//   //     name: "",
+//   //     country: "",
+//   //     countryCode: "",
+//   //     timezone: "",
+//   // },
+//   // {
+//   //     name: "",
+//   //     country: "",
+//   //     countryCode: "",
+//   //     timezone: "",
+//   // },
+//   {
+//     name: "Adelaide",
+//     country: "Australia",
+//     countryCode: "AU",
+//     timezone: "Australia/Adelaide",
+//   },
+//   {
+//     name: "Melbourne",
+//     country: "Australia",
+//     countryCode: "AU",
+//     timezone: "Australia/Melbourne",
+//   },
+//   {
+//     name: "New York",
+//     country: "United States",
+//     countryCode: "US",
+//     timezone: "America/New_York",
+//   },
+//   {
+//     name: "New Jersey",
+//     country: "United States",
+//     countryCode: "US",
+//     timezone: "America/New_York",
+//   },
+//   {
+//     name: "New Orleans",
+//     country: "United States",
+//     countryCode: "US",
+//     timezone: "America/???",
+//   },
+//   {
+//     name: "London",
+//     country: "United Kingdom",
+//     countryCode: "GB",
+//     timezone: "Europe/London",
+//   },
+//   {
+//     name: "Shanghai",
+//     country: "China",
+//     countryCode: "CN",
+//     timezone: "Asia/Shanghai",
+//   },
+//   {
+//     name: "Cairo",
+//     country: "Egypt",
+//     countryCode: "EG",
+//     timezone: "Africa/Cairo",
+//   },
+//   {
+//     name: "Buenos Aires",
+//     country: "Argentina",
+//     countryCode: "AR",
+//     timezone: "America/Argentina/Buenos_Aires",
+//   },
+//   {
+//     name: "Manila",
+//     country: "Philippines",
+//     countryCode: "PH",
+//     timezone: "Asia/Manila",
+//   },
+//   {
+//     name: "Tokyo",
+//     country: "Japan",
+//     countryCode: "JP",
+//     timezone: "Asia/Tokyo",
+//   },
+// ];
+
+const cities = require("all-the-cities")
+
+// cities - format example
+//
+// [{
+//   name: 'Albuquerque',
+//   country: 'US',
+//   altCountry: '',
+//   muni: '',
+//   muniSub: '',
+//   featureClass: 'P',
+//   featureCode: 'PPLA2',
+//   adminCode: 'NM',
+//   population: 545852,
+//   lat: 35.08449,
+//   lon: -106.65114
+// },
+// ...]
 
 getFilteredCities = value => {
 
-	const inputValue = value.trim().toLowerCase();
-	const inputLength = inputValue.length;
+	const filteredCities = cities.filter(city => {
+	  return (
+	  	city.name.toLowerCase().match(value.toLowerCase()) 
+	  	&& 
+	  	parseInt(city.population) > 100000
+	  	)
+	})
 
-	return inputLength === 0 ? [] : cities.filter(lang =>
-	  lang.name.toLowerCase().slice(0, inputLength) === inputValue
-	);
+	console.log(filteredCities.length);
+
+	return filteredCities;
+
+	// const inputValue = value.trim().toLowerCase();
+	// const inputLength = inputValue.length;
+
+	// return inputLength === 0 ? [] : cities.filter(lang =>
+	//   lang.name.toLowerCase().slice(0, inputLength) === inputValue
+	// );
 };
 
 app.get('/api/cities', (req, res) => {
