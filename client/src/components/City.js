@@ -308,7 +308,7 @@ class CityHead extends Component {
 						className="country-flag"
 						code={country} 
 						size="2x" 
-						squared="true"
+						squared={true}
 						/>
 					</div>
 
