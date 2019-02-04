@@ -112,7 +112,11 @@ input::placeholder {
 	align-items: center;
 	border-bottom: solid 4px var(--red);
 }	
-.container.container-header .head *:nth-child(3) {
+.container.container-header .head > *:nth-child(1) {
+	justify-self:left;
+	margin-left: 10px;
+}	
+.container.container-header .head > *:nth-child(3) {
 	justify-self:right;
 	margin-right: 10px;
 }	
@@ -285,6 +289,9 @@ input::placeholder {
 	font-size: 13vw;
 	font-weight: 700;
 	font-family: 'Khula', sans-serif;
+}
+.country-flag {
+	border-radius: 50%;
 }
 
 /* animations */
