@@ -91,10 +91,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const cities = require("all-the-cities")
 
+// cities - format example
+//
+// [{
+//   name: 'Albuquerque',
+//   country: 'US',
+//   altCountry: '',
+//   muni: '',
+//   muniSub: '',
+//   featureClass: 'P',
+//   featureCode: 'PPLA2',
+//   adminCode: 'NM',
+//   population: 545852,
+//   lat: 35.08449,
+//   lon: -106.65114
+// },
+// ...]
+
 getFilteredCities = value => {
 
 	const filteredCities = cities.filter(city => {
-	  return city.name.match(value)
+	  return (
+	  	city.name.toLowerCase().match(value.toLowerCase()) 
+	  	&& 
+	  	parseInt(city.population) > 100000
+	  	)
 	})
 
 	console.log(filteredCities.length);
