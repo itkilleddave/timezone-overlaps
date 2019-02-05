@@ -8,8 +8,8 @@ function getEmptyCity() {
 	return {
 				name: "",
 				country: "",
-				countryCode: "",
-				timezone: "",
+				//countryCode: "",
+				//timezone: "",
 			}
 }
 
@@ -118,8 +118,8 @@ class TimezoneApp extends Component {
 							<CityHead 
 							name={city.name} 
 							country={city.country} 
-							countryCode={city.countryCode}
-							timezone={city.timezone} 
+							//countryCode={city.countryCode}
+							//timezone={city.timezone} 
 							columnIndex={index} 
 							active={ (index===position.column) ? true : false }
 							onClickRemove={this.handleClickRemoveCity}
@@ -136,8 +136,8 @@ class TimezoneApp extends Component {
 							<City 
 							name={city.name} 
 							country={city.country} 
-							countryCode={city.countryCode} 
-							timezone={city.timezone} 
+							//countryCode={city.countryCode} 
+							//timezone={city.timezone} 
 							columnIndex={index}
 							onMouseEnter={this.handleMouseEnterCityTimeRow}
 							active={ (index===position.column) ? true : false }

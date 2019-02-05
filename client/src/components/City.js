@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Button from './Button'
 import CityInput from './CityInput'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import FlagIcon from './FlagIcon'
 
 class City extends Component {
 
@@ -71,7 +72,7 @@ class City extends Component {
 	};
 
 	loadSuggestionsCityInput(value) {
-	    
+
 	    this.setState({
 	      isLoading: true
 	    });
@@ -149,6 +150,7 @@ class City extends Component {
 	// }
 
 	render() {
+
 
 		//console.log('position', this.props.activeTimeRow); 
 
@@ -291,15 +293,30 @@ class CityHead extends Component {
 	}
 
 	render() {
+
+		//console.log('city', this.props)
+
+		const country = this.props.country.toLowerCase();
+
 		if(this.props.name) {
 		return (
 			<div className={this.props.active ? 'city active' : 'city'}>
 				
 				<div className="head">
-					<div></div>
-					<h3>
-					{this.props.name}
+
+					<div>
+						<FlagIcon 
+						className="country-flag"
+						code={country} 
+						size="lg" 
+						squared={false}
+						/>
+					</div>
+
+					<h3 className="city-name">
+						{this.props.name}
 					</h3>
+
 					<Button 
 						theme="secondary"
 						icon={faTimes}
@@ -307,6 +324,11 @@ class CityHead extends Component {
 						size="small"
 						onClick={this.handleClickRemove}
 					/>
+
+	{/*				<h3 className="city-name">
+						{this.props.name}
+					</h3>*/}
+
 				</div>
 
 			</div>

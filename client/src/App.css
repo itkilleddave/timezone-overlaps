@@ -3,7 +3,7 @@
 	/* theme dimensions */
 
 	--col-width-min: 50vw;
-	--col-width-max: 360px;
+	/*--col-width-max: 360px;*/
 	--head-height: 60px;
 
 	/* colors swatches */
@@ -62,12 +62,22 @@ input::placeholder {
 	padding: 20px;
 	border: solid 1px var(--input-border);
 	border-top: none;
+	
 	font-weight: 700;
 	font-size: 16px;
-	text-align: center;
+	text-align: left;
 	cursor: pointer;
 	width: calc(var(--col-width-min) - 40px);
 }
+.react-autosuggest__suggestion div {
+	
+	display: grid;
+	grid-template-columns: auto 1fr;
+}
+.react-autosuggest__suggestion div .country-flag {
+	margin-right: 20px;
+}
+
 .react-autosuggest__suggestion--highlighted {
 
 	background: var(--light-grey);
@@ -108,14 +118,25 @@ input::placeholder {
 }
 .container.container-header .head {
 	display: grid;
-	grid-template-columns: 1fr 100px 1fr;
+	grid-template-columns: 50px 1fr 50px;
 	align-items: center;
-	border-bottom: solid 4px var(--red);
+	justify-items: center;
+	border-bottom: solid 4px var(--grey);
 }	
-.container.container-header .head *:nth-child(3) {
+/*.container.container-header .head .city-name {
+	grid-column: 1 / -1;
+}*/
+.container.container-header .head > * {
+	overflow: hidden;
+}
+/*.container.container-header .head > *:nth-child(1) {
+	justify-self:left;
+	margin: 0 10px;
+}	
+.container.container-header .head > *:nth-child(3) {
 	justify-self:right;
-	margin-right: 10px;
-}	
+	margin: 0 10px;
+}*/	
 .container.container-header .item {
 	height: var(--head-height);
 	padding: 0 10px;
@@ -286,6 +307,12 @@ input::placeholder {
 	font-weight: 700;
 	font-family: 'Khula', sans-serif;
 }
+.country-flag {
+	/*border-radius: 50%;*/
+	border-radius: 3px;
+/*	border: var(--grey) solid 2px;
+  	box-sizing: content-box;*/
+}
 
 /* animations */
 
@@ -315,7 +342,9 @@ input::placeholder {
 @media only screen and (min-width: 768px) {
 
 	:root{
-		--col-width-min: 180px;
+		/*--col-width-min: 180px;*/
+		--col-width-min: 240px;
+		/*--col-width-min: calc(100vw/6);*/
 	}
 }
 
