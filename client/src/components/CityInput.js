@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Autosuggest from 'react-autosuggest';
+import FlagIcon from './FlagIcon'
  
 class CityInput extends Component {
 
@@ -11,7 +12,13 @@ class CityInput extends Component {
   // Use your imagination to render suggestions.
   renderSuggestion = suggestion => (
     <div>
-      {suggestion.name}
+      <FlagIcon 
+      className="country-flag"
+      code={suggestion.country.toLowerCase()} 
+      size="1x" 
+      squared={false}
+      />
+      <span>{suggestion.name}</span>
     </div>
   );
 

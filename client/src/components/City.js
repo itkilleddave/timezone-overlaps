@@ -72,7 +72,7 @@ class City extends Component {
 	};
 
 	loadSuggestionsCityInput(value) {
-	    
+
 	    this.setState({
 	      isLoading: true
 	    });
@@ -150,6 +150,7 @@ class City extends Component {
 	// }
 
 	render() {
+
 
 		//console.log('position', this.props.activeTimeRow); 
 
