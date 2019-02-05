@@ -108,7 +108,7 @@ input::placeholder {
 }
 .container.container-header .head {
 	display: grid;
-	grid-template-columns: 1fr 100px 1fr;
+	grid-template-columns: 1fr minmax(80px, 1000px) 1fr;
 	align-items: center;
 	border-bottom: solid 4px var(--red);
 }	
@@ -292,6 +292,8 @@ input::placeholder {
 }
 .country-flag {
 	border-radius: 50%;
+/*	border: var(--grey) solid 2px;
+  	box-sizing: content-box;*/
 }
 
 /* animations */
