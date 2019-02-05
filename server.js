@@ -114,7 +114,7 @@ getFilteredCities = value => {
 	  return (
 	  	city.name.toLowerCase().match(value.toLowerCase()) 
 	  	&& 
-	  	parseInt(city.population) > 100000
+	  	parseInt(city.population) > 50000
 	  	)
 	})
 

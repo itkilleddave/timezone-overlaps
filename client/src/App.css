@@ -291,7 +291,8 @@ input::placeholder {
 	font-family: 'Khula', sans-serif;
 }
 .country-flag {
-	border-radius: 50%;
+	/*border-radius: 50%;*/
+	border-radius: 3px;
 /*	border: var(--grey) solid 2px;
   	box-sizing: content-box;*/
 }
