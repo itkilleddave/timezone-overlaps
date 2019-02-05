@@ -15,7 +15,6 @@ class CityInput extends Component {
       <FlagIcon 
       className="country-flag"
       code={suggestion.country.toLowerCase()} 
-      size="1x" 
       squared={false}
       />
       <span>{suggestion.name}</span>

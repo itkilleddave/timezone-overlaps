@@ -313,7 +313,7 @@ class CityHead extends Component {
 						/>
 					</div>
 
-					<h3>
+					<h3 className="city-name">
 						{this.props.name}
 					</h3>
 
@@ -324,6 +324,10 @@ class CityHead extends Component {
 						size="small"
 						onClick={this.handleClickRemove}
 					/>
+
+	{/*				<h3 className="city-name">
+						{this.props.name}
+					</h3>*/}
 
 				</div>
 
