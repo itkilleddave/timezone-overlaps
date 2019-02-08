@@ -3,6 +3,7 @@ import Button from './Button'
 import CityInput from './CityInput'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import FlagIcon from './FlagIcon'
+import tzlookup from 'tz-lookup'
 
 class City extends Component {
 
@@ -149,8 +150,21 @@ class City extends Component {
 	// 	return this.getCityIndexByName(name)>=0 ? true : false
 	// }
 
-	render() {
+	componentDidUpdate(prevProps, prevState, snapshot) {
 
+		if (this.props.lat) {
+			if(
+				prevProps.lat !== this.props.lat
+				||
+				prevProps.lon !== this.props.lon
+				) {
+				alert("Get City Timezone: "+tzlookup(this.props.lat, this.props.lon))
+			}
+		}
+			
+	}
+
+	render() {
 
 		//console.log('position', this.props.activeTimeRow); 
 
@@ -228,7 +242,7 @@ class City extends Component {
 
 			return (
 
-				<div className={this.props.active ? 'city active' : 'city'}>
+				<div className={this.props.active ? 'city active' : 'city'}>	
 					<ul>{rows}</ul>
 				</div>
 			)

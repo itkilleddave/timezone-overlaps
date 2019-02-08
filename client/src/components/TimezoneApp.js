@@ -136,6 +136,8 @@ class TimezoneApp extends Component {
 							<City 
 							name={city.name} 
 							country={city.country} 
+							lat={city.lat}
+							lon={city.lon}
 							//countryCode={city.countryCode} 
 							//timezone={city.timezone} 
 							columnIndex={index}
