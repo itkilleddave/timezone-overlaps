@@ -4,6 +4,8 @@ import CityInput from './CityInput'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import FlagIcon from './FlagIcon'
 import tzlookup from 'tz-lookup'
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 class City extends Component {
 
@@ -152,15 +154,16 @@ class City extends Component {
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
 
-		if (this.props.lat) {
-			if(
-				prevProps.lat !== this.props.lat
-				||
-				prevProps.lon !== this.props.lon
-				) {
-				alert("Get City Timezone: "+tzlookup(this.props.lat, this.props.lon))
-			}
-		}
+		// if (this.props.lat) {
+		// 	if(
+		// 		prevProps.lat !== this.props.lat
+		// 		||
+		// 		prevProps.lon !== this.props.lon
+		// 		) {
+
+		// 		alert("Get City Timezone: "+tzlookup(this.props.lat, this.props.lon))
+		// 	}
+		// }
 			
 	}
 
@@ -224,6 +227,10 @@ class City extends Component {
 
 			const activeTimeRow = this.props.activeTimeRow
 
+			const baseDateTime = new Date()//'1976-04-19T12:59-0500';
+			
+    		const timezone = tzlookup(this.props.lat, this.props.lon)
+
 			var rows = [];
 			for (var i = 0; i < 24; i++) {
 				rows.push(
@@ -234,6 +241,8 @@ class City extends Component {
 						beforeActive={ (i===activeTimeRow-1) ? true : false }
 						active={ (i===activeTimeRow) ? true : false }
 						afterActive={ (i===activeTimeRow+1) ? true : false }
+						baseDateTime={baseDateTime}
+						timezone={timezone}
 						/>
 					</li>
 					)
@@ -242,7 +251,7 @@ class City extends Component {
 
 			return (
 
-				<div className={this.props.active ? 'city active' : 'city'}>	
+				<div className={this.props.active ? 'city active' : 'city'}>
 					<ul>{rows}</ul>
 				</div>
 			)
@@ -266,7 +275,9 @@ class TimeRow extends Component {
 
 	render() {
 
-		//console.log('active', this.props.active); 
+		// console.log('active', this.props.active); 
+
+		// console.log(this.props.timezone);
 
 		let className = 'row-time ';
 
@@ -274,13 +285,36 @@ class TimeRow extends Component {
         className += this.props.active ? 'active ' : ''
         className += this.props.afterActive ? 'after-active ' : ''
 
+
 		return(
 			<div 
 			className={className} 
 			onMouseEnter={this.handleMouseEnter}
 			>
-				<div className="label label-day">Wed</div>
-				<div className="label label-time">{this.props.rowIndex}:00</div>
+				{/*
+				find formats here: http://momentjs.com/
+				*/}
+
+				<Moment
+				className="label label-day"
+				add={{ hours: this.props.rowIndex }}
+				format="dddd"
+				tz={this.props.timezone}
+				>
+				{this.props.baseDateTime}
+				</Moment>
+
+				<Moment
+				className="label label-time"
+				add={{ hours: this.props.rowIndex }}
+				format="h:mm a"
+				tz={this.props.timezone}
+				>
+				{this.props.baseDateTime}
+				</Moment>
+
+
+
 			</div>
 			)
 	}
