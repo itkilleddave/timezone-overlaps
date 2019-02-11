@@ -20,6 +20,7 @@ class TimezoneApp extends Component {
 		this.state = {
 			cities : [getEmptyCity()],
 			position : [],
+			dateTime : new Date(),
 			datePicker : {
 				active : false
 			}
@@ -108,6 +109,7 @@ class TimezoneApp extends Component {
 				<DatePicker
 				active={this.state.datePicker.active}
 				onClickSetDate={this.handleClickSetDate}
+				dateTime={this.state.dateTime}
 				>
 				</DatePicker>
 				<div className="container container-header">
@@ -138,6 +140,7 @@ class TimezoneApp extends Component {
 							country={city.country} 
 							lat={city.lat}
 							lon={city.lon}
+							dateTime={this.state.dateTime}
 							//countryCode={city.countryCode} 
 							//timezone={city.timezone} 
 							columnIndex={index}
