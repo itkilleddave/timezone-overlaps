@@ -25,31 +25,49 @@ class TimezoneApp extends Component {
 				active : false
 			}
 		}
-		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
+
+		// date handlers
 		this.handleClickChangeDate = this.handleClickChangeDate.bind(this)
 		this.handleClickSetDate = this.handleClickSetDate.bind(this)
+		this.handleClickSetDay = this.handleClickSetDay.bind(this)
+		this.handleClickSetMonth = this.handleClickSetMonth.bind(this)
+		this.handleClickSetYear = this.handleClickSetYear.bind(this)
+
+		//city handlers
 		this.handleClickAddCity = this.handleClickAddCity.bind(this)
 		this.handleClickConfirmAddCity = this.handleClickConfirmAddCity.bind(this)
 		this.handleClickRemoveCity = this.handleClickRemoveCity.bind(this)
+		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
 	}
 
-	handleMouseEnterCityTimeRow(position) {
-		this.setState({
-			position : position
-		})
-	}
 	handleClickChangeDate() {
 		
 		const dp = {...this.state.datePicker, active:true}
 
-		this.setState({datePicker: dp});
+		this.setState({datePicker: dp})
 
 	}
 	handleClickSetDate() {
 		
 		const dp = {...this.state.datePicker, active:false}
 
-		this.setState({datePicker: dp});
+		this.setState({datePicker: dp})
+
+	}
+	handleClickSetDay() {
+	
+		alert('handleClickSetDay')
+
+	}
+	handleClickSetMonth(e) {
+		
+		alert('change month of "this.state.dateTime" here')
+		console.log(e, this.state.dateTime)
+
+	}
+	handleClickSetYear() {
+		
+		alert('handleClickSetYear')
 
 	}
 	handleClickAddCity() {
@@ -88,6 +106,12 @@ class TimezoneApp extends Component {
 
 		this.setState({cities: cities})
 	}
+	handleMouseEnterCityTimeRow(position) {
+		this.setState({
+			position : position
+		})
+	}
+
 	componentDidUpdate(prevProps, prevState, snapshot) {
 
 		if(this.state.cities.length > prevState.cities.length) {
@@ -109,6 +133,9 @@ class TimezoneApp extends Component {
 				<DatePicker
 				active={this.state.datePicker.active}
 				onClickSetDate={this.handleClickSetDate}
+				onClickSetDay={this.handleClickSetDay}
+				onClickSetMonth={this.handleClickSetMonth}
+				onClickSetYear={this.handleClickSetYear}
 				dateTime={this.state.dateTime}
 				>
 				</DatePicker>

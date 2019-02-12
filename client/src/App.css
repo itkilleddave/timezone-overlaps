@@ -276,6 +276,10 @@ input::placeholder {
 .btn-secondary:hover {
 	background: var(--grey);
 }
+.btn-secondary.active {
+	background: var(--primary);
+	color: white;
+}
 .btn-bottom-left {
 	position: fixed;
 	left:    20px;
@@ -306,6 +310,17 @@ input::placeholder {
 	font-size: 13vw;
 	font-weight: 700;
 	font-family: 'Khula', sans-serif;
+}
+.date-picker .month-buttons {
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 
+		1fr 1fr 1fr 1fr
+	;
+	margin-bottom: 30px;
+}
+.date-picker .month-buttons > * {
+	/*margin: 10px;*/
 }
 .country-flag {
 	/*border-radius: 50%;*/
@@ -338,6 +353,11 @@ input::placeholder {
 	:root{
 		--col-width-min: 33.33vw;
 	}
+	.date-picker .month-buttons {
+		grid-template-columns: 
+		1fr 1fr 1fr 1fr 1fr 1fr
+		;
+	}
 }
 @media only screen and (min-width: 768px) {
 
@@ -345,6 +365,13 @@ input::placeholder {
 		/*--col-width-min: 180px;*/
 		--col-width-min: 240px;
 		/*--col-width-min: calc(100vw/6);*/
+	}
+	.date-picker .month-buttons {
+		grid-template-columns: 
+		1fr 1fr 1fr 1fr
+		1fr 1fr 1fr 1fr
+		1fr 1fr 1fr 1fr
+		;
 	}
 }
 
