@@ -59,10 +59,13 @@ class TimezoneApp extends Component {
 		alert('handleClickSetDay')
 
 	}
-	handleClickSetMonth(e) {
+	handleClickSetMonth(monthIndex) {
 		
-		alert('change month of "this.state.dateTime" here')
-		console.log(e, this.state.dateTime)
+		const date = new Date(this.state.dateTime)
+
+		console.log(monthIndex);
+
+		this.setState({dateTime: date.setMonth(monthIndex)})
 
 	}
 	handleClickSetYear() {

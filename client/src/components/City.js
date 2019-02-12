@@ -226,7 +226,7 @@ class City extends Component {
 			// city - render content (time rows)
 
 			const activeTimeRow = this.props.activeTimeRow
-
+			console.log(this.props.dateTime)
 			const baseDateTime = this.props.dateTime
 			
     		const timezone = tzlookup(this.props.lat, this.props.lon)

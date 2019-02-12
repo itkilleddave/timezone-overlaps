@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Button from './Button'
 import Moment from 'react-moment';
+import moment from 'moment';
 
 class DatePicker extends Component {
 
@@ -11,20 +12,12 @@ class DatePicker extends Component {
 
 	render() {
 
-		const months = [
-			"Jan",
-			"Feb",
-			"Mar",
-			"Apr",
-			"May",
-			"Jun",
-			"Jul",
-			"Aug",
-			"Sep",
-			"Oct",
-			"Nov",
-			"Dec",
-		]
+		var months = []
+
+		for (var i = 0; i < 12; i++) {
+			
+			months.push(moment(i+1, 'M').format('MMM'))
+		}
 
 		return (
 			<div className={this.props.active ? 'date-picker active' : 'date-picker'}>
@@ -35,13 +28,13 @@ class DatePicker extends Component {
 				</Moment>
 				</h3>
 
+
 				<div className="month-buttons">
 					{months.map((month, index) => (
 						<Button
 						key={month}
 						text={month}
-						value={month}
-						onClick={() => this.props.onClickSetMonth(month)}
+						onClick={() => this.props.onClickSetMonth(index)}
 						theme="secondary"
 						/>
 					))}
