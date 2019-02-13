@@ -17,10 +17,14 @@ class TimezoneApp extends Component {
 
 	constructor(props) {
 		super(props);
+
+		const dateTime = new Date()
+		dateTime.setHours(0,0,0,0)
+
 		this.state = {
 			cities : [getEmptyCity()],
 			position : [],
-			dateTime : new Date(),
+			dateTime : dateTime,
 			datePicker : {
 				active : false
 			}
