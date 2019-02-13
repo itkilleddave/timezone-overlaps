@@ -63,9 +63,9 @@ class TimezoneApp extends Component {
 		
 		const date = new Date(this.state.dateTime)
 
-		console.log(monthIndex);
+		date.setMonth(monthIndex)
 
-		this.setState({dateTime: date.setMonth(monthIndex)})
+		this.setState({dateTime: date})
 
 	}
 	handleClickSetYear() {
@@ -93,8 +93,6 @@ class TimezoneApp extends Component {
 		//cities.push(getEmptyCity())
 
 		this.setState({cities: cities})
-
-
 
 	}
 	handleClickRemoveCity(cityData) {
@@ -127,6 +125,8 @@ class TimezoneApp extends Component {
 		}
 	}
 	render() {
+
+		//console.log('state', this.state);
 
 		const cities = this.state.cities;
 		const position = this.state.position;

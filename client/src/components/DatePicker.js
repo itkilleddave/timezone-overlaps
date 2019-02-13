@@ -19,6 +19,8 @@ class DatePicker extends Component {
 			months.push(moment(i+1, 'M').format('MMM'))
 		}
 
+		const currentMonth = this.props.dateTime.getMonth()
+
 		return (
 			<div className={this.props.active ? 'date-picker active' : 'date-picker'}>
 				
@@ -28,12 +30,12 @@ class DatePicker extends Component {
 				</Moment>
 				</h3>
 
-
 				<div className="month-buttons">
 					{months.map((month, index) => (
 						<Button
 						key={month}
 						text={month}
+						active={(currentMonth === index) ? true : false}
 						onClick={() => this.props.onClickSetMonth(index)}
 						theme="secondary"
 						/>
