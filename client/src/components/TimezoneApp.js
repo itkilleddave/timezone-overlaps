@@ -26,7 +26,7 @@ class TimezoneApp extends Component {
 			position : [],
 			dateTime : dateTime,
 			datePicker : {
-				active : false
+				active : true
 			}
 		}
 

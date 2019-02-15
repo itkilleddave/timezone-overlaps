@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Button from './Button'
 import Moment from 'react-moment';
 import moment from 'moment';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 class DatePicker extends Component {
 
@@ -30,7 +32,17 @@ class DatePicker extends Component {
 				</Moment>
 				</h3>
 
+
+
 				<div className="month-buttons">
+				    
+				    <Slider 
+	      			className="day-slider"
+	      			min={0} 
+	      			max={31} 
+	      			defaultValue={15} 
+	      			/>
+
 					{months.map((month, index) => (
 						<Button
 						key={month}
@@ -42,10 +54,12 @@ class DatePicker extends Component {
 					))}
 				</div>
 
-				<Button
-				text="Set Date"
-				onClick={this.props.onClickSetDate}
-				/>
+				<div className="action-buttons">
+					<Button
+					text="Set Date"
+					onClick={this.props.onClickSetDate}
+					/>
+				</div>
 
 			</div>
 			)
