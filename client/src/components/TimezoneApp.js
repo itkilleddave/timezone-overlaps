@@ -17,38 +17,78 @@ class TimezoneApp extends Component {
 
 	constructor(props) {
 		super(props);
+
+		const dateTime = new Date()
+		dateTime.setHours(0,0,0,0)
+
 		this.state = {
 			cities : [getEmptyCity()],
 			position : [],
+			dateTime : dateTime,
 			datePicker : {
-				active : false
+				active : true
 			}
 		}
-		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
+
+		// date handlers
 		this.handleClickChangeDate = this.handleClickChangeDate.bind(this)
 		this.handleClickSetDate = this.handleClickSetDate.bind(this)
+		this.handleClickSetDay = this.handleClickSetDay.bind(this)
+		this.handleClickSetMonth = this.handleClickSetMonth.bind(this)
+		this.handleClickSetYear = this.handleClickSetYear.bind(this)
+
+		//city handlers
 		this.handleClickAddCity = this.handleClickAddCity.bind(this)
 		this.handleClickConfirmAddCity = this.handleClickConfirmAddCity.bind(this)
 		this.handleClickRemoveCity = this.handleClickRemoveCity.bind(this)
+		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
 	}
 
-	handleMouseEnterCityTimeRow(position) {
-		this.setState({
-			position : position
-		})
-	}
 	handleClickChangeDate() {
 		
 		const dp = {...this.state.datePicker, active:true}
 
-		this.setState({datePicker: dp});
+		this.setState({datePicker: dp})
 
 	}
 	handleClickSetDate() {
 		
 		const dp = {...this.state.datePicker, active:false}
 
-		this.setState({datePicker: dp});
+		this.setState({datePicker: dp})
+
+	}
+	handleClickSetDay(day) {
+		
+		const date = new Date(this.state.dateTime)
+
+		date.setDate(day)
+
+		this.setState({dateTime: date})
+
+	}
+	handleClickSetMonth(monthIndex) {
+
+		const date = new Date(this.state.dateTime)
+		
+		const day = date.getDate()
+
+		const year = this.state.dateTime.getYear()+1900
+
+		const maxDaysInSelectedMonth = new Date(year, (monthIndex+1), 0).getDate();
+
+		if (day > maxDaysInSelectedMonth) {
+			date.setDate(maxDaysInSelectedMonth)
+		}
+
+		date.setMonth(monthIndex)
+
+		this.setState({dateTime: date})
+
+	}
+	handleClickSetYear() {
+		
+		alert('handleClickSetYear')
 
 	}
 	handleClickAddCity() {
@@ -72,8 +112,6 @@ class TimezoneApp extends Component {
 
 		this.setState({cities: cities})
 
-
-
 	}
 	handleClickRemoveCity(cityData) {
 
@@ -87,6 +125,12 @@ class TimezoneApp extends Component {
 
 		this.setState({cities: cities})
 	}
+	handleMouseEnterCityTimeRow(position) {
+		this.setState({
+			position : position
+		})
+	}
+
 	componentDidUpdate(prevProps, prevState, snapshot) {
 
 		if(this.state.cities.length > prevState.cities.length) {
@@ -100,6 +144,8 @@ class TimezoneApp extends Component {
 	}
 	render() {
 
+		//console.log('state', this.state.dateTime);
+
 		const cities = this.state.cities;
 		const position = this.state.position;
 
@@ -108,6 +154,10 @@ class TimezoneApp extends Component {
 				<DatePicker
 				active={this.state.datePicker.active}
 				onClickSetDate={this.handleClickSetDate}
+				onClickSetDay={this.handleClickSetDay}
+				onClickSetMonth={this.handleClickSetMonth}
+				onClickSetYear={this.handleClickSetYear}
+				dateTime={this.state.dateTime}
 				>
 				</DatePicker>
 				<div className="container container-header">
@@ -138,6 +188,7 @@ class TimezoneApp extends Component {
 							country={city.country} 
 							lat={city.lat}
 							lon={city.lon}
+							dateTime={this.state.dateTime}
 							//countryCode={city.countryCode} 
 							//timezone={city.timezone} 
 							columnIndex={index}

@@ -28,7 +28,7 @@ class Button extends Component {
 	}
 
 	render() {
-		
+		//console.log(this.props)
 		return (
 			<button
 			className={"btn"
@@ -36,6 +36,7 @@ class Button extends Component {
 			+" btn-"+(this.props.shape ? this.props.shape : BUTTON.SHAPE.DEFAULT)
 			+" btn-"+(this.props.size ? this.props.size : BUTTON.SIZE.DEFAULT)
 			+" "+(this.props.pulse ? 'pulse' : '')
+			+" "+(this.props.active ? 'active' : '')
 			}
 			onClick={this.handleClick}
 			tabIndex="-1"
