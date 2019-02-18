@@ -325,8 +325,22 @@ input::placeholder {
 .day-slider {
 	grid-column: 1 / -1;
 	margin-bottom: 20px;
-	padding: 0 40px;
+	/*padding: 0 40px;*/
+	display: grid;
+	grid-template-columns: 30px 1fr 30px;
+	text-align: center;
 }
+.day-slider > span {
+	font-size: 12px;
+	font-weight: bold;
+	color: var(--dark-grey);
+}
+/*.day-slider > span:first-child {
+	text-align: left;
+}
+.day-slider > span:last-child {
+	text-align: right;
+}*/
 .rc-slider .rc-slider-track {
 	background-color: var(--primary);
 }

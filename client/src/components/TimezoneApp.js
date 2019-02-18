@@ -58,14 +58,28 @@ class TimezoneApp extends Component {
 		this.setState({datePicker: dp})
 
 	}
-	handleClickSetDay() {
-	
-		alert('handleClickSetDay')
+	handleClickSetDay(day) {
+		
+		const date = new Date(this.state.dateTime)
+
+		date.setDate(day)
+
+		this.setState({dateTime: date})
 
 	}
 	handleClickSetMonth(monthIndex) {
-		
+
 		const date = new Date(this.state.dateTime)
+		
+		const day = date.getDate()
+
+		const year = this.state.dateTime.getYear()+1900
+
+		const maxDaysInSelectedMonth = new Date(year, (monthIndex+1), 0).getDate();
+
+		if (day > maxDaysInSelectedMonth) {
+			date.setDate(maxDaysInSelectedMonth)
+		}
 
 		date.setMonth(monthIndex)
 
@@ -130,7 +144,7 @@ class TimezoneApp extends Component {
 	}
 	render() {
 
-		//console.log('state', this.state);
+		//console.log('state', this.state.dateTime);
 
 		const cities = this.state.cities;
 		const position = this.state.position;

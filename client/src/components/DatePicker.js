@@ -5,12 +5,21 @@ import moment from 'moment';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
+
 class DatePicker extends Component {
 
 	// constructor(props) {
 	// 	super(props)
 	// 	this.handleClickSetMonth = this.handleClickSetMonth.bind(this)
 	// }
+
+	daysInCurrentMonth() {
+
+		const month = this.props.dateTime.getMonth()+1
+		const year = this.props.dateTime.getYear()+1900
+
+	    return new Date(year, month, 0).getDate();
+	}
 
 	render() {
 
@@ -23,6 +32,10 @@ class DatePicker extends Component {
 
 		const currentMonth = this.props.dateTime.getMonth()
 
+		const currentDay = this.props.dateTime.getDate()
+
+		//console.log(currentDay)
+
 		return (
 			<div className={this.props.active ? 'date-picker active' : 'date-picker'}>
 				
@@ -32,16 +45,18 @@ class DatePicker extends Component {
 				</Moment>
 				</h3>
 
-
-
 				<div className="month-buttons">
 				    
-				    <Slider 
-	      			className="day-slider"
-	      			min={0} 
-	      			max={31} 
-	      			defaultValue={15} 
-	      			/>
+				    <div className="day-slider">
+				    	<span>1</span>
+					    <Slider 
+		      			min={1}
+		      			max={this.daysInCurrentMonth()} 
+		      			value={currentDay} 
+						onChange={this.props.onClickSetDay}
+		      			/>
+				    	<span>{this.daysInCurrentMonth()}</span>
+	      			</div>
 
 					{months.map((month, index) => (
 						<Button
