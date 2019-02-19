@@ -306,10 +306,29 @@ input::placeholder {
     align-content: center;
     justify-items: center;
 }
-.date-picker h3 {
-	font-size: 13vw;
+.date-picker .label-day-month {
+	font-size: calc(13vw + 30px);
+	line-height: 1em;
 	font-weight: 700;
 	font-family: 'Khula', sans-serif;
+	margin-bottom: -1vw;
+}
+.date-picker .label-year {
+	display: grid;
+	grid-template-columns: 60px 1fr 60px;
+	text-align: center;
+	align-items: center;
+	justify-items: center;
+	padding-top: 10px;
+	padding-bottom: 5vw;
+}
+.date-picker .label-year > span {
+	font-size: 10vw;
+	line-height: 1em;
+	font-weight: 700;
+	font-family: 'Khula', sans-serif;
+	display: inline-block; 
+	margin-bottom: -3vw;
 }
 .date-picker .month-buttons {
 	display: grid;

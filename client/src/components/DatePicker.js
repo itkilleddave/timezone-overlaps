@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Button from './Button'
+import Button, { BUTTON } from './Button'
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import Moment from 'react-moment';
 import moment from 'moment';
 import Slider from 'rc-slider';
@@ -30,20 +31,44 @@ class DatePicker extends Component {
 			months.push(moment(i+1, 'M').format('MMM'))
 		}
 
+		const currentYear = this.props.dateTime.getYear()+1900
 		const currentMonth = this.props.dateTime.getMonth()
-
 		const currentDay = this.props.dateTime.getDate()
 
-		//console.log(currentDay)
+		//console.log(currentYear+1)
 
 		return (
 			<div className={this.props.active ? 'date-picker active' : 'date-picker'}>
 				
-				<h3>
-				<Moment format="D MMM YYYY">
-				{this.props.dateTime}
-				</Moment>
-				</h3>
+				<div className="label-day-month">
+					<Moment format="D MMM">
+					{this.props.dateTime}
+					</Moment>
+				</div>
+
+				<div className="label-year">
+					<Button
+					icon={faMinus}
+					shape={BUTTON.SHAPE.CIRCLE}
+					size={BUTTON.SIZE.SMALL}
+					theme={BUTTON.THEME.SECONDARY}
+					onClick={() => this.props.onClickSetYear(currentYear-1)}
+					/>
+
+					<span>
+						<Moment format="YYYY">
+						{this.props.dateTime}
+						</Moment>
+					</span>
+
+					<Button
+					icon={faPlus}
+					shape={BUTTON.SHAPE.CIRCLE}
+					size={BUTTON.SIZE.SMALL}
+					theme={BUTTON.THEME.SECONDARY}
+					onClick={() => this.props.onClickSetYear(currentYear+1)}
+					/>
+				</div>
 
 				<div className="month-buttons">
 				    

@@ -86,9 +86,22 @@ class TimezoneApp extends Component {
 		this.setState({dateTime: date})
 
 	}
-	handleClickSetYear() {
+	handleClickSetYear(year) {
 		
-		alert('handleClickSetYear')
+		const date = new Date(this.state.dateTime)
+		
+		const day = date.getDate()
+		const month = date.getMonth()
+
+		const maxDaysInMonthOfSelectedYear = new Date(year, month+1, 0).getDate();
+
+		if (day > maxDaysInMonthOfSelectedYear) {
+			date.setDate(maxDaysInMonthOfSelectedYear)
+		}
+
+		date.setYear(year)
+
+		this.setState({dateTime: date})
 
 	}
 	handleClickAddCity() {
