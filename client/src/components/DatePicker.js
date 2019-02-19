@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Button from './Button'
+import Button, { BUTTON } from './Button'
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import Moment from 'react-moment';
 import moment from 'moment';
 import Slider from 'rc-slider';
@@ -39,11 +40,33 @@ class DatePicker extends Component {
 		return (
 			<div className={this.props.active ? 'date-picker active' : 'date-picker'}>
 				
-				<h3>
-				<Moment format="D MMM YYYY">
-				{this.props.dateTime}
-				</Moment>
-				</h3>
+				<div className="label-day-month">
+					<Moment format="D MMM">
+					{this.props.dateTime}
+					</Moment>
+				</div>
+
+				<div className="label-year">
+					<Button
+					icon={faMinus}
+					shape={BUTTON.SHAPE.CIRCLE}
+					size={BUTTON.SIZE.SMALL}
+					theme={BUTTON.THEME.SECONDARY}
+					/>
+{/*
+					<Moment format="YYYY">
+					{this.props.dateTime}
+					</Moment>
+*/}
+					<span>2019</span>
+
+					<Button
+					icon={faPlus}
+					shape={BUTTON.SHAPE.CIRCLE}
+					size={BUTTON.SIZE.SMALL}
+					theme={BUTTON.THEME.SECONDARY}
+					/>
+				</div>
 
 				<div className="month-buttons">
 				    
