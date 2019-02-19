@@ -297,7 +297,7 @@ class TimeRow extends Component {
 				<Moment
 				className="label label-day"
 				add={{ hours: this.props.rowIndex }}
-				format="dddd"
+				format="ddd - D MMM"
 				tz={this.props.timezone}
 				>
 				{this.props.baseDateTime}
