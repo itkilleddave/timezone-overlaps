@@ -309,9 +309,6 @@ input::placeholder {
 .date-picker .label-day-month {
 	font-size: calc(13vw + 30px);
 	line-height: 1em;
-	/*line-height: 0;*/
-	/*line-height: 19vw;*/
-	/*height: 19vw;*/
 	font-weight: 700;
 	font-family: 'Khula', sans-serif;
 	margin-bottom: -1vw;
@@ -324,8 +321,6 @@ input::placeholder {
 	justify-items: center;
 	padding-top: 10px;
 	padding-bottom: 5vw;
-
-
 }
 .date-picker .label-year > span {
 	font-size: 10vw;

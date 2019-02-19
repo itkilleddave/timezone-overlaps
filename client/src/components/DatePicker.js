@@ -31,11 +31,11 @@ class DatePicker extends Component {
 			months.push(moment(i+1, 'M').format('MMM'))
 		}
 
+		const currentYear = this.props.dateTime.getYear()+1900
 		const currentMonth = this.props.dateTime.getMonth()
-
 		const currentDay = this.props.dateTime.getDate()
 
-		//console.log(currentDay)
+		//console.log(currentYear+1)
 
 		return (
 			<div className={this.props.active ? 'date-picker active' : 'date-picker'}>
@@ -52,19 +52,21 @@ class DatePicker extends Component {
 					shape={BUTTON.SHAPE.CIRCLE}
 					size={BUTTON.SIZE.SMALL}
 					theme={BUTTON.THEME.SECONDARY}
+					onClick={() => this.props.onClickSetYear(currentYear-1)}
 					/>
-{/*
-					<Moment format="YYYY">
-					{this.props.dateTime}
-					</Moment>
-*/}
-					<span>2019</span>
+
+					<span>
+						<Moment format="YYYY">
+						{this.props.dateTime}
+						</Moment>
+					</span>
 
 					<Button
 					icon={faPlus}
 					shape={BUTTON.SHAPE.CIRCLE}
 					size={BUTTON.SIZE.SMALL}
 					theme={BUTTON.THEME.SECONDARY}
+					onClick={() => this.props.onClickSetYear(currentYear+1)}
 					/>
 				</div>
 
