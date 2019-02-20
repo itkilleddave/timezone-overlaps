@@ -26,7 +26,7 @@ class TimezoneApp extends Component {
 			position : [],
 			dateTime : dateTime,
 			datePicker : {
-				active : true
+				active : false
 			}
 		}
 
@@ -43,6 +43,19 @@ class TimezoneApp extends Component {
 		this.handleClickConfirmAddCity = this.handleClickConfirmAddCity.bind(this)
 		this.handleClickRemoveCity = this.handleClickRemoveCity.bind(this)
 		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
+
+	}
+
+	componentDidMount() {
+
+		// for testing
+
+		if (this.props.testCityData) {
+
+			this.setState({cities: this.props.testCityData})
+
+		}
+
 	}
 
 	handleClickChangeDate() {
@@ -121,7 +134,7 @@ class TimezoneApp extends Component {
 	}
 	handleClickConfirmAddCity(cityData) {
 
-		//console.log('cityData', cityData);
+		console.log('cityData', cityData);
 
 		const cities = this.state.cities.concat()
 
