@@ -89,17 +89,25 @@ class DatePicker extends Component {
 						text={month}
 						active={(currentMonth === index) ? true : false}
 						onClick={() => this.props.onClickSetMonth(index)}
-						theme="secondary"
+						theme={BUTTON.THEME.SECONDARY}
 						/>
 					))}
+
+					<div className="action-buttons">
+						<Button
+						text="Today"
+						onClick={this.props.onClickToday}
+						theme={BUTTON.THEME.SECONDARY}
+						/>
+						<Button
+						text="OK"
+						onClick={this.props.onClickSetDate}
+						/>
+					</div>
+
 				</div>
 
-				<div className="action-buttons">
-					<Button
-					text="Set Date"
-					onClick={this.props.onClickSetDate}
-					/>
-				</div>
+
 
 			</div>
 			)

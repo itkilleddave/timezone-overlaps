@@ -341,6 +341,12 @@ input::placeholder {
 .date-picker .month-buttons > * {
 	/*margin: 10px;*/
 }
+.date-picker .month-buttons .action-buttons {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-gap: inherit;
+	grid-template-columns: 1fr 1fr;
+}
 .day-slider {
 	grid-column: 1 / -1;
 	margin-bottom: 20px;

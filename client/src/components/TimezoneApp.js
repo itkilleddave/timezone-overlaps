@@ -26,7 +26,7 @@ class TimezoneApp extends Component {
 			position : [],
 			dateTime : dateTime,
 			datePicker : {
-				active : false
+				active : true
 			}
 		}
 
@@ -36,6 +36,7 @@ class TimezoneApp extends Component {
 		this.handleClickSetDay = this.handleClickSetDay.bind(this)
 		this.handleClickSetMonth = this.handleClickSetMonth.bind(this)
 		this.handleClickSetYear = this.handleClickSetYear.bind(this)
+		this.handleClickToday = this.handleClickToday.bind(this)
 
 		//city handlers
 		this.handleClickAddCity = this.handleClickAddCity.bind(this)
@@ -104,12 +105,17 @@ class TimezoneApp extends Component {
 		this.setState({dateTime: date})
 
 	}
+	handleClickToday() {
+
+		const date = new Date()
+
+		this.setState({dateTime: date})
+	}
 	handleClickAddCity() {
 
 		const cities = [...this.state.cities, getEmptyCity()]
 
 		this.setState({cities: cities})
-
 
 	}
 	handleClickConfirmAddCity(cityData) {
@@ -170,6 +176,7 @@ class TimezoneApp extends Component {
 				onClickSetDay={this.handleClickSetDay}
 				onClickSetMonth={this.handleClickSetMonth}
 				onClickSetYear={this.handleClickSetYear}
+				onClickToday={this.handleClickToday}
 				dateTime={this.state.dateTime}
 				>
 				</DatePicker>
