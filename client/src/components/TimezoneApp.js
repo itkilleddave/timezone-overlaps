@@ -108,6 +108,7 @@ class TimezoneApp extends Component {
 	handleClickToday() {
 
 		const date = new Date()
+		date.setHours(0,0,0,0)
 
 		this.setState({dateTime: date})
 	}
