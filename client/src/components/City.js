@@ -290,29 +290,27 @@ class TimeRow extends Component {
 			className={className} 
 			onMouseEnter={this.handleMouseEnter}
 			>
-				{/*
-				find formats here: http://momentjs.com/
-				*/}
+				<div className="label">
 
-				<Moment
-				className="label label-day"
-				add={{ hours: this.props.rowIndex }}
-				format="ddd - D MMM"
-				tz={this.props.timezone}
-				>
-				{this.props.baseDateTime}
-				</Moment>
+					<Moment
+					className="label-time"
+					add={{ hours: this.props.rowIndex }}
+					format="h:mm a"
+					tz={this.props.timezone}
+					>
+					{this.props.baseDateTime}
+					</Moment>
+					
+					<Moment
+					className="label-day"
+					add={{ hours: this.props.rowIndex }}
+					format="ddd - D MMM"
+					tz={this.props.timezone}
+					>
+					{this.props.baseDateTime}
+					</Moment>
 
-				<Moment
-				className="label label-time"
-				add={{ hours: this.props.rowIndex }}
-				format="h:mm a"
-				tz={this.props.timezone}
-				>
-				{this.props.baseDateTime}
-				</Moment>
-
-
+				</div>
 
 			</div>
 			)
