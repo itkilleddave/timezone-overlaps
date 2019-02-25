@@ -38,7 +38,7 @@ class DatePicker extends Component {
 		//console.log(currentYear+1)
 
 		return (
-			<div className={this.props.active ? 'date-picker active' : 'date-picker'}>
+			<div className="date-picker active">
 				
 				<div className="label-day-month">
 					<Moment format="D MMM">

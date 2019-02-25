@@ -64,6 +64,7 @@ button,
 	text-align: center;
 	/*width: calc(var(--col-width-min) - 40px);*/
 	width: calc(100vw - 80px);
+	max-width: 300px;
 }
 .react-autosuggest__input--focused {
 	border-color: var(--primary);
@@ -85,6 +86,7 @@ button,
 	cursor: pointer;
 	/*width: calc(var(--col-width-min) - 40px);*/
 	width: calc(100vw - 80px);
+	max-width: 300px;
 }
 .react-autosuggest__suggestion div {
 	

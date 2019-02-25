@@ -152,6 +152,11 @@ class City extends Component {
 	// 	return this.getCityIndexByName(name)>=0 ? true : false
 	// }
 
+	shouldComponentUpdate(nextProps,nextState) {
+		//console.log(nextProps.active)
+		return nextProps.update
+	}
+
 	componentDidUpdate(prevProps, prevState, snapshot) {
 
 		// if (this.props.lat) {
@@ -236,7 +241,7 @@ class City extends Component {
 					<li key={i} >
 						<TimeRow 
 						rowIndex={i}
-						onMouseEnter={this.handleMouseEnterRow}
+						// onMouseEnter={this.handleMouseEnterRow} //removing this, it doesnt do anything useful, and just adds unnessesary re-rendering
 						beforeActive={ (i===activeTimeRow-1) ? true : false }
 						active={ (i===activeTimeRow) ? true : false }
 						afterActive={ (i===activeTimeRow+1) ? true : false }
@@ -264,12 +269,14 @@ class TimeRow extends Component {
 	constructor(props) {
 
 		super(props);
-		this.handleMouseEnter = this.handleMouseEnter.bind(this);
+		this.handleMouseEnter = this.handleMouseEnter.bind(this)
 
 	}
 
 	handleMouseEnter() {
-		this.props.onMouseEnter(this.props.rowIndex);
+		if (this.props.onMouseEnter) {
+			this.props.onMouseEnter(this.props.rowIndex)
+		}
 	}
 
 	render() {

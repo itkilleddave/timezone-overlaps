@@ -177,23 +177,29 @@ class TimezoneApp extends Component {
 	}
 	render() {
 
-		//console.log('state', this.state.dateTime);
+		const cities = this.state.cities
+		const position = this.state.position
 
-		const cities = this.state.cities;
-		const position = this.state.position;
+		var datePicker = null;
+
+		if (this.state.datePicker.active) {
+
+			datePicker = <DatePicker
+			onClickSetDate={this.handleClickSetDate}
+			onClickSetDay={this.handleClickSetDay}
+			onClickSetMonth={this.handleClickSetMonth}
+			onClickSetYear={this.handleClickSetYear}
+			onClickToday={this.handleClickToday}
+			dateTime={this.state.dateTime}
+			/>
+
+		}
 
 		return (
 			<div className="timezone-app">
-				<DatePicker
-				active={this.state.datePicker.active}
-				onClickSetDate={this.handleClickSetDate}
-				onClickSetDay={this.handleClickSetDay}
-				onClickSetMonth={this.handleClickSetMonth}
-				onClickSetYear={this.handleClickSetYear}
-				onClickToday={this.handleClickToday}
-				dateTime={this.state.dateTime}
-				>
-				</DatePicker>
+			
+				{datePicker}
+
 				<div className="container container-header">
 					{cities.map((city, index) => (
 						<div 
@@ -231,6 +237,7 @@ class TimezoneApp extends Component {
 							activeTimeRow={position.row}
 							onClickAdd={this.handleClickConfirmAddCity}
 							onClickRemove={this.handleClickRemoveCity}
+							update={!this.state.datePicker.active}
 							/>
 						</div>
 					)
