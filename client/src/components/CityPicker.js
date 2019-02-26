@@ -133,6 +133,14 @@ class CityPicker extends Component {
 						onSuggestionSelected={this.handleSuggestionSelectedCityInput}
 					/>
 
+					<Button 
+						theme="secondary"
+						icon={faTimes}
+						shape="circle"
+						size="small"
+						onClick={this.props.onClickClose}
+					/>
+
 			</div>
 			)
 	}
