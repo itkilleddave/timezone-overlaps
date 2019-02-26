@@ -27,11 +27,11 @@ class City extends Component {
 		this.handleClickRemove = this.handleClickRemove.bind(this)
 
 		//CityInput Event Handlers
-		this.handleChangeCityInput = this.handleChangeCityInput.bind(this)
-		this.handleSuggestionsFetchRequestedCityInput = this.handleSuggestionsFetchRequestedCityInput.bind(this)
-		this.handleSuggestionsClearRequestedCityInput = this.handleSuggestionsClearRequestedCityInput.bind(this)
-		this.handleKeyPressCityInput = this.handleKeyPressCityInput.bind(this)
-		this.handleSuggestionSelectedCityInput = this.handleSuggestionSelectedCityInput.bind(this)
+		// this.handleChangeCityInput = this.handleChangeCityInput.bind(this)
+		// this.handleSuggestionsFetchRequestedCityInput = this.handleSuggestionsFetchRequestedCityInput.bind(this)
+		// this.handleSuggestionsClearRequestedCityInput = this.handleSuggestionsClearRequestedCityInput.bind(this)
+		// this.handleKeyPressCityInput = this.handleKeyPressCityInput.bind(this)
+		// this.handleSuggestionSelectedCityInput = this.handleSuggestionSelectedCityInput.bind(this)
 
 	}
 
@@ -51,89 +51,89 @@ class City extends Component {
 		)
 	}
 
-	// CityInput Event Handlers
+	// // CityInput Event Handlers
 
-	handleChangeCityInput(newValue) {
-		this.setState({
-		  value: newValue
-		});
-	};
+	// handleChangeCityInput(newValue) {
+	// 	this.setState({
+	// 	  value: newValue
+	// 	});
+	// };
 
-	callApiFilteredCities = async (value) => {
+	// callApiFilteredCities = async (value) => {
 
-		const response = await fetch('/api/filtered-cities', {
-	      method: 'POST',
-	      headers: {
-	        'Content-Type': 'application/json',
-	      },
-	      body: JSON.stringify({ value: value })
-	    });
+	// 	const response = await fetch('/api/filtered-cities', {
+	//       method: 'POST',
+	//       headers: {
+	//         'Content-Type': 'application/json',
+	//       },
+	//       body: JSON.stringify({ value: value })
+	//     });
 
-		const body = await response.json();
-		if (response.status !== 200) throw Error(body.message);
-		return body;
-	};
+	// 	const body = await response.json();
+	// 	if (response.status !== 200) throw Error(body.message);
+	// 	return body;
+	// };
 
-	loadSuggestionsCityInput(value) {
+	// loadSuggestionsCityInput(value) {
 
-	    this.setState({
-	      isLoading: true
-	    });
+	//     this.setState({
+	//       isLoading: true
+	//     });
 	    
-        this.callApiFilteredCities(value)
-		.then(res => this.setState({
-	      	isLoading: false,
-		  	suggestions: res,
-		}))
-		.catch(err => console.log(err));
+ //        this.callApiFilteredCities(value)
+	// 	.then(res => this.setState({
+	//       	isLoading: false,
+	// 	  	suggestions: res,
+	// 	}))
+	// 	.catch(err => console.log(err));
 
-	}
+	// }
 
 
 
-	// Autosuggest will call this function every time you need to update suggestions.
-	// You already implemented this logic above, so just use it.
-	handleSuggestionsFetchRequestedCityInput(value) {
-		//console.log(value);
-		this.loadSuggestionsCityInput(value);
-	};
+	// // Autosuggest will call this function every time you need to update suggestions.
+	// // You already implemented this logic above, so just use it.
+	// handleSuggestionsFetchRequestedCityInput(value) {
+	// 	//console.log(value);
+	// 	this.loadSuggestionsCityInput(value);
+	// };
 
-	// Autosuggest will call this function every time you need to clear suggestions.
-	handleSuggestionsClearRequestedCityInput() {
-		this.setState({
-		  suggestions: []
-		});
-	};
+	// // Autosuggest will call this function every time you need to clear suggestions.
+	// handleSuggestionsClearRequestedCityInput() {
+	// 	this.setState({
+	// 	  suggestions: []
+	// 	});
+	// };
 
-	handleKeyPressCityInput(event) {
+	// handleKeyPressCityInput(event) {
 
-		// const value = this.state.value
+	// 	// const value = this.state.value
 
-		// if (event.key === 'Enter')
-		// {
-		// 	if (this.isValidCityName(value))
-		// 	{
-		// 	this.handleClickAdd()
-		// 	}
-		// }
+	// 	// if (event.key === 'Enter')
+	// 	// {
+	// 	// 	if (this.isValidCityName(value))
+	// 	// 	{
+	// 	// 	this.handleClickAdd()
+	// 	// 	}
+	// 	// }
 
-	}
-	handleSuggestionSelectedCityInput(suggestion) {
+	// }
+	// handleSuggestionSelectedCityInput(suggestion) {
 
-		//console.log(suggestion)
+	// 	//console.log(suggestion)
 
-		this.setState({
-		  value: suggestion.name
-		});
+	// 	this.setState({
+	// 	  value: suggestion.name
+	// 	});
 
-		this.props.onClickAdd(
-			{
-			index: this.props.columnIndex,
-			props: suggestion
-			//props: cities[this.getCityIndexByName(suggestion.name)],
-			}
-		)
-	}
+	// 	this.props.onClickAdd(
+	// 		{
+	// 		index: this.props.columnIndex,
+	// 		props: suggestion
+	// 		//props: cities[this.getCityIndexByName(suggestion.name)],
+	// 		}
+	// 	)
+	// }
 
 	// data functions
 
@@ -178,53 +178,55 @@ class City extends Component {
 
 		if (!this.props.name) {
 
-			// new city - render options
+			return null;
+			
+// 			// new city - render options
 
-    		const { value, suggestions } = this.state;
+//     		const { value, suggestions } = this.state;
 
-    		//console.log();
+//     		//console.log();
 
-    		// check if CityInput value is a valid city name
+//     		// check if CityInput value is a valid city name
 
-			return(
-				<div className={
-					this.props.active ? 
-					'city city-new active' : 
-					'city city-new'
-				}>
-					<h3>Add City</h3>
-					<CityInput
-						value={value}
-						index={this.props.columnIndex}
-						suggestions={suggestions}
-						onChange={this.handleChangeCityInput}
-						onKeyPress={this.handleKeyPressCityInput}
-						onSuggestionsFetchRequested={this.handleSuggestionsFetchRequestedCityInput}
-						onSuggestionsClearRequested={this.handleSuggestionsClearRequestedCityInput}
-						onSuggestionSelected={this.handleSuggestionSelectedCityInput}
-					/>
+// 			return(
+// 				<div className={
+// 					this.props.active ? 
+// 					'city city-new active' : 
+// 					'city city-new'
+// 				}>
+// 					<h3>Add City</h3>
+// 					<CityInput
+// 						value={value}
+// 						index={this.props.columnIndex}
+// 						suggestions={suggestions}
+// 						onChange={this.handleChangeCityInput}
+// 						onKeyPress={this.handleKeyPressCityInput}
+// 						onSuggestionsFetchRequested={this.handleSuggestionsFetchRequestedCityInput}
+// 						onSuggestionsClearRequested={this.handleSuggestionsClearRequestedCityInput}
+// 						onSuggestionSelected={this.handleSuggestionSelectedCityInput}
+// 					/>
 
-{/*
-					// removing button (just adds confusion to the UX)
+// {/*
+// 					// removing button (just adds confusion to the UX)
 
-					{(this.isValidCityName(value)) ?
-					<Button
-						text="Add City"
-						onClick={this.handleClickAdd}
-					/>
-					: false}
-*/}
+// 					{(this.isValidCityName(value)) ?
+// 					<Button
+// 						text="Add City"
+// 						onClick={this.handleClickAdd}
+// 					/>
+// 					: false}
+// */}
 
-					<Button 
-						theme="secondary"
-						icon={faTimes}
-						shape="circle"
-						size="small"
-						onClick={this.handleClickRemove}
-					/>
+// 					<Button 
+// 						theme="secondary"
+// 						icon={faTimes}
+// 						shape="circle"
+// 						size="small"
+// 						onClick={this.handleClickRemove}
+// 					/>
 
-				</div>
-			)
+// 				</div>
+// 			)
 
 		} else {
 

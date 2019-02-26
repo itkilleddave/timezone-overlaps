@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import City, { CityHead } from './City'
 import DatePicker from './DatePicker'
+import CityPicker from './CityPicker'
 import Button, { BUTTON } from './Button'
 import { faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
@@ -27,7 +28,10 @@ class TimezoneApp extends Component {
 			dateTime : dateTime,
 			datePicker : {
 				active : false
-			}
+			},
+			cityPicker : {
+				active : false
+			},
 		}
 
 		// date handlers
@@ -126,24 +130,29 @@ class TimezoneApp extends Component {
 		this.setState({dateTime: date})
 	}
 	handleClickAddCity() {
+		
+		const cp = {...this.state.cityPicker, active:true}
 
-		const cities = [...this.state.cities, getEmptyCity()]
-
-		this.setState({cities: cities})
+		this.setState({cityPicker: cp})
 
 	}
 	handleClickConfirmAddCity(cityData) {
 
 		console.log('cityData', cityData);
 
-		const cities = this.state.cities.concat()
+		const cities = this.state.cities.concat(cityData.props)
 
-		cities[cityData.index] = cityData.props
+		//cities[cityData.index] = cityData.props
 
 		// add this line conditionally when 'add-another' funcationality is implemented
 		//cities.push(getEmptyCity())
 
-		this.setState({cities: cities})
+		const cp = {...this.state.cityPicker, active:false}
+
+		this.setState({
+			cities: cities,
+			cityPicker: cp,
+		})
 
 	}
 	handleClickRemoveCity(cityData) {
@@ -195,10 +204,22 @@ class TimezoneApp extends Component {
 
 		}
 
+		var cityPicker = null;
+
+		if (this.state.cityPicker.active) {
+
+			cityPicker = <CityPicker
+							onClickAdd={this.handleClickConfirmAddCity}
+			/>
+
+		}
+
 		return (
 			<div className="timezone-app">
-			
+
 				{datePicker}
+
+				{cityPicker}
 
 				<div className="container container-header">
 					{cities.map((city, index) => (
@@ -235,7 +256,7 @@ class TimezoneApp extends Component {
 							onMouseEnter={this.handleMouseEnterCityTimeRow}
 							active={ (index===position.column) ? true : false }
 							activeTimeRow={position.row}
-							onClickAdd={this.handleClickConfirmAddCity}
+							//onClickAdd={this.handleClickConfirmAddCity}
 							onClickRemove={this.handleClickRemoveCity}
 							update={!this.state.datePicker.active}
 							/>

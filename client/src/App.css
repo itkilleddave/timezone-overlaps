@@ -316,10 +316,7 @@ button,
 	right:    20px;
 	bottom:   20px;
 }
-.date-picker {
-	display: none;
-}
-.date-picker.active {
+.container-full-screen {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -331,6 +328,7 @@ button,
     display: grid;
     align-content: center;
     justify-items: center;
+
 }
 .date-picker .label-day-month {
 	font-size: calc(13vw + 30px);
