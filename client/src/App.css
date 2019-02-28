@@ -8,6 +8,7 @@
 
 	/* colors swatches */
 
+	--darker-grey: #68727b;
 	--dark-grey: #a4acb3;
 	--grey: #e6e9ec;
 	--light-grey: #f5f7f9;
@@ -203,9 +204,9 @@ button,
 	justify-items: center;
 	border-bottom: solid 4px var(--grey);
 }	
-/*.container.container-header .head .city-name {
-	grid-column: 1 / -1;
-}*/
+.container.container-header .head .city-name {
+	color: var(--darker-grey);
+}
 .container.container-header .head > * {
 	overflow: hidden;
 }
@@ -301,7 +302,7 @@ button,
 
 .row-time .label {
 	padding: 20px 0;
-	border-bottom: solid 1px #eaeff3;
+	border-bottom: solid 4px var(--light-grey);
 	/*display: grid;*/
 	/*grid-template-columns: 1fr 1fr;*/
 
@@ -310,7 +311,8 @@ button,
 	width: 100%;
 	display: block;
 	color: var(--dark-grey);
-	/*font-weight: bold;*/
+	font-weight: bold;
+	font-size: 11px;
 	/*font-family: 'Khula', sans-serif;*/
 	/*text-align: right;*/
 }
@@ -318,7 +320,8 @@ button,
 	/*font-size: 16px;*/
 	font-size: 16px;
 	font-family: Roboto, Arial, Helvetica;
-	/*font-weight: bold;*/
+	font-weight: bold;
+	color: var(--darker-grey);
 	width: 100%;
 	display: block;
 	margin-bottom: 6px;
@@ -358,7 +361,7 @@ button,
 }
 .btn-secondary {
 	background: var(--light-grey);
-	color: black;
+	color: var(--darker-grey);
 }
 .btn-secondary:hover {
 	background: var(--grey);
