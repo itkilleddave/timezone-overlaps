@@ -21,7 +21,7 @@
 
 	--row-time-active: var(--light-grey);
 	--input-border: var(--grey);
-	--placeholder: var(--dark-grey);
+	--placeholder: var(--grey);
 
 }
 
@@ -54,17 +54,61 @@ button,
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+.city-picker {
+    display: grid;
+    align-content: top;
+    justify-items: center;
+}
+.city-picker {
+}
 /*.react-autosuggest__container*/
-.react-autosuggest__input {
-	padding: 20px 15px;
+.city-picker .react-autosuggest__input {
+
+	font-size: 8vw;
+
+	line-height: 24vw;
+	font-weight: 700;
+	font-family: 'Khula', sans-serif;
+
+	margin: 20px 0 0 0;
+	/*padding-bottom: 20px;*/
+	border-radius: 0;
+	border: none;
+	border-bottom: solid 4px var(--red);
+	text-align: center;
+	/*width: calc(100vw - 80px);*/
+	width: 80vw;
+	max-width: 800px;
+
+/*	padding: 20px 15px;
 	border-radius: 6px;
 	border: solid 4px var(--input-border);
 	font-weight: 700;
 	font-size: 16px;
 	text-align: center;
-	/*width: calc(var(--col-width-min) - 40px);*/
 	width: calc(100vw - 80px);
-	max-width: 300px;
+	max-width: 300px;*/
+}
+.city-picker .react-autosuggest__input::placeholder {
+	font-size: smaller;
+}
+.city-picker.character-count-0 .react-autosuggest__input,
+.city-picker.character-count-1 .react-autosuggest__input,
+.city-picker.character-count-2 .react-autosuggest__input,
+.city-picker.character-count-3 .react-autosuggest__input,
+.city-picker.character-count-4 .react-autosuggest__input,
+.city-picker.character-count-5 .react-autosuggest__input {
+
+	font-size: 14vw;
+
+}
+.city-picker.character-count-6 .react-autosuggest__input,
+.city-picker.character-count-7 .react-autosuggest__input,
+.city-picker.character-count-8 .react-autosuggest__input, 
+.city-picker.character-count-9 .react-autosuggest__input, 
+.city-picker.character-count-10 .react-autosuggest__input {
+
+	font-size: 10vw;
 }
 .react-autosuggest__input--focused {
 	border-color: var(--primary);
@@ -74,19 +118,36 @@ button,
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
 }
+.react-autosuggest__suggestions-list {
+	list-style: none;
+	max-height: 210px;
+	overflow-y: scroll;
+	border: none;
+	border-bottom: solid 1px var(--grey);
+
+}
 .react-autosuggest__suggestion {
-	
+
+	height: 60px;
 	padding: 20px;
 	border: solid 1px var(--input-border);
 	border-top: none;
-	
 	font-weight: 700;
 	font-size: 16px;
 	text-align: left;
 	cursor: pointer;
-	/*width: calc(var(--col-width-min) - 40px);*/
+	width: 80vw;
+	max-width: 800px;
+
+/*	padding: 20px;
+	border: solid 1px var(--input-border);
+	border-top: none;
+	font-weight: 700;
+	font-size: 16px;
+	text-align: left;
+	cursor: pointer;
 	width: calc(100vw - 80px);
-	max-width: 300px;
+	max-width: 300px;*/
 }
 .react-autosuggest__suggestion div {
 	
@@ -322,13 +383,14 @@ button,
     height: 100%;
     left: 0;
     top: 0;
-    background: rgba(51,51,51,0.7);
+    /*background: rgba(51,51,51,0.7);*/
     background: white;
     z-index: 10;
+}
+.date-picker {
     display: grid;
     align-content: center;
     justify-items: center;
-
 }
 .date-picker .label-day-month {
 	font-size: calc(13vw + 30px);

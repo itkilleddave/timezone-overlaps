@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Button from './Button'
+import Button, { BUTTON } from './Button'
 import CityInput from './CityInput'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import FlagIcon from './FlagIcon'
@@ -119,10 +119,15 @@ class CityPicker extends Component {
 
     	const { value, suggestions } = this.state;
 
+    	const characterCount = value.length
+
 		return (
-			<div className="container-full-screen city-picker">
+			<div
+			className={"container-full-screen city-picker"
+			+" character-count-"+value.length
+			}
+			>
 					
-					<h3>Add City</h3>
 					<CityInput
 						value={value}
 						suggestions={suggestions}
@@ -133,13 +138,14 @@ class CityPicker extends Component {
 						onSuggestionSelected={this.handleSuggestionSelectedCityInput}
 					/>
 
-					<Button 
-						theme="secondary"
+					<div className="btn-bottom-right">
+						<Button 
+						theme={BUTTON.THEME.PRIMARY}
 						icon={faTimes}
-						shape="circle"
-						size="small"
+						shape={BUTTON.SHAPE.CIRCLE}
 						onClick={this.props.onClickClose}
-					/>
+						/>
+					</div>
 
 			</div>
 			)

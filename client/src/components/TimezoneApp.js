@@ -30,7 +30,7 @@ class TimezoneApp extends Component {
 				active : false
 			},
 			cityPicker : {
-				active : false
+				active : true
 			},
 		}
 
