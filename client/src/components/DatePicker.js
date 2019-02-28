@@ -38,7 +38,7 @@ class DatePicker extends Component {
 		//console.log(currentYear+1)
 
 		return (
-			<div className="date-picker active">
+			<div className="container-full-screen date-picker">
 				
 				<div className="label-day-month">
 					<Moment format="D MMM">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import City, { CityHead } from './City'
 import DatePicker from './DatePicker'
+import CityPicker from './CityPicker'
 import Button, { BUTTON } from './Button'
 import { faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
@@ -27,10 +28,13 @@ class TimezoneApp extends Component {
 			dateTime : dateTime,
 			datePicker : {
 				active : false
-			}
+			},
+			cityPicker : {
+				active : true
+			},
 		}
 
-		// date handlers
+		// datePicker handlers
 		this.handleClickChangeDate = this.handleClickChangeDate.bind(this)
 		this.handleClickSetDate = this.handleClickSetDate.bind(this)
 		this.handleClickSetDay = this.handleClickSetDay.bind(this)
@@ -39,10 +43,13 @@ class TimezoneApp extends Component {
 		this.handleClickToday = this.handleClickToday.bind(this)
 
 		//city handlers
-		this.handleClickAddCity = this.handleClickAddCity.bind(this)
-		this.handleClickConfirmAddCity = this.handleClickConfirmAddCity.bind(this)
 		this.handleClickRemoveCity = this.handleClickRemoveCity.bind(this)
 		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
+
+		//cityPicker handlers
+		this.handleClickCloseCityPicker = this.handleClickCloseCityPicker.bind(this)
+		this.handleClickOpenCityPicker = this.handleClickOpenCityPicker.bind(this)
+		this.handleClickAddCity = this.handleClickAddCity.bind(this)
 
 	}
 
@@ -125,27 +132,39 @@ class TimezoneApp extends Component {
 
 		this.setState({dateTime: date})
 	}
-	handleClickAddCity() {
 
-		const cities = [...this.state.cities, getEmptyCity()]
+	// cityPicker functions
 
-		this.setState({cities: cities})
+	handleClickOpenCityPicker() {
+		
+		const cp = {...this.state.cityPicker, active:true}
+
+		this.setState({cityPicker: cp})
 
 	}
-	handleClickConfirmAddCity(cityData) {
+	handleClickCloseCityPicker() {
+		
+		const cp = {...this.state.cityPicker, active:false}
+
+		this.setState({cityPicker: cp})
+	}
+	handleClickAddCity(cityData) {
 
 		console.log('cityData', cityData);
 
-		const cities = this.state.cities.concat()
+		const cities = this.state.cities.concat(cityData.props)
 
-		cities[cityData.index] = cityData.props
+		const cp = {...this.state.cityPicker, active:false}
 
-		// add this line conditionally when 'add-another' funcationality is implemented
-		//cities.push(getEmptyCity())
-
-		this.setState({cities: cities})
+		this.setState({
+			cities: cities,
+			cityPicker: cp,
+		})
 
 	}
+
+	// city functions
+
 	handleClickRemoveCity(cityData) {
 
 		const cities = this.state.cities.concat()
@@ -164,12 +183,14 @@ class TimezoneApp extends Component {
 		})
 	}
 
+	// standard react events
+
 	componentDidUpdate(prevProps, prevState, snapshot) {
 
 		if(this.state.cities.length > prevState.cities.length) {
 
 			window.scrollTo({
-			  top: 0,
+			  //top: 0,
 			  left: document.body.scrollWidth,
 			  behavior: 'smooth'
 			})
@@ -195,10 +216,23 @@ class TimezoneApp extends Component {
 
 		}
 
+		var cityPicker = null;
+
+		if (this.state.cityPicker.active) {
+
+			cityPicker = <CityPicker
+							onClickAdd={this.handleClickAddCity}
+							onClickClose={this.handleClickCloseCityPicker}
+						/>
+
+		}
+
 		return (
 			<div className="timezone-app">
-			
+
 				{datePicker}
+
+				{cityPicker}
 
 				<div className="container container-header">
 					{cities.map((city, index) => (
@@ -235,7 +269,6 @@ class TimezoneApp extends Component {
 							onMouseEnter={this.handleMouseEnterCityTimeRow}
 							active={ (index===position.column) ? true : false }
 							activeTimeRow={position.row}
-							onClickAdd={this.handleClickConfirmAddCity}
 							onClickRemove={this.handleClickRemoveCity}
 							update={!this.state.datePicker.active}
 							/>
@@ -258,7 +291,7 @@ class TimezoneApp extends Component {
 					<Button 
 					icon={faPlus}
 					shape={BUTTON.SHAPE.CIRCLE}
-					onClick={this.handleClickAddCity}
+					onClick={this.handleClickOpenCityPicker}
 					pulse={
 						(!cities.length)
 						||
