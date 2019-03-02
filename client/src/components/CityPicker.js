@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import Button, { BUTTON } from './Button'
 import CityInput from './CityInput'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import FlagIcon from './FlagIcon'
-import tzlookup from 'tz-lookup'
-import Moment from 'react-moment';
 import 'moment-timezone';
 
 
@@ -28,7 +25,8 @@ class CityPicker extends Component {
 		this.handleChangeCityInput = this.handleChangeCityInput.bind(this)
 		this.handleSuggestionsFetchRequestedCityInput = this.handleSuggestionsFetchRequestedCityInput.bind(this)
 		this.handleSuggestionsClearRequestedCityInput = this.handleSuggestionsClearRequestedCityInput.bind(this)
-		this.handleKeyPressCityInput = this.handleKeyPressCityInput.bind(this)
+		this.handleKeyDownCityInput = this.handleKeyDownCityInput.bind(this)
+		this.handleKeyUpCityInput = this.handleKeyUpCityInput.bind(this)
 		this.handleSuggestionSelectedCityInput = this.handleSuggestionSelectedCityInput.bind(this)
 
 	}
@@ -85,7 +83,7 @@ class CityPicker extends Component {
 		});
 	};
 
-	handleKeyPressCityInput(event) {
+	handleKeyDownCityInput(event) {
 
 		// const value = this.state.value
 
@@ -97,6 +95,24 @@ class CityPicker extends Component {
 		// 	}
 		// }
 
+	}
+	handleKeyUpCityInput(event) {
+
+		//console.log('event', event.keyCode)
+
+		// if (event.keyCode === 40 || event.keyCode === 38) 
+		// {
+		// 	// down arrow
+
+		// 	//console.log('aaa')
+
+		// 	const highlightedSuggestionIndex = this.findWithAttr(this.state.suggestions, 'name', this.state.value)
+
+		// 	if (highlightedSuggestionIndex >= 0) {
+				
+		// 		console.log('highlightedSuggestionIndex', highlightedSuggestionIndex)
+		// 	}
+		// }
 	}
 	handleSuggestionSelectedCityInput(suggestion) {
 
@@ -115,11 +131,41 @@ class CityPicker extends Component {
 		)
 	}
 
+	findWithAttr(array, attr, value) {
+	    for(var i = 0; i < array.length; i += 1) {
+	        if(array[i][attr] === value) {
+	            return i;
+	        }
+	    }
+	    return -1;
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot) {
+
+		// if (prevState.value !== this.state.value) {
+
+		// 	const highlightedSuggestionIndex = this.findWithAttr(this.state.suggestions, 'name', this.state.value)
+
+		// 	if (highlightedSuggestionIndex >= 0) {
+				
+		// 		console.log('name', highlightedSuggestionIndex)
+		// 	}
+
+		// }
+
+		// if(this.state.cities.length > prevState.cities.length) {
+
+		// 	window.scrollTo({
+		// 	  //top: 0,
+		// 	  left: document.body.scrollWidth,
+		// 	  behavior: 'smooth'
+		// 	})
+		// }
+	}
+
 	render() {
 
     	const { value, suggestions } = this.state;
-
-    	const characterCount = value.length
 
 		return (
 			<div
@@ -132,7 +178,8 @@ class CityPicker extends Component {
 						value={value}
 						suggestions={suggestions}
 						onChange={this.handleChangeCityInput}
-						onKeyPress={this.handleKeyPressCityInput}
+						//onKeyDown={this.handleKeyDownCityInput}
+						//onKeyUp={this.handleKeyUpCityInput}
 						onSuggestionsFetchRequested={this.handleSuggestionsFetchRequestedCityInput}
 						onSuggestionsClearRequested={this.handleSuggestionsClearRequestedCityInput}
 						onSuggestionSelected={this.handleSuggestionSelectedCityInput}

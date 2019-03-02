@@ -21,6 +21,16 @@ class CityInput extends Component {
     </div>
   );
 
+  renderSuggestionsContainer({ containerProps , children, query }) {
+    
+    return (
+      <div {... containerProps} className="react-autosuggest__suggestions-container">
+        {children}
+      </div>
+    );
+  }
+
+
   handleChange = (event, { newValue }) => {
     this.props.onChange(newValue);
   };
@@ -40,8 +50,12 @@ class CityInput extends Component {
     this.props.onSuggestionsClearRequested();
   };
 
-  handleKeyPress = (event) => {
-    this.props.onKeyPress(event);
+  handleKeyDown = (event) => {
+    this.props.onKeyDown(event);
+  };
+
+  handleKeyUp = (event) => {
+    this.props.onKeyUp(event);
   };
 
   handleSuggestionSelected = (event, { 
@@ -86,7 +100,8 @@ class CityInput extends Component {
       placeholder: 'e.g. Tokyo',
       value,
       onChange: this.handleChange,
-      onKeyPress: this.handleKeyPress,
+      //onKeyDown: this.handleKeyDown,
+      //onKeyUp: this.handleKeyUp,
       //onKeyUp: () => {console.log("hello")}
     };
  
@@ -98,10 +113,12 @@ class CityInput extends Component {
         onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
         getSuggestionValue={this.getSuggestionValue}
         renderSuggestion={this.renderSuggestion}
+        renderSuggestionsContainer={this.renderSuggestionsContainer}
         inputProps={inputProps}
         highlightFirstSuggestion={true}
         onSuggestionSelected={this.handleSuggestionSelected}
         ref={this.storeInputReference}
+        scrollBar={true}
       />
     );
 
