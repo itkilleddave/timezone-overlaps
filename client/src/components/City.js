@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Button from './Button'
-import CityInput from './CityInput'
+//import CityInput from './CityInput'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import FlagIcon from './FlagIcon'
 import tzlookup from 'tz-lookup'

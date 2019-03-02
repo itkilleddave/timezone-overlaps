@@ -119,18 +119,20 @@ button,
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
 }
-.react-autosuggest__suggestions-list {
-	list-style: none;
+.react-autosuggest__suggestions-container {
 	max-height: 210px;
 	overflow-y: scroll;
 	border: none;
 	border-bottom: solid 1px var(--grey);
 
 }
+.react-autosuggest__suggestions-list {
+	list-style: none;
+
+}
 .react-autosuggest__suggestion {
 
 	height: 60px;
-	padding: 20px;
 	border: solid 1px var(--input-border);
 	border-top: none;
 	font-weight: 700;
@@ -139,21 +141,17 @@ button,
 	cursor: pointer;
 	width: 80vw;
 	max-width: 800px;
+	padding: 0 20px;
 
-/*	padding: 20px;
-	border: solid 1px var(--input-border);
-	border-top: none;
-	font-weight: 700;
-	font-size: 16px;
-	text-align: left;
-	cursor: pointer;
-	width: calc(100vw - 80px);
-	max-width: 300px;*/
 }
-.react-autosuggest__suggestion div {
+.react-autosuggest__suggestion > div {
 	
+	height: 60px;
 	display: grid;
 	grid-template-columns: auto 1fr;
+	align-content: center;
+}
+.react-autosuggest__suggestion > div > span {
 }
 .react-autosuggest__suggestion div .country-flag {
 	margin-right: 20px;
