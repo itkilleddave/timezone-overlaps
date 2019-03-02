@@ -183,53 +183,33 @@ button,
 	justify-content: center;*/
 
 }
-.container.container-header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-/*  display: flex;
-  flex-wrap: wrap;
-  align-items: center;*/
-  width: 100%;
-/*	background-color: #fff;
-	border-bottom: solid 4px var(--red);*/
-	
-}
-.container.container-header .head {
+.container.container-content .head {
+
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	width: 100%;	
+
 	display: grid;
 	grid-template-columns: 50px 1fr 50px;
 	align-items: center;
 	justify-items: center;
+	background: #fff;
 	border-bottom: solid 4px var(--grey);
-}	
-.container.container-header .head .city-name {
-	color: var(--darker-grey);
-}
-.container.container-header .head > * {
-	overflow: hidden;
-}
-/*.container.container-header .head > *:nth-child(1) {
-	justify-self:left;
-	margin: 0 10px;
-}	
-.container.container-header .head > *:nth-child(3) {
-	justify-self:right;
-	margin: 0 10px;
-}*/	
-.container.container-header .item {
 	height: var(--head-height);
 	padding: 0 10px;
-/*  	background-color: #447fff;*/
+}	
+.container.container-content .head .city-name {
+	color: var(--darker-grey);
 }
-.container.container-header .item h3 {
+.container.container-content .head > * {
+	overflow: hidden;
+}
+.container.container-header .head h3 {
 	line-height: var(--head-height);
 	/*  	background-color: #447fff;*/
 	/*  	color: white;*/
 	height: var(--head-height);
-}
-.container.container-content {
-/*	padding-top: var(--head-height);*/
-  /*background: var(--red);*/
 }
 .container.container-content .item.set{
   margin-top: 4px;
@@ -507,9 +487,9 @@ button,
 @media only screen and (min-width: 768px) {
 
 	:root{
-		/*--col-width-min: 180px;*/
+		/*--col-width-min: 120px;*/
 		--col-width-min: 240px;
-		/*--col-width-min: calc(100vw/6);*/
+		/*--col-width-min: calc(100vw/8);*/
 	}
 	.date-picker .month-buttons {
 		grid-template-columns: 

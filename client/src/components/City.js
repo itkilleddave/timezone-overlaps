@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Button from './Button'
 //import CityInput from './CityInput'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import FlagIcon from './FlagIcon'
 import tzlookup from 'tz-lookup'
 import Moment from 'react-moment';
@@ -51,106 +51,6 @@ class City extends Component {
 		)
 	}
 
-	// // CityInput Event Handlers
-
-	// handleChangeCityInput(newValue) {
-	// 	this.setState({
-	// 	  value: newValue
-	// 	});
-	// };
-
-	// callApiFilteredCities = async (value) => {
-
-	// 	const response = await fetch('/api/filtered-cities', {
-	//       method: 'POST',
-	//       headers: {
-	//         'Content-Type': 'application/json',
-	//       },
-	//       body: JSON.stringify({ value: value })
-	//     });
-
-	// 	const body = await response.json();
-	// 	if (response.status !== 200) throw Error(body.message);
-	// 	return body;
-	// };
-
-	// loadSuggestionsCityInput(value) {
-
-	//     this.setState({
-	//       isLoading: true
-	//     });
-	    
- //        this.callApiFilteredCities(value)
-	// 	.then(res => this.setState({
-	//       	isLoading: false,
-	// 	  	suggestions: res,
-	// 	}))
-	// 	.catch(err => console.log(err));
-
-	// }
-
-
-
-	// // Autosuggest will call this function every time you need to update suggestions.
-	// // You already implemented this logic above, so just use it.
-	// handleSuggestionsFetchRequestedCityInput(value) {
-	// 	//console.log(value);
-	// 	this.loadSuggestionsCityInput(value);
-	// };
-
-	// // Autosuggest will call this function every time you need to clear suggestions.
-	// handleSuggestionsClearRequestedCityInput() {
-	// 	this.setState({
-	// 	  suggestions: []
-	// 	});
-	// };
-
-	// handleKeyPressCityInput(event) {
-
-	// 	// const value = this.state.value
-
-	// 	// if (event.key === 'Enter')
-	// 	// {
-	// 	// 	if (this.isValidCityName(value))
-	// 	// 	{
-	// 	// 	this.handleClickAdd()
-	// 	// 	}
-	// 	// }
-
-	// }
-	// handleSuggestionSelectedCityInput(suggestion) {
-
-	// 	//console.log(suggestion)
-
-	// 	this.setState({
-	// 	  value: suggestion.name
-	// 	});
-
-	// 	this.props.onClickAdd(
-	// 		{
-	// 		index: this.props.columnIndex,
-	// 		props: suggestion
-	// 		//props: cities[this.getCityIndexByName(suggestion.name)],
-	// 		}
-	// 	)
-	// }
-
-	// data functions
-
-	// getCityIndexByName(value) {
-
-	// 	for(var i = 0; i < cities.length; i++) {
-	// 	    if (cities[i].name === value) {
-	// 	        return i
-	// 	    }
-	// 	}
-
-	// 	return -1;
-	// }
-
-	// isValidCityName(name) {
-	// 	return this.getCityIndexByName(name)>=0 ? true : false
-	// }
 
 	shouldComponentUpdate(nextProps,nextState) {
 		//console.log(nextProps.active)
@@ -238,6 +138,7 @@ class City extends Component {
     		const timezone = tzlookup(this.props.lat, this.props.lon)
 
 			var rows = [];
+
 			for (var i = 0; i < 24; i++) {
 				rows.push(
 					<li key={i} >
@@ -258,6 +159,15 @@ class City extends Component {
 			return (
 
 				<div className={this.props.active ? 'city active' : 'city'}>
+					
+					<CityHead 
+							name={this.props.name} 
+							country={this.props.country} 
+							columnIndex={this.props.columnIndex} 
+							active={ this.props.active }
+							onClickRemove={this.handleClickRemove}
+					/>
+
 					<ul>{rows}</ul>
 				</div>
 			)
@@ -354,7 +264,6 @@ class CityHead extends Component {
 
 		if(this.props.name) {
 		return (
-			<div className={this.props.active ? 'city active' : 'city'}>
 				
 				<div className="head">
 
@@ -379,13 +288,8 @@ class CityHead extends Component {
 						onClick={this.handleClickRemove}
 					/>
 
-	{/*				<h3 className="city-name">
-						{this.props.name}
-					</h3>*/}
-
 				</div>
 
-			</div>
 			)
 		} else {
 			return (

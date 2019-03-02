@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import City, { CityHead } from './City'
+import City from './City'
 import DatePicker from './DatePicker'
 import CityPicker from './CityPicker'
 import Button, { BUTTON } from './Button'
@@ -30,7 +30,7 @@ class TimezoneApp extends Component {
 				active : false
 			},
 			cityPicker : {
-				active : true
+				active : false
 			},
 		}
 
@@ -234,24 +234,6 @@ class TimezoneApp extends Component {
 
 				{cityPicker}
 
-				<div className="container container-header">
-					{cities.map((city, index) => (
-						<div 
-						className={'item '+(!city.name ? 'new' : 'set')} 
-						key={index}>
-							<CityHead 
-							name={city.name} 
-							country={city.country} 
-							//countryCode={city.countryCode}
-							//timezone={city.timezone} 
-							columnIndex={index} 
-							active={ (index===position.column) ? true : false }
-							onClickRemove={this.handleClickRemoveCity}
-							/>
-						</div>
-					)
-					)}
-				</div>
 				<div className="container container-content">
 					{cities.map((city, index) => (
 						<div 
