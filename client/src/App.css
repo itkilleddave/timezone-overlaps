@@ -2,9 +2,12 @@
 
 	/* theme dimensions */
 	--col-width-min: 50vw;
-	--col-gutter-width-expanded:100px;
+	--col-gutter-width: 60px;
+	--col-gutter-width-collapsed: 20px;
 	/*--col-width-max: 360px;*/
 	--head-height: 60px;
+	--cols-per-view: 2;
+	--col-gutters-per-view: 3;
 
 	/* colors swatches */
 
@@ -223,7 +226,7 @@ button,
 
 .column-gutter {
 	min-width: 100%;
-	width: var(--col-gutter-width-expanded);
+	width: var(--col-gutter-width);
 
 	text-align: center;
 	grid-row: 1;
@@ -234,12 +237,12 @@ button,
 	/*background: var(--light-grey);*/
 }
 .column-gutter.collapsed {
-	width: 20px;
+	width: var(--col-gutter-width-collapsed);
 }
-.column-gutter:first-child .inner,
+/*.column-gutter:first-child .inner,
 .column-gutter:last-child .inner {
 	display: none;
-}
+}*/
 .column-gutter .inner {
 	position: -webkit-sticky;
 	position: sticky;
@@ -270,12 +273,26 @@ button,
 .city {
 	min-width: 100%;
 	background: #fff;
-	width: 180px;
+	/*width: 180px;*/
+	width: calc(
+		(100vw
+		-
+		(var(--col-gutter-width-collapsed)*var(--col-gutters-per-view)))
+		/
+		var(--cols-per-view)
+		);
 	-webkit-transition: width 0.35s; /* Safari */
 	transition: width 0.35s;
 }
 .city.collapsed {
-	width: calc(180px - var(--col-gutter-width-expanded));
+	/*width: calc(180px - var(--col-gutter-width-expanded));*/
+	width: calc(
+		(100vw
+		-
+		(var(--col-gutter-width)*var(--col-gutters-per-view)))
+		/
+		var(--cols-per-view)
+		);
 }
 .city h3 {
 }
@@ -537,7 +554,9 @@ button,
 @media only screen and (min-width: 480px) {
 
 	:root{
-		--col-width-min: 33.33vw;
+		/*--col-width-min: 33.33vw;*/
+		--cols-per-view: 3;
+		--col-gutters-per-view: 4;
 	}
 	.date-picker .month-buttons {
 		grid-template-columns: 
@@ -548,9 +567,22 @@ button,
 @media only screen and (min-width: 768px) {
 
 	:root{
-		/*--col-width-min: 120px;*/
-		--col-width-min: 240px;
-		/*--col-width-min: calc(100vw/8);*/
+		--cols-per-view: 4;
+		--col-gutters-per-view: 5;
+	}
+	.date-picker .month-buttons {
+		grid-template-columns: 
+		1fr 1fr 1fr 1fr
+		1fr 1fr 1fr 1fr
+		1fr 1fr 1fr 1fr
+		;
+	}
+}
+@media only screen and (min-width: 992px) {
+
+	:root{
+		--cols-per-view: 6;
+		--col-gutters-per-view: 7;
 	}
 	.date-picker .month-buttons {
 		grid-template-columns: 
