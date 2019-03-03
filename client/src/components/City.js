@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import Button from './Button'
-//import CityInput from './CityInput'
+import Button, { BUTTON } from './Button'
 import { faTimes, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import FlagIcon from './FlagIcon'
 import tzlookup from 'tz-lookup'
@@ -299,10 +298,10 @@ class CityHead extends Component {
 					</h3>
 
 					<Button 
-						theme="secondary"
+						theme={BUTTON.THEME.SECONDARY}
 						icon={faTimes}
-						shape="circle"
-						size="small"
+						shape={BUTTON.SHAPE.CIRCLE}
+						size={BUTTON.SIZE.SMALL}
 						onClick={this.handleClickRemove}
 					/>
 

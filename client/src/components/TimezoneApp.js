@@ -33,7 +33,8 @@ class TimezoneApp extends Component {
 			cityPicker : {
 				active : false
 			},
-			isDraggingCityIndex : -1
+			isDraggingCityIndex : -1,
+			isExpandedColumnGutterIndex : -1,
 		}
 
 		// datePicker handlers
@@ -44,15 +45,18 @@ class TimezoneApp extends Component {
 		this.handleClickSetYear = this.handleClickSetYear.bind(this)
 		this.handleClickToday = this.handleClickToday.bind(this)
 
+		//cityPicker handlers
+		this.handleClickCloseCityPicker = this.handleClickCloseCityPicker.bind(this)
+		this.handleClickOpenCityPicker = this.handleClickOpenCityPicker.bind(this)
+		this.handleClickAddCity = this.handleClickAddCity.bind(this)
+
 		//city handlers
 		this.handleClickRemoveCity = this.handleClickRemoveCity.bind(this)
 		this.handleClickStartDragCity = this.handleClickStartDragCity.bind(this)
 		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
 
-		//cityPicker handlers
-		this.handleClickCloseCityPicker = this.handleClickCloseCityPicker.bind(this)
-		this.handleClickOpenCityPicker = this.handleClickOpenCityPicker.bind(this)
-		this.handleClickAddCity = this.handleClickAddCity.bind(this)
+		//columnGutter handlers
+		this.handleClickExpandColumnGutter = this.handleClickExpandColumnGutter.bind(this)
 
 	}
 
@@ -209,21 +213,46 @@ class TimezoneApp extends Component {
 
 	newColumnGutter(index) {
 
+		const expandedCol = this.state.isExpandedColumnGutterIndex;
 		const dragging = this.state.isDraggingCityIndex;
 
 		return (
 			<ColumnGutter 
 			key={'column-gutter-'+index} 
 			index={index}
-			collapsed={(dragging !== -1) ? false : true}
+			collapsed={(
+				dragging !== -1
+				||
+				expandedCol !== -1
+				) ? false : true}
+			onClickExpand={this.handleClickExpandColumnGutter}
 			/>
 		)
+	}
+	handleClickExpandColumnGutter(cgData) {
+		
+		console.log(cgData)
+
+		if (this.state.isExpandedColumnGutterIndex !== -1) {
+
+			this.setState({
+				isExpandedColumnGutterIndex : -1
+			})
+
+		} else {
+
+			this.setState({
+				isExpandedColumnGutterIndex : cgData.index
+			})
+
+		}
+		
 	}
 
 	render() {
 
-
 		const dragging = this.state.isDraggingCityIndex;
+		const expandedCol = this.state.isExpandedColumnGutterIndex;
 		const cities = this.state.cities
 		const position = this.state.position
 
@@ -270,7 +299,11 @@ class TimezoneApp extends Component {
 				onClickRemove={this.handleClickRemoveCity}
 				onClickStartDrag={this.handleClickStartDragCity}
 				update={!this.state.datePicker.active}
-				collapsed={(dragging !== -1) ? true : false}
+				collapsed={(
+					dragging !== -1
+					||
+					expandedCol !== -1
+					) ? true : false}
 				/>
 			</div>
 			)
@@ -294,8 +327,6 @@ class TimezoneApp extends Component {
 		arr.push(this.newColumnGutter(cities.length))
 
 		const content = arr.concat();
-
-		console.log(content)
 
 		return (
 			<div className="timezone-app">

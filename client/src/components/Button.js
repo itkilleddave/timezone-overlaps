@@ -35,8 +35,10 @@ class Button extends Component {
 			+" btn-"+(this.props.theme ? this.props.theme : BUTTON.THEME.PRIMARY)
 			+" btn-"+(this.props.shape ? this.props.shape : BUTTON.SHAPE.DEFAULT)
 			+" btn-"+(this.props.size ? this.props.size : BUTTON.SIZE.DEFAULT)
-			+" "+(this.props.pulse ? 'pulse' : '')
-			+" "+(this.props.active ? 'active' : '')
+			+(this.props.pulse ? ' pulse loop' : '')
+			+(this.props.active ? ' active' : '')
+			+(this.props.transIn ? " "+this.props.transIn : '')
+
 			}
 			onClick={this.handleClick}
 			tabIndex="-1"
