@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import City from './City'
 import DatePicker from './DatePicker'
 import CityPicker from './CityPicker'
+import ColumnGutter from './ColumnGutter'
 import Button, { BUTTON } from './Button'
 import { faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
@@ -196,6 +197,16 @@ class TimezoneApp extends Component {
 			})
 		}
 	}
+
+	newColumnGutter(index) {
+		return (
+			<ColumnGutter 
+			key={'column-gutter-'+index} 
+			index={index}
+			/>
+		)
+	}
+
 	render() {
 
 		const cities = this.state.cities
@@ -227,6 +238,48 @@ class TimezoneApp extends Component {
 
 		}
 
+		const columns = cities.map((city, index) => (
+			<div 
+			className={'item '+(!city.name ? 'new' : 'set')} 
+			key={'city-'+index}>
+				<City 
+				name={city.name} 
+				country={city.country} 
+				lat={city.lat}
+				lon={city.lon}
+				dateTime={this.state.dateTime}
+				columnIndex={index}
+				onMouseEnter={this.handleMouseEnterCityTimeRow}
+				active={ (index===position.column) ? true : false }
+				activeTimeRow={position.row}
+				onClickRemove={this.handleClickRemoveCity}
+				update={!this.state.datePicker.active}
+				/>
+			</div>
+			)
+		)
+
+		const columnGutters = cities.map((city, index) => (
+			this.newColumnGutter(index)
+		))
+
+		// weave the 2 arrays
+
+		var arr = []
+
+		for (var i = 0; i < cities.length; i++) {
+			arr = arr.concat(columnGutters[i])
+			arr = arr.concat(columns[i])
+		}
+
+		// add extra end columnGutter on end
+
+		arr.push(this.newColumnGutter(cities.length))
+
+		const content = arr.concat();
+
+		console.log(content)
+
 		return (
 			<div className="timezone-app">
 
@@ -235,28 +288,7 @@ class TimezoneApp extends Component {
 				{cityPicker}
 
 				<div className="container container-content">
-					{cities.map((city, index) => (
-						<div 
-						className={'item '+(!city.name ? 'new' : 'set')} 
-						key={index}>
-							<City 
-							name={city.name} 
-							country={city.country} 
-							lat={city.lat}
-							lon={city.lon}
-							dateTime={this.state.dateTime}
-							//countryCode={city.countryCode} 
-							//timezone={city.timezone} 
-							columnIndex={index}
-							onMouseEnter={this.handleMouseEnterCityTimeRow}
-							active={ (index===position.column) ? true : false }
-							activeTimeRow={position.row}
-							onClickRemove={this.handleClickRemoveCity}
-							update={!this.state.datePicker.active}
-							/>
-						</div>
-					)
-					)}
+					{content}
 				</div>
 				<div className="btn-bottom-left">
 					<Button 

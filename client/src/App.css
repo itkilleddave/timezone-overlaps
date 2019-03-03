@@ -1,7 +1,6 @@
 :root{
 
 	/* theme dimensions */
-
 	--col-width-min: 50vw;
 	/*--col-width-max: 360px;*/
 	--head-height: 60px;
@@ -170,17 +169,16 @@ button,
 
 .container {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(var(--col-width-min), 1fr	));
-	grid-auto-columns: minmax(var(--col-width-min), 1fr);
-/*	grid-template-columns: minmax(var(--col-width-min), var(--col-width-max));
-	grid-auto-columns: minmax(var(--col-width-min), var(--col-width-max));*/
-	/*grid-gap: 10px;*/
+
+	/*grid-template-columns: repeat(auto-fit, minmax(var(--col-width-min), 1fr	));*/
+	/*grid-auto-columns: minmax(var(--col-width-min), 1fr);*/
+
+	/*grid-template-columns: repeat(0, minmax(var(--col-width-min), 1fr));*/
+
+	grid-auto-columns: auto minmax(var(--col-width-min), 1fr);
+
 	background: #fff;
-	/*width: calc(var(--col-width-min) * 8);*/
-	/*width:100px;*/
 	grid-template-rows: 1fr;
-/*	justify-items: center;
-	justify-content: center;*/
 
 }
 .container.container-content .head {
@@ -224,6 +222,17 @@ button,
 .item.new {
 	/*grid-column: span 2;*/
 }
+.column-gutter {
+	width: 20px;
+	background: #fff;
+
+	text-align: center;
+	grid-row: 1;
+}
+.column-gutter.active {
+	width: 100px;
+	background: var(--grey);
+}
 .city {
 	background: #fff;
 	width: 100%;
@@ -259,7 +268,7 @@ button,
 .row-time {
 	display: grid;
 	grid-template-columns: 1fr;
-	padding: 0 10px;
+	/*padding: 0 10px;*/
 }
 .row-time > div {
 	/*height: 100px;*/
