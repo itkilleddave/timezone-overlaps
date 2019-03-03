@@ -25,6 +25,7 @@ class City extends Component {
 
 		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this)
 		this.handleClickRemove = this.handleClickRemove.bind(this)
+		this.handleClickStartDrag = this.handleClickStartDrag.bind(this)
 
 		//CityInput Event Handlers
 		// this.handleChangeCityInput = this.handleChangeCityInput.bind(this)
@@ -45,6 +46,15 @@ class City extends Component {
 	handleClickRemove() {
 
 		this.props.onClickRemove(
+			{
+			index: this.props.columnIndex,
+			}
+		)
+	}
+
+	handleClickStartDrag() {
+
+		this.props.onClickStartDrag(
 			{
 			index: this.props.columnIndex,
 			}
@@ -158,7 +168,11 @@ class City extends Component {
 
 			return (
 
-				<div className={this.props.active ? 'city active' : 'city'}>
+				<div
+				className={"city"
+				+(this.props.collapsed ? " collapsed" : "")
+				}
+				 >
 					
 					<CityHead 
 							name={this.props.name} 
@@ -166,6 +180,7 @@ class City extends Component {
 							columnIndex={this.props.columnIndex} 
 							active={ this.props.active }
 							onClickRemove={this.handleClickRemove}
+							onClickStartDrag={this.handleClickStartDrag}
 					/>
 
 					<ul>{rows}</ul>
@@ -276,7 +291,10 @@ class CityHead extends Component {
 						/>
 					</div>
 
-					<h3 className="city-name">
+					<h3
+					className="city-name" 
+					onClick={this.props.onClickStartDrag}
+					>
 						{this.props.name}
 					</h3>
 

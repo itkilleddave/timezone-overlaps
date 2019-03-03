@@ -9,9 +9,17 @@ class ColumnGutter extends Component {
 	// 	super(props)
 	// }
 
+
 	render() {
+
+		console.log(this.props.active);
+
 		return (
-			<div className="column-gutter">
+			<div 
+			className={"column-gutter"
+			+(this.props.collapsed ? " collapsed" : "")
+			}
+			>
 			</div>
 			)
 	}

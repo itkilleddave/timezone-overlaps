@@ -33,6 +33,7 @@ class TimezoneApp extends Component {
 			cityPicker : {
 				active : false
 			},
+			isDraggingCityIndex : -1
 		}
 
 		// datePicker handlers
@@ -45,6 +46,7 @@ class TimezoneApp extends Component {
 
 		//city handlers
 		this.handleClickRemoveCity = this.handleClickRemoveCity.bind(this)
+		this.handleClickStartDragCity = this.handleClickStartDragCity.bind(this)
 		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
 
 		//cityPicker handlers
@@ -178,6 +180,13 @@ class TimezoneApp extends Component {
 
 		this.setState({cities: cities})
 	}
+	handleClickStartDragCity(cityData) {
+
+		//console.log('startDrag', cityData)
+
+		this.setState({isDraggingCityIndex: cityData.index})
+		
+	}
 	handleMouseEnterCityTimeRow(position) {
 		this.setState({
 			position : position
@@ -199,16 +208,22 @@ class TimezoneApp extends Component {
 	}
 
 	newColumnGutter(index) {
+
+		const dragging = this.state.isDraggingCityIndex;
+
 		return (
 			<ColumnGutter 
 			key={'column-gutter-'+index} 
 			index={index}
+			collapsed={(dragging !== -1) ? false : true}
 			/>
 		)
 	}
 
 	render() {
 
+
+		const dragging = this.state.isDraggingCityIndex;
 		const cities = this.state.cities
 		const position = this.state.position
 
@@ -253,7 +268,9 @@ class TimezoneApp extends Component {
 				active={ (index===position.column) ? true : false }
 				activeTimeRow={position.row}
 				onClickRemove={this.handleClickRemoveCity}
+				onClickStartDrag={this.handleClickStartDragCity}
 				update={!this.state.datePicker.active}
+				collapsed={(dragging !== -1) ? true : false}
 				/>
 			</div>
 			)

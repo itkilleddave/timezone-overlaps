@@ -175,7 +175,10 @@ button,
 
 	/*grid-template-columns: repeat(0, minmax(var(--col-width-min), 1fr));*/
 
-	grid-auto-columns: auto minmax(var(--col-width-min), 1fr);
+	/*grid-auto-columns: auto minmax(var(--col-width-min), 1fr);*/
+
+	grid-template-columns: auto;
+	grid-auto-columns: auto;
 
 	background: #fff;
 	grid-template-rows: 1fr;
@@ -199,6 +202,7 @@ button,
 }	
 .container.container-content .head .city-name {
 	color: var(--darker-grey);
+	cursor: pointer;
 }
 .container.container-content .head > * {
 	overflow: hidden;
@@ -213,31 +217,36 @@ button,
   margin-top: 4px;
 }
 .item {
+
 	text-align: center;
 	grid-row: 1;
-  -webkit-transition: width 2s; /* Safari */
-  transition: width 2s;
-  background: white;
-}
-.item.new {
-	/*grid-column: span 2;*/
+  	background: white;
 }
 .column-gutter {
-	width: 20px;
+	min-width: 100%;
+	width: 100px;
 	background: #fff;
 
 	text-align: center;
 	grid-row: 1;
+
+	-webkit-transition: width 0.5s; /* Safari */
+	transition: width 0.5s;
+	background: white;
+	/*background: var(--light-grey);*/
 }
-.column-gutter.active {
-	width: 100px;
-	background: var(--grey);
+.column-gutter.collapsed {
+	width: 20px;
 }
 .city {
+	min-width: 100%;
 	background: #fff;
-	width: 100%;
-  -webkit-transition: width 0.5s; /* Safari */
-  transition: width 0.5s;
+	width: 200px;
+	-webkit-transition: width 0.5s; /* Safari */
+	transition: width 0.5s;
+}
+.city.collapsed {
+	width: 120px;
 }
 .city h3 {
 }
