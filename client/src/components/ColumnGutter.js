@@ -10,11 +10,29 @@ class ColumnGutter extends Component {
 		super(props)
 
 		this.handleClickExpand = this.handleClickExpand.bind(this)
+		this.handleClickAdd = this.handleClickAdd.bind(this)
+		this.handleClickSwap = this.handleClickSwap.bind(this)
 	}
 
 	handleClickExpand() {
 
 		this.props.onClickExpand(
+			{
+			index: this.props.index,
+			}
+		)
+	}
+	handleClickAdd() {
+
+		this.props.onClickAdd(
+			{
+			index: this.props.index,
+			}
+		)
+	}
+	handleClickSwap() {
+
+		this.props.onClickSwap(
 			{
 			index: this.props.index,
 			}
@@ -36,16 +54,16 @@ class ColumnGutter extends Component {
 					icon={faPlus}
 					shape={BUTTON.SHAPE.CIRCLE}
 					size={BUTTON.SIZE.SMALL}
-					onClick={this.handleClickRemove}
-					transIn="scale-up"
+					onClick={this.handleClickAdd}
+					className="add scale-up"
 				/>
 				<Button 
 					theme={BUTTON.THEME.SECONDARY}
 					icon={faArrowsAltH}
 					shape={BUTTON.SHAPE.CIRCLE}
 					size={BUTTON.SIZE.SMALL}
-					onClick={this.handleClickRemove}
-					transIn="scale-up"
+					onClick={this.handleClickSwap}
+					className="swap scale-up"
 				/>
 			</div>
 			)

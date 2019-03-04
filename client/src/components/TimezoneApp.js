@@ -57,6 +57,8 @@ class TimezoneApp extends Component {
 
 		//columnGutter handlers
 		this.handleClickExpandColumnGutter = this.handleClickExpandColumnGutter.bind(this)
+		this.handleClickSwapCity = this.handleClickSwapCity.bind(this)
+		this.handleClickAddCity = this.handleClickAddCity.bind(this)
 
 	}
 
@@ -226,6 +228,8 @@ class TimezoneApp extends Component {
 				expandedCol !== -1
 				) ? false : true}
 			onClickExpand={this.handleClickExpandColumnGutter}
+			onClickAdd={this.handleClickInsertCity}
+			onClickSwap={this.handleClickSwapCity}
 			/>
 		)
 	}
@@ -246,6 +250,27 @@ class TimezoneApp extends Component {
 			})
 
 		}
+		
+	}
+	handleClickInsertCity(cgData) {
+		
+		//console.log(cgData)
+		
+	}
+	handleClickSwapCity(cgData) {
+		
+		const i = (cgData.index)
+
+		var cities = this.state.cities.concat()
+
+		const temp = cities[i]
+		cities[i] = cities[i-1]
+		cities[i-1] = temp
+
+
+		this.setState({
+			cities: cities.concat(),
+		})
 		
 	}
 

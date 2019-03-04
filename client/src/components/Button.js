@@ -37,7 +37,7 @@ class Button extends Component {
 			+" btn-"+(this.props.size ? this.props.size : BUTTON.SIZE.DEFAULT)
 			+(this.props.pulse ? ' pulse loop' : '')
 			+(this.props.active ? ' active' : '')
-			+(this.props.transIn ? " "+this.props.transIn : '')
+			+(this.props.className ? " "+this.props.className : '')
 
 			}
 			onClick={this.handleClick}

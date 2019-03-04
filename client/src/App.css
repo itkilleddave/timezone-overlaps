@@ -239,10 +239,10 @@ button,
 .column-gutter.collapsed {
 	width: var(--col-gutter-width-collapsed);
 }
-/*.column-gutter:first-child .inner,
-.column-gutter:last-child .inner {
+.column-gutter:first-child .swap,
+.column-gutter:last-child .swap {
 	display: none;
-}*/
+}
 .column-gutter .inner {
 	position: -webkit-sticky;
 	position: sticky;
