@@ -146,9 +146,9 @@ class City extends Component {
 			
     		const timezone = tzlookup(this.props.lat, this.props.lon)
 
-			var rows = [];
+			let rows = [];
 
-			for (var i = 0; i < 24; i++) {
+			for (let i = 0; i < 24; i++) {
 				rows.push(
 					<li key={i} >
 						<TimeRow 

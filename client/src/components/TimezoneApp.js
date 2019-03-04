@@ -31,7 +31,8 @@ class TimezoneApp extends Component {
 				active : false
 			},
 			cityPicker : {
-				active : false
+				active : false,
+				insertAtIndex : -1,
 			},
 			isDraggingCityIndex : -1,
 			isExpandedColumnGutterIndex : -1,
@@ -58,7 +59,7 @@ class TimezoneApp extends Component {
 		//columnGutter handlers
 		this.handleClickExpandColumnGutter = this.handleClickExpandColumnGutter.bind(this)
 		this.handleClickSwapCity = this.handleClickSwapCity.bind(this)
-		this.handleClickAddCity = this.handleClickAddCity.bind(this)
+		this.handleClickInsertCity = this.handleClickInsertCity.bind(this)
 
 	}
 
@@ -159,11 +160,30 @@ class TimezoneApp extends Component {
 	}
 	handleClickAddCity(cityData) {
 
-		console.log('cityData', cityData);
+		//console.log('cityData', cityData);
 
-		const cities = this.state.cities.concat(cityData.props)
+		const i = this.state.cityPicker.insertAtIndex;
 
-		const cp = {...this.state.cityPicker, active:false}
+		let c = this.state.cities.concat()
+
+		if (i === -1) {
+			c.push(cityData.props)
+		} else {
+			c.splice(i, 0, cityData.props)
+		}
+
+		const cities = c.concat()
+
+		// const cities = (i === -1)
+		// ? c.concat(cityData.props) // add to end
+		// : c.splice(i, 0, cityData.props) // insert at index
+
+		const cp = {...this.state.cityPicker, 
+			active:false, 
+			insertAtIndex : -1
+		}
+
+		console.log('asdsad')
 
 		this.setState({
 			cities: cities,
@@ -254,14 +274,21 @@ class TimezoneApp extends Component {
 	}
 	handleClickInsertCity(cgData) {
 		
-		//console.log(cgData)
+		//console.log('cgData', cgData);
+
+		const cp = {...this.state.cityPicker, 
+			active : true, 
+			insertAtIndex : cgData.index
+		}
+
+		this.setState({cityPicker: cp})
 		
 	}
 	handleClickSwapCity(cgData) {
 		
 		const i = (cgData.index)
 
-		var cities = this.state.cities.concat()
+		let cities = this.state.cities.concat()
 
 		const temp = cities[i]
 		cities[i] = cities[i-1]
@@ -281,7 +308,7 @@ class TimezoneApp extends Component {
 		const cities = this.state.cities
 		const position = this.state.position
 
-		var datePicker = null;
+		let datePicker = null;
 
 		if (this.state.datePicker.active) {
 
@@ -296,7 +323,7 @@ class TimezoneApp extends Component {
 
 		}
 
-		var cityPicker = null;
+		let cityPicker = null;
 
 		if (this.state.cityPicker.active) {
 
@@ -340,9 +367,9 @@ class TimezoneApp extends Component {
 
 		// weave the 2 arrays
 
-		var arr = []
+		let arr = []
 
-		for (var i = 0; i < cities.length; i++) {
+		for (let i = 0; i < cities.length; i++) {
 			arr = arr.concat(columnGutters[i])
 			arr = arr.concat(columns[i])
 		}

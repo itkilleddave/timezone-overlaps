@@ -24,9 +24,9 @@ class DatePicker extends Component {
 
 	render() {
 
-		var months = []
+		let months = []
 
-		for (var i = 0; i < 12; i++) {
+		for (let i = 0; i < 12; i++) {
 			
 			months.push(moment(i+1, 'M').format('MMM'))
 		}
