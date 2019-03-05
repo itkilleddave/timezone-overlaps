@@ -63,6 +63,7 @@ class TimezoneApp extends Component {
 
 	}
 
+	/* date picker functions */
 
 	handleClickChangeDate() {
 		
@@ -132,7 +133,7 @@ class TimezoneApp extends Component {
 		this.setState({dateTime: date})
 	}
 
-	// cityPicker functions
+	// city picker functions
 
 	handleClickOpenCityPicker() {
 		
@@ -208,6 +209,24 @@ class TimezoneApp extends Component {
 
 	// standard react events
 
+	stabliliseFragileState() {
+
+		// if there are no cities, we auto prompt the city picker
+
+		if (!this.state.cities.length
+			&& this.state.cityPicker.active === false
+			) {
+
+			const cityPicker = {
+				active : true,
+				insertAtIndex : 0,
+			}
+
+			this.setState({cityPicker : cityPicker})
+
+		}
+	}
+
 	componentWillMount() {
 
 		// for testing
@@ -221,22 +240,14 @@ class TimezoneApp extends Component {
 
 	componentDidMount() {
 
-		console.log(this.state.cities.length)
-
-		if (!this.state.cities.length) {
-
-			const cityPicker = {
-				active : true,
-				insertAtIndex : 0,
-			}
-
-			this.setState({cityPicker : cityPicker})
-
-		}
-
+		this.stabliliseFragileState()
 
 	}
 	componentDidUpdate(prevProps, prevState, snapshot) {
+
+		console.log(this.state.cities.length)
+
+		this.stabliliseFragileState()
 
 		if(this.state.cities.length > prevState.cities.length) {
 
@@ -248,6 +259,8 @@ class TimezoneApp extends Component {
 		}
 
 	}
+
+	/* column gutter functions */
 
 	newColumnGutter(index) {
 
