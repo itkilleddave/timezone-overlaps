@@ -6,14 +6,14 @@ import ColumnGutter from './ColumnGutter'
 import Button, { BUTTON } from './Button'
 import { faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
-function getEmptyCity() {
-	return {
-				name: "",
-				country: "",
-				//countryCode: "",
-				//timezone: "",
-			}
-}
+// function getEmptyCity() {
+// 	return {
+// 				name: "",
+// 				country: "",
+// 				//countryCode: "",
+// 				//timezone: "",
+// 			}
+// }
 
 class TimezoneApp extends Component {
 
@@ -24,7 +24,7 @@ class TimezoneApp extends Component {
 		dateTime.setHours(0,0,0,0)
 
 		this.state = {
-			cities : [getEmptyCity()],
+			cities : [],
 			position : [],
 			dateTime : dateTime,
 			datePicker : {
@@ -63,17 +63,6 @@ class TimezoneApp extends Component {
 
 	}
 
-	componentDidMount() {
-
-		// for testing
-
-		if (this.props.testCityData) {
-
-			this.setState({cities: this.props.testCityData})
-
-		}
-
-	}
 
 	handleClickChangeDate() {
 		
@@ -219,6 +208,34 @@ class TimezoneApp extends Component {
 
 	// standard react events
 
+	componentWillMount() {
+
+		// for testing
+
+		if (this.props.testCityData) {
+
+			this.setState({cities: this.props.testCityData})
+
+		}
+	}
+
+	componentDidMount() {
+
+		console.log(this.state.cities.length)
+
+		if (!this.state.cities.length) {
+
+			const cityPicker = {
+				active : true,
+				insertAtIndex : 0,
+			}
+
+			this.setState({cityPicker : cityPicker})
+
+		}
+
+
+	}
 	componentDidUpdate(prevProps, prevState, snapshot) {
 
 		if(this.state.cities.length > prevState.cities.length) {
@@ -229,6 +246,7 @@ class TimezoneApp extends Component {
 			  behavior: 'smooth'
 			})
 		}
+
 	}
 
 	newColumnGutter(index) {
@@ -248,6 +266,7 @@ class TimezoneApp extends Component {
 			onClickExpand={this.handleClickExpandColumnGutter}
 			onClickAdd={this.handleClickInsertCity}
 			onClickSwap={this.handleClickSwapCity}
+			className={this.state.cities.length === 1 ? "empty" : ""}
 			/>
 		)
 	}
@@ -332,6 +351,8 @@ class TimezoneApp extends Component {
 
 		}
 
+		console.log('cc', cities)
+
 		const columns = cities.map((city, index) => (
 			<div 
 			className={'item '+(!city.name ? 'new' : 'set')} 
@@ -359,13 +380,13 @@ class TimezoneApp extends Component {
 			)
 		)
 
+		let arr = []
+
 		const columnGutters = cities.map((city, index) => (
 			this.newColumnGutter(index)
 		))
 
 		// weave the 2 arrays
-
-		let arr = []
 
 		for (let i = 0; i < cities.length; i++) {
 			arr = arr.concat(columnGutters[i])
@@ -377,6 +398,8 @@ class TimezoneApp extends Component {
 		arr.push(this.newColumnGutter(cities.length))
 
 		const content = arr.concat();
+
+
 
 		return (
 			<div className="timezone-app">
@@ -396,10 +419,6 @@ class TimezoneApp extends Component {
 					/>
 				</div>
 				<div className="btn-bottom-right">
-					{!cities[cities.length-1].name
-					? 
-					false // only allow 1 new city to be added at a time
-					:
 					<Button 
 					icon={faPlus}
 					shape={BUTTON.SHAPE.CIRCLE}
@@ -411,7 +430,6 @@ class TimezoneApp extends Component {
 						? true : false}
 					//pulse={ cities.length ? true : false} 
 					/>
-					}
 				</div>
 			</div>
 

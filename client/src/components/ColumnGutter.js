@@ -72,6 +72,7 @@ class ColumnGutter extends Component {
 			<div 
 			className={"column-gutter"
 			+(this.props.collapsed ? " collapsed" : "")
+			+" "+this.props.className
 			}
 			>
 				<div className="inner">

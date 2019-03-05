@@ -202,7 +202,7 @@ button,
 	background: #fff;
 	border-bottom: solid 4px var(--grey);
 	height: var(--head-height);
-	padding: 0 10px;
+	/*padding: 0 10px;*/
 }	
 .container.container-content .item .head .city-name {
 	color: var(--darker-grey);
@@ -241,6 +241,9 @@ button,
 }
 .column-gutter:first-child .swap,
 .column-gutter:last-child .swap {
+	display: none;
+}
+.column-gutter.empty * {
 	display: none;
 }
 .column-gutter .inner {
