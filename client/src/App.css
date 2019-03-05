@@ -281,8 +281,9 @@ button,
 		/
 		var(--cols-per-view)
 		);
-	-webkit-transition: width 0.35s; /* Safari */
-	transition: width 0.35s;
+	-webkit-transition: all 0.35s; /* Safari */
+	transition: all 0.35s;
+	opacity:1;
 }
 .city.collapsed {
 	/*width: calc(180px - var(--col-gutter-width-expanded));*/
@@ -293,6 +294,11 @@ button,
 		/
 		var(--cols-per-view)
 		);
+}
+.city.highlighted {
+	opacity:0.01;
+}
+.city.highlighted * {
 }
 .city h3 {
 }

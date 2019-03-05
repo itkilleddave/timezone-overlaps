@@ -68,7 +68,7 @@ class CityInput extends Component {
     this.props.onSuggestionSelected(suggestion)
   }
   componentDidMount() {
-
+    
     // use a timeout for delay, to allow time for the scrollTo animation.
     // because the focusing also triggers an auto scroll (with no animation)
     // which breaks/overrides the scrollTo animation

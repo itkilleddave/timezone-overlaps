@@ -18,9 +18,9 @@ class City extends Component {
 	      	value: '',
 	      	suggestions: [],
       		isLoading: false,
-	    };
+      		isMounting: true
 
-    	//this.lastRequestId = null;
+	    };
 
 		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this)
 		this.handleClickRemove = this.handleClickRemove.bind(this)
@@ -34,6 +34,13 @@ class City extends Component {
 		// this.handleSuggestionSelectedCityInput = this.handleSuggestionSelectedCityInput.bind(this)
 
 	}
+
+	// getTransitionByName(name) {
+
+	// 	return this.transitions.filter((t) => 
+	// 		 t.event == name
+	// 	)[0]
+	// }
 
 	handleMouseEnterRow(rowIndex) {
 		this.props.onMouseEnter({
@@ -60,6 +67,17 @@ class City extends Component {
 		)
 	}
 
+	componentDidMount() {
+
+		//used to remove css class once mounted (for transition animation)
+
+		setTimeout(() => { 
+			this.setState({
+				isMounting: false,
+			})
+		}, 350);
+
+	}
 
 	shouldComponentUpdate(nextProps,nextState) {
 		//console.log(nextProps.active)
@@ -67,6 +85,8 @@ class City extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
+
+
 
 		// if (this.props.lat) {
 		// 	if(
@@ -78,6 +98,7 @@ class City extends Component {
 		// 		alert("Get City Timezone: "+tzlookup(this.props.lat, this.props.lon))
 		// 	}
 		// }
+
 			
 	}
 
@@ -170,6 +191,7 @@ class City extends Component {
 				<div
 				className={"city"
 				+(this.props.collapsed ? " collapsed" : "")
+				+(this.state.isMounting ? " highlighted" : "")
 				}
 				 >
 					

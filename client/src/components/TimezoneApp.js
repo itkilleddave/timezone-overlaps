@@ -182,9 +182,7 @@ class TimezoneApp extends Component {
 			active:false, 
 			insertAtIndex : -1
 		}
-
-		console.log('asdsad')
-
+		
 		this.setState({
 			cities: cities,
 			cityPicker: cp,
