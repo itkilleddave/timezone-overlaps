@@ -369,7 +369,7 @@ class TimezoneApp extends Component {
 		const columns = cities.map((city, index) => (
 			<div 
 			className={'item '+(!city.name ? 'new' : 'set')} 
-			key={'city-'+index}>
+			key={'city-'+city.name}>
 				<City 
 				name={city.name} 
 				country={city.country} 
