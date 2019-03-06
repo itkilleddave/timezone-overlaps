@@ -8,12 +8,13 @@ class ColumnGutter extends Component {
 	constructor(props) {
 
 		super(props)
-
+       	this.state = {
+            buttonClass: 'scale-up'
+        };
 		this.handleClickExpand = this.handleClickExpand.bind(this)
 		this.handleClickAdd = this.handleClickAdd.bind(this)
 		this.handleClickSwap = this.handleClickSwap.bind(this)
 	}
-
 	handleClickExpand() {
 
 		this.props.onClickExpand(
@@ -38,6 +39,9 @@ class ColumnGutter extends Component {
 			}
 		)
 	}
+	componentDidMount() {
+        this.setState({ buttonClass: '' });
+    }
 
 	render() {
 
@@ -55,7 +59,7 @@ class ColumnGutter extends Component {
 					shape={BUTTON.SHAPE.CIRCLE}
 					size={BUTTON.SIZE.SMALL}
 					onClick={this.handleClickAdd}
-					className="add scale-up"
+					className={"add "+this.state.buttonClass}
 				/>
 				<Button 
 					theme={BUTTON.THEME.SECONDARY}
@@ -63,7 +67,7 @@ class ColumnGutter extends Component {
 					shape={BUTTON.SHAPE.CIRCLE}
 					size={BUTTON.SIZE.SMALL}
 					onClick={this.handleClickSwap}
-					className="swap scale-up"
+					className={"swap "+this.state.buttonClass}
 				/>
 			</div>
 			)
