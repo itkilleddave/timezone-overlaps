@@ -150,33 +150,45 @@ class TimezoneApp extends Component {
 	}
 	handleClickAddCity(cityData) {
 
-		//console.log('cityData', cityData);
-
-		const i = this.state.cityPicker.insertAtIndex;
-
-		let c = this.state.cities.concat()
-
-		if (i === -1) {
-			c.push(cityData.props)
-		} else {
-			c.splice(i, 0, cityData.props)
-		}
-
-		const cities = c.concat()
-
-		// const cities = (i === -1)
-		// ? c.concat(cityData.props) // add to end
-		// : c.splice(i, 0, cityData.props) // insert at index
-
 		const cp = {...this.state.cityPicker, 
 			active:false, 
 			insertAtIndex : -1
 		}
-		
-		this.setState({
-			cities: cities,
-			cityPicker: cp,
-		})
+
+		const ii = this.state.cityPicker.insertAtIndex;
+
+		let c = this.state.cities.concat()
+
+		let found = false;
+
+		for(let i = 0; i < c.length; i++) {
+		    if (this.cityKey(c[i]) === this.cityKey(cityData.props) ) {
+		        found = true;
+		        break;
+		    }
+		}
+
+		if(!found) { // no duplicates (breaks key logic)
+
+			if (ii === -1) {
+				c.push(cityData.props)
+			} else {
+				c.splice(ii, 0, cityData.props)
+			}
+
+			const cities = c.concat()
+
+			this.setState({
+				cities: cities,
+				cityPicker: cp,
+			})
+
+		} else {
+
+			this.setState({
+				cityPicker: cp,
+			})
+		}
 
 	}
 
@@ -331,6 +343,10 @@ class TimezoneApp extends Component {
 		
 	}
 
+	cityKey(city) {
+		return ('city-'+city.name+"-"+city.country).toLowerCase();
+	}
+
 	render() {
 
 		const dragging = this.state.isDraggingCityIndex;
@@ -369,7 +385,7 @@ class TimezoneApp extends Component {
 		const columns = cities.map((city, index) => (
 			<div 
 			className={'item '+(!city.name ? 'new' : 'set')} 
-			key={'city-'+city.name}>
+			key={this.cityKey(city)}>
 				<City 
 				name={city.name} 
 				country={city.country} 
