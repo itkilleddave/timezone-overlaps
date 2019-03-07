@@ -60,11 +60,11 @@ class City extends Component {
 
 	handleClickStartDrag() {
 
-		this.props.onClickStartDrag(
-			{
-			index: this.props.columnIndex,
-			}
-		)
+		// this.props.onClickStartDrag(
+		// 	{
+		// 	index: this.props.columnIndex,
+		// 	}
+		// )
 	}
 
 	componentDidMount() {
@@ -302,7 +302,7 @@ class CityHead extends Component {
 		return (
 				
 				<div className="head">
-
+{/*
 					<div>
 						<FlagIcon 
 						className="country-flag"
@@ -311,14 +311,14 @@ class CityHead extends Component {
 						squared={false}
 						/>
 					</div>
-
+*/}
 					<h3
 					className="city-name" 
 					onClick={this.props.onClickStartDrag}
 					>
 						{this.props.name}
 					</h3>
-
+{/*
 					<Button 
 						theme={BUTTON.THEME.SECONDARY}
 						icon={faTimes}
@@ -326,7 +326,7 @@ class CityHead extends Component {
 						size={BUTTON.SIZE.SMALL}
 						onClick={this.handleClickRemove}
 					/>
-
+*/}
 				</div>
 
 			)

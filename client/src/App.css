@@ -194,15 +194,16 @@ button,
 	position: sticky;
 	top: 0;
 	width: 100%;	
+	height: var(--head-height);
+	background: #fff;
+	border-bottom: solid 4px var(--red);
 
 	display: grid;
-	grid-template-columns: 50px 1fr 50px;
 	align-items: center;
 	justify-items: center;
-	background: #fff;
-	border-bottom: solid 4px var(--grey);
-	height: var(--head-height);
-	/*padding: 0 10px;*/
+	/*grid-template-columns: 50px 1fr 50px;*/
+
+	grid-template-columns: 1fr;
 }	
 .container.container-content .item .head .city-name {
 	color: var(--darker-grey);
