@@ -29,11 +29,10 @@ class App extends Component {
 	
   render() {
     return (
-    	<div className="app">
-        <TimezoneApp testCityData={testCityData} />
-{/*       <TimezoneApp />
-*/}      
-		</div>
+      <div className="app">
+{/*        <TimezoneApp testCityData={testCityData} />
+*/}        <TimezoneApp />
+      </div>
     );
   }
 }
