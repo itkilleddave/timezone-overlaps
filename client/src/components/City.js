@@ -18,13 +18,14 @@ class City extends Component {
 	      	value: '',
 	      	suggestions: [],
       		isLoading: false,
-      		isMounting: true
+      		isMounting: true,
 
 	    };
 
 		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this)
 		this.handleClickRemove = this.handleClickRemove.bind(this)
 		this.handleClickStartDrag = this.handleClickStartDrag.bind(this)
+		this.handleClickToggleEditMode = this.handleClickToggleEditMode.bind(this)
 
 		//CityInput Event Handlers
 		// this.handleChangeCityInput = this.handleChangeCityInput.bind(this)
@@ -65,6 +66,14 @@ class City extends Component {
 		// 	index: this.props.columnIndex,
 		// 	}
 		// )
+	}
+	handleClickToggleEditMode() {
+
+		this.props.onClickToggleEditMode(
+			{
+			index: this.props.columnIndex,
+			}
+		)
 	}
 
 	componentDidMount() {
@@ -190,7 +199,7 @@ class City extends Component {
 
 				<div
 				className={"city"
-				+(this.props.collapsed ? " collapsed" : "")
+				+(this.props.editMode ? " collapsed" : "")
 				+(this.state.isMounting ? " highlighted" : "")
 				}
 				 >
@@ -202,6 +211,8 @@ class City extends Component {
 							active={ this.props.active }
 							onClickRemove={this.handleClickRemove}
 							onClickStartDrag={this.handleClickStartDrag}
+							onClickToggleEditMode={this.handleClickToggleEditMode}
+							editMode={this.props.editMode}
 					/>
 
 					<ul>{rows}</ul>
@@ -301,20 +312,30 @@ class CityHead extends Component {
 		if(this.props.name) {
 		return (
 				
-				<div className="head">
-{/*
-					<div>
+				<div 
+				className={"head"
+				+(!this.props.editMode ? " collapsed" : "")
+				+" "+this.props.className
+				}
+				>
+
+
+					<div 
+					class="country-flag-wrapper"
+					onClick={this.props.onClickToggleEditMode}
+					>
 						<FlagIcon 
 						className="country-flag"
 						code={country} 
-						size="lg" 
+						size="2x" 
 						squared={false}
 						/>
 					</div>
-*/}
+
 					<h3
 					className="city-name" 
-					onClick={this.props.onClickStartDrag}
+					//onClick={this.props.onClickStartDrag}
+					onClick={this.props.onClickToggleEditMode}
 					>
 						{this.props.name}
 					</h3>

@@ -34,8 +34,7 @@ class TimezoneApp extends Component {
 				active : false,
 				insertAtIndex : -1,
 			},
-			isDraggingCityIndex : -1,
-			isExpandedColumnGutterIndex : -1,
+			editMode: false,
 		}
 
 		// datePicker handlers
@@ -55,6 +54,7 @@ class TimezoneApp extends Component {
 		this.handleClickRemoveCity = this.handleClickRemoveCity.bind(this)
 		this.handleClickStartDragCity = this.handleClickStartDragCity.bind(this)
 		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
+		this.handleClickToggleEditModeCity = this.handleClickToggleEditModeCity.bind(this)
 
 		//columnGutter handlers
 		this.handleClickExpandColumnGutter = this.handleClickExpandColumnGutter.bind(this)
@@ -210,12 +210,20 @@ class TimezoneApp extends Component {
 
 		//console.log('startDrag', cityData)
 
-		this.setState({isDraggingCityIndex: cityData.index})
+		//this.setState({isDraggingCityIndex: cityData.index})
 		
 	}
 	handleMouseEnterCityTimeRow(position) {
 		this.setState({
 			position : position
+		})
+	}
+	handleClickToggleEditModeCity(cityData) {
+
+		const editMode = !this.state.editMode;
+
+		this.setState({
+			editMode : editMode
 		})
 	}
 
@@ -276,18 +284,11 @@ class TimezoneApp extends Component {
 
 	newColumnGutter(index) {
 
-		const expandedCol = this.state.isExpandedColumnGutterIndex;
-		const dragging = this.state.isDraggingCityIndex;
-
 		return (
 			<ColumnGutter 
 			key={'column-gutter-'+index} 
 			index={index}
-			collapsed={(
-				dragging !== -1
-				||
-				expandedCol !== -1
-				) ? false : true}
+			editMode={this.state.editMode}
 			onClickExpand={this.handleClickExpandColumnGutter}
 			onClickAdd={this.handleClickInsertCity}
 			onClickSwap={this.handleClickSwapCity}
@@ -299,19 +300,25 @@ class TimezoneApp extends Component {
 		
 		console.log(cgData)
 
-		if (this.state.isExpandedColumnGutterIndex !== -1) {
+		const editMode = !this.state.editMode;
 
-			this.setState({
-				isExpandedColumnGutterIndex : -1
-			})
+		this.setState({
+			editMode : editMode
+		})
 
-		} else {
+		// if (this.state.isExpandedColumnGutterIndex !== -1) {
 
-			this.setState({
-				isExpandedColumnGutterIndex : cgData.index
-			})
+		// 	this.setState({
+		// 		isExpandedColumnGutterIndex : -1
+		// 	})
 
-		}
+		// } else {
+
+		// 	this.setState({
+		// 		isExpandedColumnGutterIndex : cgData.index
+		// 	})
+
+		// }
 		
 	}
 	handleClickInsertCity(cgData) {
@@ -349,8 +356,6 @@ class TimezoneApp extends Component {
 
 	render() {
 
-		const dragging = this.state.isDraggingCityIndex;
-		const expandedCol = this.state.isExpandedColumnGutterIndex;
 		const cities = this.state.cities
 		const position = this.state.position
 
@@ -398,12 +403,9 @@ class TimezoneApp extends Component {
 				activeTimeRow={position.row}
 				onClickRemove={this.handleClickRemoveCity}
 				onClickStartDrag={this.handleClickStartDragCity}
+				onClickToggleEditMode={this.handleClickToggleEditModeCity}
 				update={!this.state.datePicker.active}
-				collapsed={(
-					dragging !== -1
-					||
-					expandedCol !== -1
-					) ? true : false}
+				editMode={this.state.editMode}
 				/>
 			</div>
 			)
