@@ -8,9 +8,6 @@ class ColumnGutter extends Component {
 	constructor(props) {
 
 		super(props)
-       	this.state = {
-            buttonClass: 'scale-up'
-        };
 		this.handleClickExpand = this.handleClickExpand.bind(this)
 		this.handleClickAdd = this.handleClickAdd.bind(this)
 		this.handleClickSwap = this.handleClickSwap.bind(this)
@@ -39,16 +36,11 @@ class ColumnGutter extends Component {
 			}
 		)
 	}
-	componentDidMount() {
-        this.setState({ buttonClass: '' });
-    }
 
 	render() {
 
-
-
 		const options =  (
-			this.props.collapsed
+			!this.props.editMode
 			?
 			null
 			:
@@ -59,7 +51,7 @@ class ColumnGutter extends Component {
 					shape={BUTTON.SHAPE.CIRCLE}
 					size={BUTTON.SIZE.SMALL}
 					onClick={this.handleClickAdd}
-					className={"add "+this.state.buttonClass}
+					className={"add scale-up"}
 				/>
 				<Button 
 					theme={BUTTON.THEME.SECONDARY}
@@ -67,7 +59,7 @@ class ColumnGutter extends Component {
 					shape={BUTTON.SHAPE.CIRCLE}
 					size={BUTTON.SIZE.SMALL}
 					onClick={this.handleClickSwap}
-					className={"swap "+this.state.buttonClass}
+					className={"swap scale-up"}
 				/>
 			</div>
 			)
@@ -75,19 +67,19 @@ class ColumnGutter extends Component {
 		return (
 			<div 
 			className={"column-gutter"
-			+(this.props.collapsed ? " collapsed" : "")
+			+(!this.props.editMode ? " collapsed" : "")
 			+" "+this.props.className
 			}
 			>
 				<div className="inner">
 
-					<div className="head">
+{/*					<div className="head">
 						<Button
 							icon={faEllipsisV}
 							shape={BUTTON.SHAPE.SQUARE}
 							onClick={this.handleClickExpand}
 						/>
-					</div>
+					</div>*/}
 
 					{options}
 
