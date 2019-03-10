@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Button, { BUTTON } from './Button'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPen } from '@fortawesome/free-solid-svg-icons'
 import FlagIcon from './FlagIcon'
 import tzlookup from 'tz-lookup'
 import Moment from 'react-moment';
@@ -309,6 +309,34 @@ class CityHead extends Component {
 
 		const country = this.props.country.toLowerCase();
 
+		const btnEdit = (
+			<div
+			>
+				<Button 
+				theme={BUTTON.THEME.SECONDARY}
+				icon={faPen}
+				shape={BUTTON.SHAPE.CIRCLE}
+				size={BUTTON.SIZE.SMALL}
+				onClick={this.handleClickRemove}
+				className={this.props.editMode ? "scale-up" : "hidden"}
+				/>
+			</div>
+			)
+
+		const btnRemove = (
+			<div
+			>
+				<Button 
+				theme={BUTTON.THEME.SECONDARY}
+				icon={faTimes}
+				shape={BUTTON.SHAPE.CIRCLE}
+				size={BUTTON.SIZE.SMALL}
+				onClick={this.handleClickRemove}
+				className={this.props.editMode ? "scale-up" : "hidden"}
+				/>
+			</div>
+			)
+
 		if(this.props.name) {
 		return (
 				
@@ -319,37 +347,42 @@ class CityHead extends Component {
 				}
 				>
 
+				<div className="options">
 
-					<div 
-					class="country-flag-wrapper"
-					onClick={this.props.onClickToggleEditMode}
-					>
-						<FlagIcon 
-						className="country-flag"
-						code={country} 
-						size="2x" 
-						squared={false}
-						/>
+						
+						{btnRemove}
+
+						<div 
+						class="country-flag-wrapper"
+						onClick={this.props.onClickToggleEditMode}
+						>
+							<FlagIcon 
+							className="country-flag"
+							code={country} 
+							size="2x" 
+							squared={false}
+							/>
+
+						</div>
+
+						{btnEdit}
+
 					</div>
 
-					<h3
-					className="city-name" 
-					//onClick={this.props.onClickStartDrag}
-					onClick={this.props.onClickToggleEditMode}
-					>
-						{this.props.name}
-					</h3>
-{/*
-					<Button 
-						theme={BUTTON.THEME.SECONDARY}
-						icon={faTimes}
-						shape={BUTTON.SHAPE.CIRCLE}
-						size={BUTTON.SIZE.SMALL}
-						onClick={this.handleClickRemove}
-					/>
-*/}
-				</div>
+						<h3
+						className="city-name" 
+						//onClick={this.props.onClickStartDrag}
+						onClick={this.props.onClickToggleEditMode}
+						>
+							{this.props.name}
+						</h3>
+					</div>
 
+
+
+
+/*				</div>
+*/
 			)
 		} else {
 			return (
