@@ -198,11 +198,12 @@ button,
 	border-bottom: solid 4px var(--red);
 
 	display: grid;
-	align-content: center;
+	align-items: center;
 	justify-items: center;
 	/*grid-template-columns: 50px 1fr 50px;*/
 
 	grid-template-columns: 1fr;
+	grid-template-rows: 1fr 1fr;
 }	
 .container.container-content .item .head {
 	height: calc(var(--head-height)*2);
@@ -212,7 +213,8 @@ button,
 	transition: height 0.35s;
 }
 .container.container-content .item .head > * {
-	margin: 10px 0;
+	/*margin: 10px 0;*/
+	/*height:var(--head-height);*/
 }
 .container.container-content .item .head.collapsed {
 	/*margin-top: var(--head-height);*/
@@ -555,6 +557,7 @@ button,
 	border-radius: 4px;
 	padding: 4px;
 	background: var(--grey);
+	margin-top: 20px;
 	/*position: sticky;*/
 } 
 
