@@ -24,24 +24,11 @@ class City extends Component {
 
 		this.handleMouseEnterRow = this.handleMouseEnterRow.bind(this)
 		this.handleClickRemove = this.handleClickRemove.bind(this)
+		this.handleClickEdit = this.handleClickEdit.bind(this)
 		this.handleClickStartDrag = this.handleClickStartDrag.bind(this)
 		this.handleClickToggleEditMode = this.handleClickToggleEditMode.bind(this)
 
-		//CityInput Event Handlers
-		// this.handleChangeCityInput = this.handleChangeCityInput.bind(this)
-		// this.handleSuggestionsFetchRequestedCityInput = this.handleSuggestionsFetchRequestedCityInput.bind(this)
-		// this.handleSuggestionsClearRequestedCityInput = this.handleSuggestionsClearRequestedCityInput.bind(this)
-		// this.handleKeyPressCityInput = this.handleKeyPressCityInput.bind(this)
-		// this.handleSuggestionSelectedCityInput = this.handleSuggestionSelectedCityInput.bind(this)
-
 	}
-
-	// getTransitionByName(name) {
-
-	// 	return this.transitions.filter((t) => 
-	// 		 t.event == name
-	// 	)[0]
-	// }
 
 	handleMouseEnterRow(rowIndex) {
 		this.props.onMouseEnter({
@@ -53,6 +40,15 @@ class City extends Component {
 	handleClickRemove() {
 
 		this.props.onClickRemove(
+			{
+			index: this.props.columnIndex,
+			}
+		)
+	}
+
+	handleClickEdit() {
+
+		this.props.onClickEdit(
 			{
 			index: this.props.columnIndex,
 			}
@@ -89,83 +85,14 @@ class City extends Component {
 	}
 
 	shouldComponentUpdate(nextProps,nextState) {
-		//console.log(nextProps.active)
 		return nextProps.update
-	}
-
-	componentDidUpdate(prevProps, prevState, snapshot) {
-
-
-
-		// if (this.props.lat) {
-		// 	if(
-		// 		prevProps.lat !== this.props.lat
-		// 		||
-		// 		prevProps.lon !== this.props.lon
-		// 		) {
-
-		// 		alert("Get City Timezone: "+tzlookup(this.props.lat, this.props.lon))
-		// 	}
-		// }
-
-			
 	}
 
 	render() {
 
-		//console.log('position', this.props.activeTimeRow); 
-
 		if (!this.props.name) {
 
 			return null;
-			
-// 			// new city - render options
-
-//     		const { value, suggestions } = this.state;
-
-//     		//console.log();
-
-//     		// check if CityInput value is a valid city name
-
-// 			return(
-// 				<div className={
-// 					this.props.active ? 
-// 					'city city-new active' : 
-// 					'city city-new'
-// 				}>
-// 					<h3>Add City</h3>
-// 					<CityInput
-// 						value={value}
-// 						index={this.props.columnIndex}
-// 						suggestions={suggestions}
-// 						onChange={this.handleChangeCityInput}
-// 						onKeyPress={this.handleKeyPressCityInput}
-// 						onSuggestionsFetchRequested={this.handleSuggestionsFetchRequestedCityInput}
-// 						onSuggestionsClearRequested={this.handleSuggestionsClearRequestedCityInput}
-// 						onSuggestionSelected={this.handleSuggestionSelectedCityInput}
-// 					/>
-
-// {/*
-// 					// removing button (just adds confusion to the UX)
-
-// 					{(this.isValidCityName(value)) ?
-// 					<Button
-// 						text="Add City"
-// 						onClick={this.handleClickAdd}
-// 					/>
-// 					: false}
-// */}
-
-// 					<Button 
-// 						theme="secondary"
-// 						icon={faTimes}
-// 						shape="circle"
-// 						size="small"
-// 						onClick={this.handleClickRemove}
-// 					/>
-
-// 				</div>
-// 			)
 
 		} else {
 
@@ -210,6 +137,7 @@ class City extends Component {
 							columnIndex={this.props.columnIndex} 
 							active={ this.props.active }
 							onClickRemove={this.handleClickRemove}
+							onClickEdit={this.handleClickEdit}
 							onClickStartDrag={this.handleClickStartDrag}
 							onClickToggleEditMode={this.handleClickToggleEditMode}
 							editMode={this.props.editMode}
@@ -239,10 +167,6 @@ class TimeRow extends Component {
 	}
 
 	render() {
-
-		// console.log('active', this.props.active); 
-
-		// console.log(this.props.timezone);
 
 		let className = 'row-time ';
 
@@ -285,53 +209,31 @@ class TimeRow extends Component {
 
 class CityHead extends Component {
 
-
-	constructor(props) {
-
-		super(props);
-
-		this.handleClickRemove = this.handleClickRemove.bind(this)
-
-	}
-
-	handleClickRemove() {
-
-		this.props.onClickRemove(
-			{
-			index: this.props.columnIndex,
-			}
-		)
-	}
-
 	render() {
-
-		//console.log('city', this.props)
 
 		const country = this.props.country.toLowerCase();
 
 		const btnEdit = (
-			<div
-			>
+			<div>
 				<Button 
 				theme={BUTTON.THEME.SECONDARY}
 				icon={faPen}
 				shape={BUTTON.SHAPE.CIRCLE}
 				size={BUTTON.SIZE.SMALL}
-				onClick={this.handleClickRemove}
+				onClick={this.props.onClickEdit}
 				className={this.props.editMode ? "scale-up" : "hidden"}
 				/>
 			</div>
 			)
 
 		const btnRemove = (
-			<div
-			>
+			<div>
 				<Button 
 				theme={BUTTON.THEME.SECONDARY}
 				icon={faTimes}
 				shape={BUTTON.SHAPE.CIRCLE}
 				size={BUTTON.SIZE.SMALL}
-				onClick={this.handleClickRemove}
+				onClick={this.props.onClickRemove}
 				className={this.props.editMode ? "scale-up" : "hidden"}
 				/>
 			</div>
@@ -353,7 +255,7 @@ class CityHead extends Component {
 						{btnRemove}
 
 						<div 
-						class="country-flag-wrapper"
+						className="country-flag-wrapper"
 						onClick={this.props.onClickToggleEditMode}
 						>
 							<FlagIcon 
@@ -377,13 +279,8 @@ class CityHead extends Component {
 							{this.props.name}
 						</h3>
 					</div>
-
-
-
-
-/*				</div>
-*/
 			)
+
 		} else {
 			return (
 			<div className={this.props.active ? 'city active' : 'city'}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Button, { BUTTON } from './Button'
-import { faEllipsisV, faPlus, faArrowsAltH } from '@fortawesome/free-solid-svg-icons'
+import { /*faEllipsisV,*/ faPlus, faArrowsAltH } from '@fortawesome/free-solid-svg-icons'
 
 
 class ColumnGutter extends Component {

@@ -33,6 +33,7 @@ class TimezoneApp extends Component {
 			cityPicker : {
 				active : false,
 				insertAtIndex : -1,
+				editIndex : -1,
 			},
 			editMode: false,
 		}
@@ -52,6 +53,7 @@ class TimezoneApp extends Component {
 
 		//city handlers
 		this.handleClickRemoveCity = this.handleClickRemoveCity.bind(this)
+		this.handleClickEditCity = this.handleClickEditCity.bind(this)
 		this.handleClickStartDragCity = this.handleClickStartDragCity.bind(this)
 		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
 		this.handleClickToggleEditModeCity = this.handleClickToggleEditModeCity.bind(this)
@@ -152,10 +154,12 @@ class TimezoneApp extends Component {
 
 		const cp = {...this.state.cityPicker, 
 			active:false, 
-			insertAtIndex : -1
+			insertAtIndex : -1,
+			editIndex : -1
 		}
 
-		const ii = this.state.cityPicker.insertAtIndex;
+		const ii = this.state.cityPicker.insertAtIndex
+		const ei = this.state.cityPicker.editIndex
 
 		let c = this.state.cities.concat()
 
@@ -168,24 +172,36 @@ class TimezoneApp extends Component {
 		    }
 		}
 
-		if(!found) { // no duplicates (breaks key logic)
+		if(found) { // no duplicates (breaks key logic)
 
-			if (ii === -1) {
-				c.push(cityData.props)
+			this.setState({
+				cityPicker: cp,
+			})
+
+		} else {
+
+			if (ei >= 0) {
+
+				// edit 
+
+				c[ei] = cityData.props
+
 			} else {
-				c.splice(ii, 0, cityData.props)
+
+				// insert / add
+
+				if (ii === -1) {
+					c.push(cityData.props)
+				} else {
+					c.splice(ii, 0, cityData.props)
+				}
+
 			}
 
 			const cities = c.concat()
 
 			this.setState({
 				cities: cities,
-				cityPicker: cp,
-			})
-
-		} else {
-
-			this.setState({
 				cityPicker: cp,
 			})
 		}
@@ -200,11 +216,17 @@ class TimezoneApp extends Component {
 
 		cities.splice(cityData.index, 1)
 
-		// if(!cities.length) {
-		// 	cities[0] = getEmptyCity();
-		// }
-
 		this.setState({cities: cities})
+	}
+	handleClickEditCity(cityData) {
+
+		const cityPicker = {...this.state.cityPicker, 
+			active : true,
+			editIndex : cityData.index
+		}
+
+		this.setState({cityPicker: cityPicker})
+
 	}
 	handleClickStartDragCity(cityData) {
 
@@ -265,8 +287,6 @@ class TimezoneApp extends Component {
 	}
 	componentDidUpdate(prevProps, prevState, snapshot) {
 
-		console.log(this.state.cities.length)
-
 		this.stabliliseFragileState()
 
 		if(this.state.cities.length > prevState.cities.length) {
@@ -298,8 +318,6 @@ class TimezoneApp extends Component {
 	}
 	handleClickExpandColumnGutter(cgData) {
 		
-		console.log(cgData)
-
 		const editMode = !this.state.editMode;
 
 		this.setState({
@@ -323,8 +341,6 @@ class TimezoneApp extends Component {
 	}
 	handleClickInsertCity(cgData) {
 		
-		//console.log('cgData', cgData);
-
 		const cp = {...this.state.cityPicker, 
 			active : true, 
 			insertAtIndex : cgData.index
@@ -385,8 +401,6 @@ class TimezoneApp extends Component {
 
 		}
 
-		console.log('cc', cities)
-
 		const columns = cities.map((city, index) => (
 			<div 
 			className={'item '+(!city.name ? 'new' : 'set')} 
@@ -402,6 +416,7 @@ class TimezoneApp extends Component {
 				active={ (index===position.column) ? true : false }
 				activeTimeRow={position.row}
 				onClickRemove={this.handleClickRemoveCity}
+				onClickEdit={this.handleClickEditCity}
 				onClickStartDrag={this.handleClickStartDragCity}
 				onClickToggleEditMode={this.handleClickToggleEditModeCity}
 				update={!this.state.datePicker.active}
