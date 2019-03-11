@@ -319,8 +319,8 @@ button,
 }
 .column-gutter .head .btn.active,
 .column-gutter .head .btn:hover {
-	color: var(--red);
-	background: none;
+/*	color: var(--red);
+	background: none;*/
 }
 .column-gutter .options {
 	display: grid;
@@ -468,14 +468,14 @@ button,
 
 }
 .btn-primary:hover {
-	background: var(--light-primary);
+	/*background: var(--light-primary);*/
 }
 .btn-secondary {
 	background: var(--light-grey);
 	color: var(--darker-grey);
 }
 .btn-secondary:hover {
-	background: var(--grey);
+	/*background: var(--grey);*/
 }
 .btn-secondary.active {
 	background: var(--primary);
@@ -572,7 +572,6 @@ button,
 .rc-slider .rc-slider-handle {
 	border-color: var(--primary);
 }
-.rc-slider .rc-slider-handle:hover,
 .rc-slider .rc-slider-handle:focus,
 .rc-slider .rc-slider-handle:active {
 	border-color: var(--primary);
@@ -693,20 +692,21 @@ button,
 
 /* remove hover states for touch */
 
-@media (hover: none) {
+@media (hover: hover) {
 
 	.btn-primary:hover {
-		background: inherit;
+		background: var(--light-primary);
 	}
 	.btn-secondary:hover {
-		background: inherit;
+		background: var(--grey);
 	}
 	.column-gutter .head .btn:hover {
-		color: inherit;
-		background: inherit;
+		color: var(--red);
+		background: none;
 	}
 	.rc-slider .rc-slider-handle:hover {
-		border-color: inherit;
+		border-color: var(--primary);
+		box-shadow: none;
 	}
 }
 
