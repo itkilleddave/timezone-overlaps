@@ -97,7 +97,7 @@ button,
 	max-width: 300px;*/
 }
 .city-picker .react-autosuggest__input::placeholder {
-	font-size: smaller;
+	font-size: 0.8em;
 }
 .city-picker.character-count-0 .react-autosuggest__input,
 .city-picker.character-count-1 .react-autosuggest__input,
@@ -691,4 +691,22 @@ button,
 	}
 }
 
+/* remove hover states for touch */
+
+@media (hover: none) {
+
+	.btn-primary:hover {
+		background: inherit;
+	}
+	.btn-secondary:hover {
+		background: inherit;
+	}
+	.column-gutter .head .btn:hover {
+		color: inherit;
+		background: inherit;
+	}
+	.rc-slider .rc-slider-handle:hover {
+		border-color: inherit;
+	}
+}
 
