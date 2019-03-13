@@ -6,6 +6,7 @@
 	--col-gutter-width-collapsed: 20px;
 	/*--col-width-max: 360px;*/
 	--head-height: 60px;
+	--nav-bar-height: 50px;
 	--cols-per-view: 2;
 	--col-gutters-per-view: 3;
 
@@ -81,7 +82,7 @@ button,
 	/*padding-bottom: 20px;*/
 	border-radius: 0;
 	border: none;
-	border-bottom: solid 4px var(--red);
+	border-bottom: solid 4px var(--primary);
 	text-align: center;
 	/*width: calc(100vw - 80px);*/
 	width: 80vw;
@@ -174,6 +175,15 @@ button,
 
 /* TimezoneApp */
 
+.timezone-app {
+/*	display: grid;
+	grid-template-columns: 1fr;
+	width: 100%;*/
+
+}
+.wrapper-content {
+	padding-top: var(--nav-bar-height);
+}
 .container {
 	display: grid;
 
@@ -191,8 +201,15 @@ button,
 	grid-template-rows: 1fr;
 
 }
+.container.container-nav-bar {
+	height: var(--nav-bar-height);
+	width: 100%;
+	position: fixed;
+	background: var(--primary);
+	z-index: 1;
+}
 .container.container-content .item .head.collapsed {
-	top: calc(var(--head-height)*(-1));
+	top: calc(var(--nav-bar-height) - var(--head-height));
 	padding-top: 0;
 	margin-top: 20px;
 }
@@ -200,10 +217,10 @@ button,
 
 	position: -webkit-sticky;
 	position: sticky;
-	top: 0;
+	top: var(--nav-bar-height);
 	width: 100%;	
 	background: #fff;
-	border-bottom: solid 4px var(--red);
+	border-bottom: solid 4px var(--primary);
 
 	display: grid;
 	grid-template-columns: 1fr;
@@ -376,7 +393,7 @@ button,
 .city ul li:nth-child(even) {
 	/*background: #f0f4f7;*/
 }
-.city.city-new  {
+/*.city.city-new  {
 	display: grid;
 	justify-items: center;
 	position: -webkit-sticky;
@@ -388,7 +405,7 @@ button,
 }
 .city.city-new > * {
 	margin-bottom: 20px;
-}
+}*/
 .row-time {
 	display: grid;
 	grid-template-columns: 1fr;

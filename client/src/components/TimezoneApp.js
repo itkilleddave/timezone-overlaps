@@ -4,7 +4,14 @@ import DatePicker from './DatePicker'
 import CityPicker from './CityPicker'
 import ColumnGutter from './ColumnGutter'
 import Button, { BUTTON } from './Button'
-import { faEllipsisV, faPen, faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { 
+faEllipsisV,
+faPen, 
+faPlus, 
+faCalendar, 
+faDollarSign,
+faClock,
+} from '@fortawesome/free-solid-svg-icons'
 
 // function getEmptyCity() {
 // 	return {
@@ -475,59 +482,77 @@ class TimezoneApp extends Component {
 
 				{cityPicker}
 
-				<div className="container container-content">
-					{content}
+				<div className="container container-nav-bar">
+{/*				
+					<Button 
+						theme={BUTTON.THEME.TERTIARY}
+						icon={faDollarSign}
+						shape={BUTTON.SHAPE.CIRCLE}
+						size={BUTTON.SIZE.SMALL}
+					/>
+					<Button 
+						theme={BUTTON.THEME.TERTIARY}
+						icon={faClock}
+						shape={BUTTON.SHAPE.CIRCLE}
+						size={BUTTON.SIZE.SMALL}
+					/>
+*/}
 				</div>
 
+				<div className="wrapper-content">
 
+					<div className="container container-content">
+						{content}
+					</div>
 
-				{ 	// quick menu
+					{ 	// quick menu
 
-					<div> 
-					<div className={"btn-bottom-left "+ 
-					(qm ? "from-v0 to-v2" : "from-v2 to-v0")}
-					>
+						<div> 
+						<div className={"btn-bottom-left "+ 
+						(qm ? "from-v0 to-v2" : "from-v2 to-v0")}
+						>
+							<Button 
+							theme={BUTTON.THEME.TERTIARY}
+							icon={faCalendar}
+							shape={BUTTON.SHAPE.CIRCLE}
+							onClick={this.handleClickChangeDate} 
+							/>
+						</div>
+						 
+						<div className={"btn-bottom-left "+ 
+						(qm ? "from-v0 to-v1" : "from-v1 to-v0")}
+						>
+							<Button 
+							theme={BUTTON.THEME.TERTIARY}
+							icon={faPen}
+							shape={BUTTON.SHAPE.CIRCLE}
+							onClick={this.handleClickToggleEditModeCity}
+							active={this.state.editMode}
+							/>
+						</div>
+						</div>
+					}
+
+					<div className="btn-bottom-left">
 						<Button 
-						theme={BUTTON.THEME.TERTIARY}
-						icon={faCalendar}
+						icon={faEllipsisV}
 						shape={BUTTON.SHAPE.CIRCLE}
-						onClick={this.handleClickChangeDate} 
+						onClick={this.handleClickQuickMenu} 
 						/>
 					</div>
-					 
-					<div className={"btn-bottom-left "+ 
-					(qm ? "from-v0 to-v1" : "from-v1 to-v0")}
-					>
+					<div className="btn-bottom-right">
 						<Button 
-						theme={BUTTON.THEME.TERTIARY}
-						icon={faPen}
+						icon={faPlus}
 						shape={BUTTON.SHAPE.CIRCLE}
-						onClick={this.handleClickToggleEditModeCity}
-						active={this.state.editMode}
+						onClick={this.handleClickOpenCityPicker}
+						pulse={
+							(!cities.length)
+							||
+							(cities.length===1 && cities[0].name !== '')
+							? true : false}
+						//pulse={ cities.length ? true : false} 
 						/>
 					</div>
-					</div>
-				}
-
-				<div className="btn-bottom-left">
-					<Button 
-					icon={faEllipsisV}
-					shape={BUTTON.SHAPE.CIRCLE}
-					onClick={this.handleClickQuickMenu} 
-					/>
-				</div>
-				<div className="btn-bottom-right">
-					<Button 
-					icon={faPlus}
-					shape={BUTTON.SHAPE.CIRCLE}
-					onClick={this.handleClickOpenCityPicker}
-					pulse={
-						(!cities.length)
-						||
-						(cities.length===1 && cities[0].name !== '')
-						? true : false}
-					//pulse={ cities.length ? true : false} 
-					/>
 				</div>
 			</div>
 
