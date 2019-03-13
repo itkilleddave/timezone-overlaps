@@ -467,19 +467,21 @@ button,
 	color: white;
 
 }
-.btn-primary:hover {
-	/*background: var(--light-primary);*/
-}
 .btn-secondary {
 	background: var(--light-grey);
 	color: var(--darker-grey);
 }
-.btn-secondary:hover {
-	/*background: var(--grey);*/
-}
 .btn-secondary.active {
 	background: var(--primary);
 	color: white;
+}
+.btn-tertiary {
+	background: var(--light-grey);
+	color: var(--darker-grey);
+}
+.btn-tertiary.active {
+	color: var(--primary);
+	background: var(--light-grey);
 }
 .btn-bottom-left {
 	position: fixed;
@@ -623,6 +625,50 @@ button,
     transform: scale(1);
   }
 }
+.from-v0 {
+	transform: scale(0.8);
+	bottom: 20px;
+	/*webkit-transition: bottom 0.35s; 
+	transition: bottom 0.35s;*/
+}
+.from-v1 {
+  	transform: scale(1);
+	bottom: 80px;
+}
+.from-v2 {
+  	transform: scale(1);
+	bottom: 140px;
+}
+.to-v0 {
+	animation: to-v0 .35s forwards;
+	animation-iteration-count:1;
+}
+.to-v1 {
+	animation: to-v1 .35s forwards;
+	animation-iteration-count:1;
+}
+.to-v2 {
+	animation: to-v2 .35s forwards;
+	animation-iteration-count:1;
+}
+@keyframes to-v0 {
+  100% {
+  	transform: scale(0.8);
+    bottom: 20px;
+  }
+}
+@keyframes to-v1 {
+  100% {
+  	transform: scale(1);
+    bottom: 80px;
+  }
+}
+@keyframes to-v2 {
+  100% {
+  	transform: scale(1);
+    bottom: 140px;
+  }
+}
 
 .loop {
   animation-iteration-count:infinite;
@@ -699,6 +745,15 @@ button,
 	}
 	.btn-secondary:hover {
 		background: var(--grey);
+	}
+	.btn-secondary.active:hover {
+		background: var(--primary);
+	}
+	.btn-tertiary:hover {
+		background: var(--grey);
+	}
+	.btn-tertiary.active:hover {
+		color: var(--primary);
 	}
 	.column-gutter .head .btn:hover {
 		color: var(--red);

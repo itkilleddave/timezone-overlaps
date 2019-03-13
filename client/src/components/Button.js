@@ -5,6 +5,7 @@ const BUTTON = {
 	THEME : {
 		PRIMARY : 'primary',
 		SECONDARY : 'secondary',
+		TERTIARY : 'tertiary',
 	},
 	SHAPE : {
 		DEFAULT : 'rectangle',

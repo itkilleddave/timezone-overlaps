@@ -4,7 +4,7 @@ import DatePicker from './DatePicker'
 import CityPicker from './CityPicker'
 import ColumnGutter from './ColumnGutter'
 import Button, { BUTTON } from './Button'
-import { faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisV, faPen, faPlus, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 // function getEmptyCity() {
 // 	return {
@@ -35,6 +35,9 @@ class TimezoneApp extends Component {
 				insertAtIndex : -1,
 				editIndex : -1,
 			},
+			quickMenu : {
+				active : false,
+			},
 			editMode: false,
 		}
 
@@ -46,19 +49,22 @@ class TimezoneApp extends Component {
 		this.handleClickSetYear = this.handleClickSetYear.bind(this)
 		this.handleClickToday = this.handleClickToday.bind(this)
 
-		//cityPicker handlers
+		// cityPicker handlers
 		this.handleClickCloseCityPicker = this.handleClickCloseCityPicker.bind(this)
 		this.handleClickOpenCityPicker = this.handleClickOpenCityPicker.bind(this)
 		this.handleClickAddCity = this.handleClickAddCity.bind(this)
 
-		//city handlers
+		// quickMenu handlers
+		this.handleClickQuickMenu = this.handleClickQuickMenu.bind(this)
+
+		// city handlers
 		this.handleClickRemoveCity = this.handleClickRemoveCity.bind(this)
 		this.handleClickEditCity = this.handleClickEditCity.bind(this)
 		this.handleClickStartDragCity = this.handleClickStartDragCity.bind(this)
 		this.handleMouseEnterCityTimeRow = this.handleMouseEnterCityTimeRow.bind(this)
 		this.handleClickToggleEditModeCity = this.handleClickToggleEditModeCity.bind(this)
 
-		//columnGutter handlers
+		// columnGutter handlers
 		this.handleClickExpandColumnGutter = this.handleClickExpandColumnGutter.bind(this)
 		this.handleClickSwapCity = this.handleClickSwapCity.bind(this)
 		this.handleClickInsertCity = this.handleClickInsertCity.bind(this)
@@ -67,6 +73,16 @@ class TimezoneApp extends Component {
 
 	/* date picker functions */
 
+
+	handleClickQuickMenu() {
+		
+		//console.log('handleClickQuickMenu', this.state.quickMenu.active);
+
+		const qm = {...this.state.quickMenu, active:!this.state.quickMenu.active}
+
+		this.setState({quickMenu: qm})
+
+	}
 	handleClickChangeDate() {
 		
 		const dp = {...this.state.datePicker, active:true}
@@ -244,8 +260,13 @@ class TimezoneApp extends Component {
 
 		const editMode = !this.state.editMode;
 
+		//force qm to open if in edit mode (so user can see the edit button)
+
+		//const qm = {...this.state.quickMenu, active:editMode}
+
 		this.setState({
-			editMode : editMode
+			editMode : editMode,
+			//quickMenu : qm,
 		})
 	}
 
@@ -445,7 +466,7 @@ class TimezoneApp extends Component {
 
 		const content = arr.concat();
 
-
+		const qm = this.state.quickMenu.active;
 
 		return (
 			<div className="timezone-app">
@@ -457,11 +478,42 @@ class TimezoneApp extends Component {
 				<div className="container container-content">
 					{content}
 				</div>
+
+
+
+				{ 	// quick menu
+
+					<div> 
+					<div className={"btn-bottom-left "+ 
+					(qm ? "from-v0 to-v2" : "from-v2 to-v0")}
+					>
+						<Button 
+						theme={BUTTON.THEME.TERTIARY}
+						icon={faCalendar}
+						shape={BUTTON.SHAPE.CIRCLE}
+						onClick={this.handleClickChangeDate} 
+						/>
+					</div>
+					 
+					<div className={"btn-bottom-left "+ 
+					(qm ? "from-v0 to-v1" : "from-v1 to-v0")}
+					>
+						<Button 
+						theme={BUTTON.THEME.TERTIARY}
+						icon={faPen}
+						shape={BUTTON.SHAPE.CIRCLE}
+						onClick={this.handleClickToggleEditModeCity}
+						active={this.state.editMode}
+						/>
+					</div>
+					</div>
+				}
+
 				<div className="btn-bottom-left">
 					<Button 
-					icon={faCalendar}
+					icon={faEllipsisV}
 					shape={BUTTON.SHAPE.CIRCLE}
-					onClick={this.handleClickChangeDate} 
+					onClick={this.handleClickQuickMenu} 
 					/>
 				</div>
 				<div className="btn-bottom-right">
