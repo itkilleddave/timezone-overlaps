@@ -4,6 +4,7 @@ import DatePicker from './DatePicker'
 import CityPicker from './CityPicker'
 import ColumnGutter from './ColumnGutter'
 import Button, { BUTTON } from './Button'
+import NavBar from './NavBar'
 import { 
 faEllipsisV,
 faPen, 
@@ -483,20 +484,9 @@ class TimezoneApp extends Component {
 				{cityPicker}
 
 				<div className="container container-nav-bar">
-{/*				
-					<Button 
-						theme={BUTTON.THEME.TERTIARY}
-						icon={faDollarSign}
-						shape={BUTTON.SHAPE.CIRCLE}
-						size={BUTTON.SIZE.SMALL}
-					/>
-					<Button 
-						theme={BUTTON.THEME.TERTIARY}
-						icon={faClock}
-						shape={BUTTON.SHAPE.CIRCLE}
-						size={BUTTON.SIZE.SMALL}
-					/>
-*/}
+
+					<NavBar />
+
 				</div>
 
 				<div className="wrapper-content">
