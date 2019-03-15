@@ -5,18 +5,18 @@ import { faInfinity, faDollarSign, faClock } from '@fortawesome/free-solid-svg-i
 
 class NavBar extends Component {
 
+	// constructor(props) {
+	// 	super(props)
+
+	// 	this.handleClickNav = this.handleClickNav.bind(this)
+	// }
+
 	render() {
 
+		const items = this.props.items
+
 		return (
-/*
-				<ul className="nav-bar">
-					<li className="logo">
-						LOGO
-					</li>
-					<li>Currency</li>
-					<li>Time</li>
-				</ul>
-*/
+	
 				<div className="nav-bar">
 					
 					<div
@@ -26,18 +26,21 @@ class NavBar extends Component {
 					/>
 					</div>
 
-					<Button 
+					{items.map((item, index) => (
+
+						<Button 
+						key={item.name}
+						id={index}
 						theme={BUTTON.THEME.TERTIARY}
-						icon={faDollarSign}
+						icon={item.icon}
 						shape={BUTTON.SHAPE.CIRCLE}
 						size={BUTTON.SIZE.SMALL}
-					/>
-					<Button 
-						theme={BUTTON.THEME.TERTIARY}
-						icon={faClock}
-						shape={BUTTON.SHAPE.CIRCLE}
-						size={BUTTON.SIZE.SMALL}
-					/>
+						onClick={this.props.onClickNav}
+						active={item.active}
+						/>
+
+						)
+					)}
 
 				</div>
 

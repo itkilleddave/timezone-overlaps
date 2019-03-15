@@ -23,6 +23,13 @@ faClock,
 // 			}
 // }
 
+const APP = {
+	MODE : {
+		TIME : "time",
+		CURRENCY : "currency",
+	}
+}
+
 class TimezoneApp extends Component {
 
 	constructor(props) {
@@ -46,8 +53,27 @@ class TimezoneApp extends Component {
 			quickMenu : {
 				active : false,
 			},
+			mainMenu : {
+				items : [
+					{
+					name : APP.MODE.CURRENCY,
+					label : null,
+					icon : faDollarSign,
+					active : false,
+					},
+					{
+					name : APP.MODE.TIME,
+					label : null,
+					icon : faClock,
+					active : true,
+					},
+				]
+			},
 			editMode: false,
 		}
+
+		// nav bar functions
+		this.handleClickNav = this.handleClickNav.bind(this)
 
 		// datePicker handlers
 		this.handleClickChangeDate = this.handleClickChangeDate.bind(this)
@@ -76,6 +102,52 @@ class TimezoneApp extends Component {
 		this.handleClickExpandColumnGutter = this.handleClickExpandColumnGutter.bind(this)
 		this.handleClickSwapCity = this.handleClickSwapCity.bind(this)
 		this.handleClickInsertCity = this.handleClickInsertCity.bind(this)
+
+
+	}
+
+	/* nav bar functions */
+
+	handleClickNav(data) {
+
+		const appMode = this.state.mainMenu.items[data.id].name
+
+		const items = this.state.mainMenu.items
+
+		for (var i = 0; i < items.length; i++) {
+
+			// reset all 
+
+			items[i].active = false
+
+			//set selected
+
+			if (i === data.id) {
+
+				// console.log(items[i].name)
+
+				items[i].active = true
+			}
+		}
+
+		const mainMenu = {...this.state.mainMenu, items : items}
+
+		this.setState({
+			mainMenu : mainMenu
+		})
+
+	}
+
+	getAppMode() {
+
+		const items = this.state.mainMenu.items
+
+		for (var i = 0; i < items.length; i++) {
+			if (items[i].active) {
+				console.log(items[i].name)
+				return items[i].name
+			}
+		}
 
 	}
 
@@ -450,6 +522,7 @@ class TimezoneApp extends Component {
 				onClickToggleEditMode={this.handleClickToggleEditModeCity}
 				update={!this.state.datePicker.active}
 				editMode={this.state.editMode}
+				appMode={this.getAppMode()}
 				/>
 			</div>
 			)
@@ -485,7 +558,10 @@ class TimezoneApp extends Component {
 
 				<div className="container container-nav-bar">
 
-					<NavBar />
+					<NavBar 
+						onClickNav={this.handleClickNav}
+						items={this.state.mainMenu.items}
+					/>
 
 				</div>
 
@@ -554,3 +630,5 @@ class TimezoneApp extends Component {
 
 
 export default TimezoneApp
+
+export {APP}

@@ -25,7 +25,7 @@ class Button extends Component {
 	}
 
 	handleClick() {
-		this.props.onClick()
+		this.props.onClick({id: this.props.id})
 	}
 
 	render() {

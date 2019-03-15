@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Button, { BUTTON } from './Button'
+import {APP} from './TimezoneApp'
 import { faTimes, faPen } from '@fortawesome/free-solid-svg-icons'
 import FlagIcon from './FlagIcon'
 import tzlookup from 'tz-lookup'
@@ -90,62 +91,83 @@ class City extends Component {
 
 	render() {
 
+
 		if (!this.props.name) {
 
 			return null;
 
 		} else {
 
-			// city - render content (time rows)
+			const appMode = this.props.appMode;
 
-			const activeTimeRow = this.props.activeTimeRow
-			const baseDateTime = this.props.dateTime
-			
-    		const timezone = tzlookup(this.props.lat, this.props.lon)
-
-			let rows = [];
-
-			for (let i = 0; i < 24; i++) {
-				rows.push(
-					<li key={i} >
-						<TimeRow 
-						rowIndex={i}
-						// onMouseEnter={this.handleMouseEnterRow} //removing this, it doesnt do anything useful, and just adds unnessesary re-rendering
-						beforeActive={ (i===activeTimeRow-1) ? true : false }
-						active={ (i===activeTimeRow) ? true : false }
-						afterActive={ (i===activeTimeRow+1) ? true : false }
-						baseDateTime={baseDateTime}
-						timezone={timezone}
-						/>
-					</li>
-					)
-			}
-
-
-			return (
-
-				<div
-				className={"city"
+			const wrapperClassName = "city"
 				+(this.props.editMode ? " collapsed" : "")
 				+(this.state.isMounting ? " highlighted" : "")
-				}
-				 >
-					
-					<CityHead 
-							name={this.props.name} 
-							country={this.props.country} 
-							columnIndex={this.props.columnIndex} 
-							active={ this.props.active }
-							onClickRemove={this.handleClickRemove}
-							onClickEdit={this.handleClickEdit}
-							onClickStartDrag={this.handleClickStartDrag}
-							onClickToggleEditMode={this.handleClickToggleEditMode}
-							editMode={this.props.editMode}
-					/>
+				
 
-					<ul>{rows}</ul>
-				</div>
-			)
+			const cityHead = <CityHead 
+				name={this.props.name} 
+				country={this.props.country} 
+				columnIndex={this.props.columnIndex} 
+				active={ this.props.active }
+				onClickRemove={this.handleClickRemove}
+				onClickEdit={this.handleClickEdit}
+				onClickStartDrag={this.handleClickStartDrag}
+				onClickToggleEditMode={this.handleClickToggleEditMode}
+				editMode={this.props.editMode}
+			/>
+
+
+			if (appMode == APP.MODE.TIME) {
+
+				const activeTimeRow = this.props.activeTimeRow
+				const baseDateTime = this.props.dateTime
+				
+	    		const timezone = tzlookup(this.props.lat, this.props.lon)
+
+				let rows = [];
+
+				for (let i = 0; i < 24; i++) {
+					rows.push(
+						<li key={i} >
+							<TimeRow 
+							rowIndex={i}
+							// onMouseEnter={this.handleMouseEnterRow} //removing this, it doesnt do anything useful, and just adds unnessesary re-rendering
+							beforeActive={ (i===activeTimeRow-1) ? true : false }
+							active={ (i===activeTimeRow) ? true : false }
+							afterActive={ (i===activeTimeRow+1) ? true : false }
+							baseDateTime={baseDateTime}
+							timezone={timezone}
+							/>
+						</li>
+						)
+				}
+
+				return (
+
+					<div className={wrapperClassName}>
+
+						{cityHead}
+
+						<ul>{rows}</ul>
+						
+					</div>
+				)
+
+			} else if (appMode == APP.MODE.CURRENCY) {
+
+				return (
+
+					<div className={wrapperClassName}>
+
+						{cityHead}
+						
+					</div>
+				)
+
+
+			}
+
 
 		}
 	}
