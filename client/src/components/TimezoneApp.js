@@ -10,6 +10,7 @@ faEllipsisV,
 faPen, 
 faPlus, 
 faCalendar, 
+faComment,
 faDollarSign,
 faClock,
 } from '@fortawesome/free-solid-svg-icons'
@@ -27,6 +28,7 @@ const APP = {
 	MODE : {
 		TIME : "time",
 		CURRENCY : "currency",
+		LANGUAGE : "language",
 	}
 }
 
@@ -55,6 +57,12 @@ class TimezoneApp extends Component {
 			},
 			mainMenu : {
 				items : [
+					{
+					name : APP.MODE.LANGUAGE,
+					label : null,
+					icon : faComment,
+					active : false,
+					},
 					{
 					name : APP.MODE.CURRENCY,
 					label : null,
@@ -110,8 +118,6 @@ class TimezoneApp extends Component {
 
 	handleClickNav(data) {
 
-		const appMode = this.state.mainMenu.items[data.id].name
-
 		const items = this.state.mainMenu.items
 
 		for (var i = 0; i < items.length; i++) {
@@ -144,7 +150,6 @@ class TimezoneApp extends Component {
 
 		for (var i = 0; i < items.length; i++) {
 			if (items[i].active) {
-				console.log(items[i].name)
 				return items[i].name
 			}
 		}

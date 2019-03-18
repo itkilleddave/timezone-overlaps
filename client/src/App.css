@@ -70,6 +70,13 @@ button,
 }
 .city-picker {
 }
+.dev-comment {
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--dark-grey);
+	font-family: 'Khula', sans-serif;
+	margin-top: 10px;
+}
 /*.react-autosuggest__container*/
 .city-picker .react-autosuggest__input {
 

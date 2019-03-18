@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Button, { BUTTON } from './Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfinity, faDollarSign, faClock } from '@fortawesome/free-solid-svg-icons'
+import { faInfinity } from '@fortawesome/free-solid-svg-icons'
 
 class NavBar extends Component {
 

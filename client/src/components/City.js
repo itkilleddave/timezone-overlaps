@@ -118,7 +118,7 @@ class City extends Component {
 			/>
 
 
-			if (appMode == APP.MODE.TIME) {
+			if (appMode === APP.MODE.TIME) {
 
 				const activeTimeRow = this.props.activeTimeRow
 				const baseDateTime = this.props.dateTime
@@ -154,13 +154,31 @@ class City extends Component {
 					</div>
 				)
 
-			} else if (appMode == APP.MODE.CURRENCY) {
+			} else if (appMode === APP.MODE.CURRENCY) {
 
 				return (
 
 					<div className={wrapperClassName}>
 
 						{cityHead}
+						
+					</div>
+				)
+
+
+			} else if (appMode === APP.MODE.LANGUAGE) {
+
+				return (
+
+					<div className={wrapperClassName}>
+
+						{cityHead}
+
+						<div
+						className="dev-comment"
+						>
+						Language (WIP)
+						</div>
 						
 					</div>
 				)
