@@ -683,6 +683,9 @@ button,
 
 /* default state (not loading) */
 
+.city-input .pre-loader {
+	display: none;
+}
 .city-input .pre-loader .pre-loader-bar {
 	height: 1px;
 }
@@ -697,6 +700,9 @@ button,
 
 /* is-loading state */
 
+.city-input.is-loading .pre-loader {
+	display: block;
+}
 .city-input.is-loading .pre-loader .pre-loader-bar {
 	height: 4px;
 }
@@ -717,6 +723,31 @@ button,
     left: 0;
   }
 }
+
+/*
+@keyframes anim-is-loading-2 {
+  0% {
+  	width:10%;
+    left: 0;
+  }
+  25% {
+  	width: 100%;
+    left: 0;
+  }
+  50% {
+  	width: 10%;
+    left: 90%;
+  }
+  75% {
+  	width: 100%;
+    left: 0;
+  }
+  100% {
+  	width:10%;
+    left: 0;
+  }
+}
+*/
 
 /* other animations */
 

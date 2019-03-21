@@ -111,15 +111,9 @@ class CityInput extends Component {
       //onKeyUp: () => {console.log("hello")}
     }
 
-    //const preloaderClass =  suggestions.length ? "" : (
-    const preloaderClass =  !this.props.isLoading ? "" : (
-    //const preloaderClass =  1===2 ? "" : (
-      "is-loading"
-    )
-    
     // Finally, render it!
     return (
-      <div className={"city-input "+preloaderClass}>
+      <div className={"city-input "+(this.props.isLoading ? "is-loading" : "")}>
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
