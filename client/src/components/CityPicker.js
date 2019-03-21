@@ -165,6 +165,8 @@ class CityPicker extends Component {
 
 	render() {
 
+
+
     	const { value, suggestions } = this.state;
 
 		return (
@@ -183,6 +185,7 @@ class CityPicker extends Component {
 						onSuggestionsFetchRequested={this.handleSuggestionsFetchRequestedCityInput}
 						onSuggestionsClearRequested={this.handleSuggestionsClearRequestedCityInput}
 						onSuggestionSelected={this.handleSuggestionSelectedCityInput}
+						isLoading={this.state.isLoading}
 					/>
 
 					<div className="btn-bottom-right">

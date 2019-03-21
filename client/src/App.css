@@ -78,6 +78,9 @@ button,
 	margin-top: 10px;
 }
 /*.react-autosuggest__container*/
+.city-picker .city-input {
+
+}
 .city-picker .react-autosuggest__input {
 
 	font-size: 8vw;
@@ -90,7 +93,7 @@ button,
 	/*padding-bottom: 20px;*/
 	border-radius: 0;
 	border: none;
-	border-bottom: solid 4px var(--primary);
+	/*border-bottom: solid 4px var(--primary);*/
 	text-align: center;
 	/*width: calc(100vw - 80px);*/
 	width: 80vw;
@@ -138,11 +141,18 @@ button,
 	max-height: 210px;
 	overflow-y: scroll;
 	border: none;
-	border-bottom: solid 1px var(--grey);
+	/*border-bottom: solid 1px var(--grey);*/
 
+}
+.city-input .react-autosuggest__suggestions-container {
+	border-top: solid 4px var(--red);
+}
+.city-input.is-loading .react-autosuggest__suggestions-container {
+	border-top: none;
 }
 .react-autosuggest__suggestions-list {
 	list-style: none;
+	/*border-top: solid 4px var(--red);*/
 
 }
 .react-autosuggest__suggestion {
@@ -177,6 +187,7 @@ button,
 	background: var(--light-grey);
 
 }
+
 .app {
   padding: 0;
 }
@@ -651,7 +662,64 @@ button,
 	/*position: sticky;*/
 } 
 
-/* animations */
+/* pre-loader */
+
+.pre-loader {
+	position: relative;
+	width: 100%;
+}
+.pre-loader-bar {
+	position: relative;
+	width: 100%;
+	background: var(--grey);
+}
+.pre-loader-handle {
+	height: inherit;
+	position: absolute;
+	background: var(--red);
+	top:0;
+	left:0;
+}
+
+/* default state (not loading) */
+
+.city-input .pre-loader .pre-loader-bar {
+	height: 1px;
+}
+.city-input .pre-loader .pre-loader-bar .pre-loader-handle {
+	width: 100%;
+	-webkit-transition: width 0.35s; /* Safari */
+	transition: width 0.35s;
+	display: none;
+	animation: none;
+
+}
+
+/* is-loading state */
+
+.city-input.is-loading .pre-loader .pre-loader-bar {
+	height: 4px;
+}
+.city-input.is-loading .pre-loader .pre-loader-bar .pre-loader-handle {
+	width: 10%;
+	display: block;
+ 	animation: anim-is-loading 3s;
+ 	animation-iteration-count:infinite;
+}
+@keyframes anim-is-loading {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 90%;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+/* other animations */
+
 
 .pulse {
   animation: anim-pulse .8s;

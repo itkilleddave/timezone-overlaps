@@ -4,22 +4,29 @@ import FlagIcon from './FlagIcon'
  
 class CityInput extends Component {
 
+  constructor(props) {
+    super(props)
+    this.renderSuggestion = this.renderSuggestion.bind(this)
+  }
+
   // When suggestion is clicked, Autosuggest needs to populate the input
   // based on the clicked suggestion. Teach Autosuggest how to calculate the
   // input value for every given suggestion.
   getSuggestionValue = suggestion => suggestion.name;
    
   // Use your imagination to render suggestions.
-  renderSuggestion = suggestion => (
-    <div>
+
+  renderSuggestion(suggestion) {
+    return (<div>
       <FlagIcon 
       className="country-flag"
       code={suggestion.country.toLowerCase()} 
       squared={false}
       />
       <span>{suggestion.name}</span>
-    </div>
-  );
+    </div>)
+  }
+
 
   renderSuggestionsContainer({ containerProps , children, query }) {
     
@@ -92,7 +99,6 @@ class CityInput extends Component {
 
     const { value, suggestions } = this.props;
 
-
     //const randomIndex = Math.floor(Math.random() * cities.length)  
 
     // Autosuggest will pass through all these props to the input.
@@ -103,23 +109,37 @@ class CityInput extends Component {
       //onKeyDown: this.handleKeyDown,
       //onKeyUp: this.handleKeyUp,
       //onKeyUp: () => {console.log("hello")}
-    };
- 
+    }
+
+    //const preloaderClass =  suggestions.length ? "" : (
+    const preloaderClass =  !this.props.isLoading ? "" : (
+    //const preloaderClass =  1===2 ? "" : (
+      "is-loading"
+    )
+    
     // Finally, render it!
     return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        renderSuggestionsContainer={this.renderSuggestionsContainer}
-        inputProps={inputProps}
-        highlightFirstSuggestion={true}
-        onSuggestionSelected={this.handleSuggestionSelected}
-        ref={this.storeInputReference}
-        scrollBar={true}
-      />
+      <div className={"city-input "+preloaderClass}>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          renderSuggestionsContainer={this.renderSuggestionsContainer}
+          inputProps={inputProps}
+          highlightFirstSuggestion={true}
+          onSuggestionSelected={this.handleSuggestionSelected}
+          ref={this.storeInputReference}
+          scrollBar={true}
+        />
+        <div className="pre-loader">
+          <div className="pre-loader-bar">
+            <div className="pre-loader-handle">
+            </div>
+          </div>
+        </div>
+      </div>
     );
 
 
