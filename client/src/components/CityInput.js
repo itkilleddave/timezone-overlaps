@@ -37,6 +37,21 @@ class CityInput extends Component {
     );
   }
 
+  renderInputComponent(inputProps) {
+
+    return (
+      <div>
+        <input {...inputProps} />
+        <div className="pre-loader">
+          <div className="pre-loader-bar">
+            <div className="pre-loader-handle">
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
 
   handleChange = (event, { newValue }) => {
     this.props.onChange(newValue);
@@ -121,18 +136,13 @@ class CityInput extends Component {
           getSuggestionValue={this.getSuggestionValue}
           renderSuggestion={this.renderSuggestion}
           renderSuggestionsContainer={this.renderSuggestionsContainer}
+          renderInputComponent={this.renderInputComponent}
           inputProps={inputProps}
           highlightFirstSuggestion={true}
           onSuggestionSelected={this.handleSuggestionSelected}
           ref={this.storeInputReference}
           scrollBar={true}
         />
-        <div className="pre-loader">
-          <div className="pre-loader-bar">
-            <div className="pre-loader-handle">
-            </div>
-          </div>
-        </div>
       </div>
     );
 

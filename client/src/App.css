@@ -141,14 +141,8 @@ button,
 	max-height: 210px;
 	overflow-y: scroll;
 	border: none;
-	/*border-bottom: solid 1px var(--grey);*/
+	border-bottom: solid 1px var(--grey);
 
-}
-.city-input .react-autosuggest__suggestions-container {
-	border-top: solid 4px var(--red);
-}
-.city-input.is-loading .react-autosuggest__suggestions-container {
-	border-top: none;
 }
 .react-autosuggest__suggestions-list {
 	list-style: none;
@@ -665,10 +659,12 @@ button,
 /* pre-loader */
 
 .pre-loader {
+	height: 4px;
 	position: relative;
 	width: 100%;
 }
 .pre-loader-bar {
+	height: inherit;
 	position: relative;
 	width: 100%;
 	background: var(--grey);
@@ -684,16 +680,16 @@ button,
 /* default state (not loading) */
 
 .city-input .pre-loader {
-	display: none;
+	/*display: none;*/
 }
 .city-input .pre-loader .pre-loader-bar {
-	height: 1px;
+	/*height: 1px;*/
 }
 .city-input .pre-loader .pre-loader-bar .pre-loader-handle {
 	width: 100%;
 	-webkit-transition: width 0.35s; /* Safari */
 	transition: width 0.35s;
-	display: none;
+	/*display: none;*/
 	animation: none;
 
 }

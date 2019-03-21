@@ -165,8 +165,6 @@ class CityPicker extends Component {
 
 	render() {
 
-
-
     	const { value, suggestions } = this.state;
 
 		return (
